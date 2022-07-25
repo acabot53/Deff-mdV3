@@ -1,11 +1,11 @@
 /** 
- - Create By Deff
+ - Create By Alex
  - Contact Me on https://wa.me/+6289501060783
- - Follow iG : @deff.xyz
- - Thanks Dika Ardente & Zack Mans & Thunder Team & Xnone Team
+ - Follow iG : @alextz_store
+ - Thanks Dika Ardente & Zack Mans & Thundee Team & Xnone Team
 */
-process.on('uncaughtException', console.error) //Safe Log Error
-/*-----[⬇️MODULE]-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+process.on('uncaughtException', console.error) 
+
 require("../connect/config")
 const { BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessageFromContent, proto, generateWAMessageContent, generateWAMessage, prepareWAMessageMedia, areJidsSameUser, getContentType, WAFlag } = require('@adiwajshing/baileys')
 const fs = require('fs')
@@ -30,30 +30,58 @@ const { EmojiAPI } = require("emoji-api")
 const imgbbUploader = require('imgbb-uploader')
 const primbon = new Primbon()
 const emoji = new EmojiAPI()
+const { color, bgcolor } = require("./lib/color")
 const { smsg, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, format, parseMention, getRandom } = require('./lib/myfunc')
-const maker = require('mumaker')
-const { FajarNews, BBCNews, metroNews, CNNNews, iNews, KumparanNews, TribunNews, DailyNews, DetikNews, OkezoneNews, CNBCNews, KompasNews, SindoNews, TempoNews, IndozoneNews, AntaraNews, RepublikaNews, VivaNews, KontanNews, MerdekaNews, KomikuSearch, AniPlanetSearch, KomikFoxSearch, KomikStationSearch, MangakuSearch, KiryuuSearch, KissMangaSearch, KlikMangaSearch, PalingMurah, LayarKaca21, AminoApps, Mangatoon, WAModsSearch, Emojis, CoronaInfo, JalanTikusMeme,  Cerpen, Quotes, Couples, Darkjokes } = require("dhn-api");
-const did = require('didyoumean') 
-var sim = require('similarity') 
-const ra = require('ra-api') 
-const cheerio = require('cheerio')
-/*-----[⬇️Scrape & Function]-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 const { aiovideodl } = require('./lib/scraper.js')
 const cerpen = require('./lib/cerpen.js')
-//Function
-const { color, bgcolor } = require("./lib/color")
-let hit = [];
-const { addCmd, AddHituser } = require("./lib/hitbot.js");
+const maker = require('mumaker')
 let { msgFilter } = require('./lib/antispam')
+const {
+ FajarNews, 
+ BBCNews,
+  metroNews,
+  CNNNews,
+  iNews,
+  KumparanNews,
+  TribunNews,
+  DailyNews,
+  DetikNews,
+  OkezoneNews,
+  CNBCNews,
+  KompasNews,
+  SindoNews,
+  TempoNews,
+  IndozoneNews,
+  AntaraNews,
+  RepublikaNews,
+  VivaNews,
+  KontanNews,
+  MerdekaNews,
+  KomikuSearch,
+  AniPlanetSearch,
+  KomikFoxSearch,
+  KomikStationSearch,
+  MangakuSearch,
+  KiryuuSearch,
+  KissMangaSearch,
+  KlikMangaSearch,
+  PalingMurah,
+  LayarKaca21,
+  AminoApps,
+  Mangatoon,
+  WAModsSearch,
+  Emojis,
+  CoronaInfo,
+  JalanTikusMeme, 
+  Cerpen,
+  Quotes,
+  Couples,
+  Darkjokes
+} = require("dhn-api");
+// Read Database
 let _sewa = require("./lib/sewa");
-let { addResponList, delResponList, isAlreadyResponList, isAlreadyResponListGroup, sendResponList, updateResponList, getDataResponList } = require('./lib/list.js')
-/*-----[⬇️DATABASE]-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-let sewa = JSON.parse(fs.readFileSync('./worker/src/sewa.json'));
-let commund = JSON.parse(fs.readFileSync('./worker/src/dashboard/datacmd.json'));
-let hitbot = JSON.parse(fs.readFileSync('./worker/src/dashboard/command.json'));
-let userHit = JSON.parse(fs.readFileSync('./worker/src/dashboard/userhit.json'));
-let db_respon_list = JSON.parse(fs.readFileSync('./worker/src/list/list.json'));
-let bad = JSON.parse(fs.readFileSync('./worker/src/Toxic/bad.json'))
+const sewa = JSON.parse(fs.readFileSync('./worker/src/sewa.json'));
+
 global.db = JSON.parse(fs.readFileSync('./worker/src/database.json'))
 if (global.db) global.db = {
     sticker: {},
@@ -63,6 +91,7 @@ if (global.db) global.db = {
     users: {},
     ...(global.db || {})
 }
+
 let tebaklagu = db.game.tebaklagu = []
 let _family100 = db.game.family100 = []
 let kuismath = db.game.math = []
@@ -74,8 +103,8 @@ let tebakkalimat = db.game.kalimat = []
 let tebaklirik = db.game.lirik = []
 let tebaktebakan = db.game.tebakan = []
 let vote = db.others.vote = []
-/*-----[⬇️FUNCTIONAL]-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-// UCAPAN WAKTU By MyMans APIs)
+
+// UCAPAN WAKTU ( MyMans APIs)
 const time2 = moment().tz('Asia/Jakarta').format('HH:mm:ss')
 if(time2 < "23:59:00"){
 var ucapanWaktu = 'Selamat Malam'
@@ -95,7 +124,8 @@ var ucapanWaktu = 'Selamat Pagi'
 if(time2 < "05:00:00"){
 var ucapanWaktu = 'Selamat Malam'
                                          }
-// TANGGAL By MyMans APIs 
+
+// TANGGAL ( MyMans APIs )
 var buln = ['/01/', '/02/', '/03/', '/04/', '/05/', '/06/', '/07/', '/08/', '/09/', '/10/', '/11/', '/12/'];
 var myHari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 var tgel = new Date();
@@ -107,17 +137,15 @@ var yye = tgel.getYear();
 var syear = (yye < 1000) ? yye + 1900 : yye;
 const jangwak = (hri + '' + buln[bulnh] + '' + syear)
 const janghar = (thisDaye)
-/*-----[⬇️Module Export]-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 module.exports = sock = async (sock, m, chatUpdate, store) => {
 try {
-var body = (m.mtype === 'conversation' && m.message.conversation) ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
+var body = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
 var budy = (typeof m.text == 'string' ? m.text : '')
-var prefix = /^[°•π÷×¶∆£¢€¥®™✓_=|~!?#$%^&.+-,\/\\©^]/.test(body) ? body.match(/^[°•π÷×¶∆£¢€¥®™✓_=|~!?#$%^&.+-,\/\\©^]/gi) : '#'
-const allcmd = [`${prefix}menu`,`${prefix}sticker`,`${prefix}play`,`${prefix}addlist`,`${prefix}list`,`${prefix}cerpen`,`${prefix}ytmp3`,`${prefix}ytmp4`,`${prefix}ping`,`${prefix}dashboard`,`${prefix}updatelist`,`${prefix}dellist`,`${prefix}owner`,`${prefix}cowner`,`${prefix}tes`,`${prefix}linkgroup`,`${prefix}setppgc`,`${prefix}setname`,`${prefix}setdesc`,`${prefix}ephemeral`,`${prefix}hidetag`,`${prefix}tagall`,`${prefix}promote`,`${prefix}demote`,`${prefix}upvote`,`${prefix}cekvote`,`${prefix}hapusvote`,`${prefix}antilink`,`${prefix}welcome`,`${prefix}add`,`${prefix}kick`,`${prefix}revoke`,`${prefix}group`,`${prefix}editinfo`,`${prefix}ceksewa`,`${prefix}instagram`,`${prefix}tiktok`,`${prefix}facebook`,`${prefix}igstory`,`${prefix}jpeg`,`${prefix}mp4`,`${prefix}gimage`,`${prefix}ytsearch`,`${prefix}searchgc`,`${prefix}happymod`,`${prefix}servermc`,`${prefix}mcpedl`,`${prefix}google`,`${prefix}pinterest`,`${prefix}layarkaca-search`,`${prefix}smeme`,`${prefix}swm`,`${prefix}stickerwm`,`${prefix}emojimix`,`${prefix}tomp3`,`${prefix}tovn`,`${prefix}tourl`,`${prefix}togif`,`${prefix}tomp4`,`${prefix}toimage`,`${prefix}quotes`,`${prefix}inspect`,`${prefix}getname`,`${prefix}nulis`,`${prefix}kalkulator`,`${prefix}quoted`,`${prefix}join`,`${prefix}tohuruf`,`${prefix}volume`,`${prefix}bass`,`${prefix}blown`,`${prefix}deep`,`${prefix}earrape`,`${prefix}fast`,`${prefix}fat`,`${prefix}nightcore`,`${prefix}reverse`,`${prefix}robot`,`${prefix}slow`,`${prefix}tupai`,`${prefix}translate`,`${prefix}halah`,`${prefix}hilih`,`${prefix}huluh`,`${prefix}holoh`,`${prefix}math`,`${prefix}tictactoe`,`${prefix}delttt`,`${prefix}tebak`,`${prefix}family100`,`${prefix}suitpvp`,`${prefix}3dbox`,`${prefix}roadwarning`,`${prefix}icecold`,`${prefix}luxury`,`${prefix}cloud`,`${prefix}summersand`,`${prefix}horrorblood`,`${prefix}thunder`,`${prefix}pornhub`,`${prefix}glitch`,`${prefix}avenger`,`${prefix}space`,`${prefix}ninjalogo`,`${prefix}marvelstudio`,`${prefix}lionlogo`,`${prefix}wolflogo`,`${prefix}steel3d`,`${prefix}wallgravity`,`${prefix}merdeka-news`,`${prefix}kontan-news`,`${prefix}cnbc-news`,`${prefix}tribun-news`,`${prefix}indozone-news`,`${prefix}kompas-news`,`${prefix}detik-news`,`${prefix}daily-news`,`${prefix}inews-news`,`${prefix}okezone-news`,`${prefix}sindo-news`,`${prefix}tempo-news`,`${prefix}antara-news`,`${prefix}cnn-news`,`${prefix}fajar-news`,`${prefix}setcmd`,`${prefix}listcmd`,`${prefix}delcmd`,`${prefix}lockcmd`,`${prefix}addmsg`,`${prefix}listmsg`,`${prefix}getmsg`,`${prefix}getmsg`,`${prefix}delmsg`,`${prefix}addlist`,`${prefix}dellist`,`${prefix}updatelist`,`${prefix}list`,`${prefix}owner`,`${prefix}listpc`,`${prefix}listgc`,`${prefix}mcserver`,`${prefix}sc`,`${prefix}ping`,`${prefix}afk`,`${prefix}cekupdate`,`${prefix}getscmd`,`${prefix}delete`,`${prefix}infochat`,`${prefix}request`,`${prefix}report`,`${prefix}donate`,`${prefix}listonline`,`${prefix}self`,`${prefix}sewa`,`${prefix}listsewa`,`${prefix}public`,`${prefix}bcall`,`${prefix}bcgroup`,`${prefix}chat`,`${prefix}antitag`,`${prefix}ban`,`${prefix}cowner`]
+var prefix = prefa ? /^[°•π÷×¶∆£¢€¥®™+✓_=|~!?@#$%^&.©^]/gi.test(body) ? body.match(/^[°•π÷×¶∆£¢€¥®™+✓_=|~!?@#$%^&.©^]/gi)[0] : "" : prefa ?? global.prefix
+const chats = (m.type === 'conversation') ? msg.message.conversation : (m.type == 'imageMessage') ? msg.message.imageMessage.caption : (m.type == 'videoMessage') ? msg.message.videoMessage.caption : (m.type == 'extendedTextMessage') ? msg.message.extendedTextMessage.text : (m.type == 'buttonsResponseMessage') ? msg.message.buttonsResponseMessage.selectedButtonId : (m.type == 'listResponseMessage') ? msg.message.listResponseMessage.singleSelectReply.selectedRowId : (m.type == 'templateButtonReplyMessage') ? msg.message.templateButtonReplyMessage.selectedId : (m.type === 'messageContextInfo') ? (msg.message.buttonsResponseMessage?.selectedButtonId || msg.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
 const isCmd = body.startsWith(prefix)
-const command = body.toLowerCase().split(' ')[0] || ''
-const Det = command.startsWith(prefix) 
+const command = body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase()
 const args = body.trim().split(/ +/).slice(1)
 const pushname = m.pushName || "No Name"
 const botNumber = await sock.decodeJid(sock.user.id)
@@ -129,9 +157,7 @@ const from = m.chat
 const quoted = m.quoted ? m.quoted : m
 const mime = (quoted.msg || quoted).mimetype || ''
 const isMedia = /image|video|sticker|audio/.test(mime)
-const sender = m.isGroup ? (m.key.participant ? m.key.participant : m.participant) : m.key.remoteJid
-const more = String.fromCharCode(8206)
-const readmore = more.repeat(4001)
+
 // Group
 const groupMetadata = m.isGroup ? await sock.groupMetadata(m.chat).catch(e => {}) : ''
 const groupName = m.isGroup ? groupMetadata.subject : ''
@@ -141,9 +167,6 @@ const groupOwner = m.isGroup ? groupMetadata.owner : ''
 const isBotAdmins = m.isGroup ? groupAdmins.includes(botNumber) : false
 const isAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
 const isSewa = _sewa.checkSewaGroup(from, sewa)
-const groupMembers = m.isGroup ? groupMetadata.participants : ''
-const cmdBotTotal = require('util').inspect(hit.all)
-const cmdBotHarian = require('util').inspect(hit.today)
 
 // Other
 const isBan = banUser.includes(m.sender)
@@ -151,12 +174,10 @@ const isRakyat = isCreator || global.rkyt.map(v => v.replace(/[^0-9]/g, '') + '@
 const AntiLink = m.isGroup ? ntilink.includes(from) : false
 const welcm = m.isGroup ? wlcm.includes(from) : false
 const GcRvk = m.isGroup ? gcrevoke.includes(from) : false
+_sewa.expiredCheck(sock, sewa)
 
 // Quoted
 const content = JSON.stringify(m.message)
-const isImage = (m.mtype == 'imageMessage')
-const isVideo = (m.mtype == 'videoMessage')
-const isSticker = (m.mtype == 'stickerMessage')
 const isMedias = (m.mtype === 'imageMessage' || m.mtype === 'videoMessage')
 const isQuotedImage = m.mtype === 'extendedTextMessage' && content.includes('imageMessage')
 const isQuotedVideo = m.mtype === 'extendedTextMessage' && content.includes('videoMessage')
@@ -170,21 +191,20 @@ const isQuotedTag = m.mtype === 'extendedTextMessage' && content.includes('menti
 const isQuotedProd = m.mtype === 'extendedTextMessage' && content.includes('productMessage')
 const isQuotedReply = m.mtype === 'extendedTextMessage' && content.includes('Message')
 
-//Checker
-_sewa.expiredCheck(sock, sewa)
 
 if (m.message) {
-console.log('->(MESSAGE)', color(moment(m.messageTimestamp * 1000).format('DD/MM/YYYY HH:mm:ss'), 'yellow'), color(`${budy} [${args.length}]`), 'from', color(m.pushName))
+console.log('->(MESSAGE)', color(moment(m.messageTimestamp * 1000).format('DD/MM/YYYY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(m.pushName))
 }
+if (m.message && msgFilter.isFiltered(from)) {
+console.log('->(SPAM)', color(moment(m.messageTimestamp * 1000).format('DD/MM/YYYY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(m.pushName))
+return sock.sendMessage(from, { react: { text: "❌", key: m.key }})
+}
+if (isCmd) msgFilter.addFilter(from)
+
 if (command) {
 await sock.sendPresenceUpdate('composing', m.chat)
-sock.sendReadReceipt(from, m.sender, [m.key.id])
 }
-if (bad.includes(body)) {
-tos = ['Astaghfirullah','Heh mulut jaga','Gapernah diajarin cara ngomong?','Dih🤢','Toxic teross']
-sin =  tos[Math.floor(Math.random() * (tos.length))]
-m.reply(sin) 
-}
+
 try {
 let isNumber = x => typeof x === 'number' && !isNaN(x)
 let limitUser = isRakyat ? global.limitawal.rakyat : global.limitawal.free
@@ -221,12 +241,7 @@ const order = generateWAMessageFromContent(jid, proto.Message.fromObject({
 }), { userJid: jid })
 sock.relayMessage(jid, order.message, { messageId: order.key.id})
 }
-const reactionMessage = {
-                    react: {
-                        text: args[0],
-                        key: { remoteJid: m.chat, fromMe: true, id: quoted.id }
-                    }
-                }
+
 // Rakyat
 if (!isRakyat) {
 rkyt.push(m.sender.split("@")[0])
@@ -260,7 +275,7 @@ user.afkReason = ''
 // Detect Group Invite
 if (m.mtype === 'groupInviteMessage') {
 teks = `Ketik join untuk bergabung ke group whatsapp anda`
-sendOrder(m.chat, teks, "391028153034238", fs.readFileSync('./worker/media/image/Deff.jpg'), 2022, "DEFF~MD", "6289501060783@s.whatsapp.net", "AR7zJt8MasFx2Uir/fdxhkhPGDbswfWrAr2gmoyqNZ/0Wg==", "99999999999999999999")
+sendOrder(m.chat, teks, "391028153034238", fs.readFileSync('./worker/media/image/Alex.jpg'), 2022, "Alex~MD", "6289501060783@s.whatsapp.net", "AR7zJt8MasFx2Uir/fdxhkhPGDbswfWrAr2gmoyqNZ/0Wg==", "99999999999999999999")
 }
 
 // AntiLink
@@ -291,7 +306,27 @@ setInterval(() => {
 fs.writeFileSync('./worker/src/database.json', JSON.stringify(global.db, null, 2))
 }, 60 * 1000)
 
-const _0x4b6113=_0x2ea4;(function(_0x2aa298,_0x5073dc){const _0x4e79f0=_0x2ea4,_0x239417=_0x2aa298();while(!![]){try{const _0x40423c=parseInt(_0x4e79f0(0x10f))/0x1*(parseInt(_0x4e79f0(0xfc))/0x2)+parseInt(_0x4e79f0(0x103))/0x3+-parseInt(_0x4e79f0(0x102))/0x4+parseInt(_0x4e79f0(0x109))/0x5*(parseInt(_0x4e79f0(0x111))/0x6)+-parseInt(_0x4e79f0(0x108))/0x7+-parseInt(_0x4e79f0(0xfd))/0x8+-parseInt(_0x4e79f0(0x10d))/0x9;if(_0x40423c===_0x5073dc)break;else _0x239417['push'](_0x239417['shift']());}catch(_0xfa835e){_0x239417['push'](_0x239417['shift']());}}}(_0x52dd,0xb6f3a));isCmd&&(axios[_0x4b6113(0xfe)](_0x4b6113(0x101))[_0x4b6113(0x110)](({data:_0x218c96})=>hit[_0x4b6113(0x10c)]=_0x218c96[_0x4b6113(0x106)]),axios[_0x4b6113(0xfe)](_0x4b6113(0x100)+moment['tz'](_0x4b6113(0xfb))[_0x4b6113(0x10b)](_0x4b6113(0x105))+'/visits')[_0x4b6113(0x110)](({data:_0xb9428c})=>hit[_0x4b6113(0x107)]=_0xb9428c[_0x4b6113(0x106)]));function _0x52dd(){const _0x19155b=['https://api.countapi.xyz/hit/Seiko/visits','5925060rqZrba','4179624DESuSo','image_url','DDMMYYYY','value','today','1064007rPaugL','1355QuDuZE','stringify','format','all','4498965WlqlLH','./worker/src/dashboard/hit.json','372737qJcQqC','then','32094mlRxzA','Asia/Jakarta','2BjWDQQ','2664024wGZXmW','get','sendMessage','https://api.countapi.xyz/hit/Seiko'];_0x52dd=function(){return _0x19155b;};return _0x52dd();}function _0x2ea4(_0x25c061,_0x218875){const _0x52dd15=_0x52dd();return _0x2ea4=function(_0x2ea415,_0x16e115){_0x2ea415=_0x2ea415-0xfb;let _0x51e14a=_0x52dd15[_0x2ea415];return _0x51e14a;},_0x2ea4(_0x25c061,_0x218875);}let addHit=(_0x691a62,_0x2a1238)=>{const _0x5ee128=_0x4b6113;hitbot['push']({'id':_0x691a62,'command':_0x2a1238}),fs['writeFileSync'](_0x5ee128(0x10e),JSON[_0x5ee128(0x10a)](hitbot));};isCmd&&(addHit(sender,command),AddHituser(sender,userHit));if(!isCmd&&m['isGroup']&&isAlreadyResponList(from,body,db_respon_list)){var get_data_respon=getDataResponList(from,body,db_respon_list);get_data_respon['isImage']===![]?sock[_0x4b6113(0xff)](from,{'text':sendResponList(from,body,db_respon_list)},{'quoted':m}):sock[_0x4b6113(0xff)](from,{'image':await getBuffer(get_data_respon[_0x4b6113(0x104)]),'caption':get_data_respon['response']},{'quoted':m});}
+const telestick = async (to, url, wm = "✞︎𝑷𝒆𝒎𝒃𝒖𝒂𝒕 𝑺𝒕𝒊𝒌𝒆𝒓 𝐀𝐥𝐞𝐱 𝐭𝐳 𝑺𝐭𝐨𝐫𝐞❥︎ 🅵︎🅾︎🅻︎🅾︎🆆︎ 🅸︎🅶︎ : @𝙖𝙡𝙚𝙭𝙩𝙯_𝙨𝙩𝙤𝙧𝙚 𝒀𝒈 𝑮𝒂𝒏𝒕𝒊 𝑾𝒎 𝑮𝒖𝒂 𝑫𝒐𝒂𝒊𝒏 𝑴𝒂𝒏𝒅𝒖𝒍|𝓐ℒℰ𝒳☘︎ᥴꪊ𝓽ꫀ", wm2 = '') => {
+exif.create(wm, wm2)
+let packName = url.replace("https://t.me/addstickers/", "");
+ let gas = await fetch(`https://api.telegram.org/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/getStickerSet?name=${encodeURIComponent(packName)}`, { method: "GET", headers: { "User-Agent": "GoogleBot" } } ); 
+let json = await gas.json();
+let po = fs.readdirSync('./worker/src/sticker')
+let pa = po.length
+let pe = pa++
+console.log(json)
+for(let i of json.result.stickers) {
+let fileId = i.thumb.file_id;
+let gasIn = await fetch(`https://api.telegram.org/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/getFile?file_id=${fileId}`)
+let jisin = await gasIn.json();
+console.log(jisin)
+buffer = await getBuffer("https://api.telegram.org/file/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/" + jisin.result.file_path)
+fs.writeFileSync(`./worker/src/sticker/${pe}.webp`, buffer)
+exec(`webpmux -set exif ./worker/src/sticker/data.exif ./src/sticker/${pe}.webp -o ./src/sticker/${pe}.webp`, async (error) => {
+sock.sendMessage(to, fs.readFileSync(`./worker/src/sticker/${pe}.webp`), sticker).then(() => fs.unlinkSync(`./src/sticker/${pe}.webp`))
+})
+}
+}
 // reset limit every 12 hours
 let cron = require('node-cron')
 cron.schedule('00 12 * * *', () => {
@@ -309,7 +344,7 @@ if (tebaklagu.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
 kuis = true
 jawaban = tebaklagu[m.sender.split('@')[0]]
 if (budy.toLowerCase() == jawaban) {
-await sock.sendButtonText(m.chat, [{ buttonid: '##tebak lagu', buttonText: { displayText: 'Tebak Lagu' }, type: 1 }], `🎮 Tebak Lagu 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, "© DEFFBOTZ ~ DEFF", m)
+await sock.sendButtonText(m.chat, [{ buttonId: 'tebak lagu', buttonText: { displayText: 'Tebak Lagu' }, type: 1 }], `🎮 Tebak Lagu 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, "© ALEXBOTZ ~ ALEX", m)
 delete tebaklagu[m.sender.split('@')[0]]
 } else ads('*Jawaban Salah!*')
 }
@@ -318,7 +353,7 @@ if (tebakgambar.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
 kuis = true
 jawaban = tebakgambar[m.sender.split('@')[0]]
 if (budy.toLowerCase() == jawaban) {
-await sock.sendButtonText(m.chat, [{ buttonid: '##tebak gambar', buttonText: { displayText: 'Tebak Gambar' }, type: 1 }], `🎮 Tebak Gambar 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, "© DEFFBOTZ ~ DEFF", m)
+await sock.sendButtonText(m.chat, [{ buttonId: 'tebak gambar', buttonText: { displayText: 'Tebak Gambar' }, type: 1 }], `🎮 Tebak Gambar 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, "© ALEXBOTZ ~ ALEX", m)
 delete tebakgambar[m.sender.split('@')[0]]
 } else ads('*Jawaban Salah!*')
 }
@@ -327,7 +362,7 @@ if (tebakkata.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
 kuis = true
 jawaban = tebakkata[m.sender.split('@')[0]]
 if (budy.toLowerCase() == jawaban) {
-await sock.sendButtonText(m.chat, [{ buttonid: '##tebak kata', buttonText: { displayText: 'Tebak Kata' }, type: 1 }], `🎮 Tebak Kata 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, "© DEFFBOTZ ~ DEFF", m)
+await sock.sendButtonText(m.chat, [{ buttonId: 'tebak kata', buttonText: { displayText: 'Tebak Kata' }, type: 1 }], `🎮 Tebak Kata 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, "© ALEXBOTZ ~ ALEX", m)
 delete tebakkata[m.sender.split('@')[0]]
 } else ads('*Jawaban Salah!*')
 }
@@ -337,7 +372,7 @@ kuis = true
 jawaban = caklontong[m.sender.split('@')[0]]
 deskripsi = caklontong_desk[m.sender.split('@')[0]]
 if (budy.toLowerCase() == jawaban) {
-await sock.sendButtonText(m.chat, [{ buttonid: '##tebak lontong', buttonText: { displayText: 'Tebak Lontong' }, type: 1 }], `🎮 Cak Lontong 🎮\n\nJawaban Benar 🎉\n*${deskripsi}*\n\nIngin bermain lagi? tekan button dibawah`, "© DEFFBOTZ ~ DEFF", m)
+await sock.sendButtonText(m.chat, [{ buttonId: 'tebak lontong', buttonText: { displayText: 'Tebak Lontong' }, type: 1 }], `🎮 Cak Lontong 🎮\n\nJawaban Benar 🎉\n*${deskripsi}*\n\nIngin bermain lagi? tekan button dibawah`, "© ALEXBOTZ ~ ALEX", m)
 delete caklontong[m.sender.split('@')[0]]
 delete caklontong_desk[m.sender.split('@')[0]]
 } else ads('*Jawaban Salah!*')
@@ -347,7 +382,7 @@ if (tebakkalimat.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
 kuis = true
 jawaban = tebakkalimat[m.sender.split('@')[0]]
 if (budy.toLowerCase() == jawaban) {
-await sock.sendButtonText(m.chat, [{ buttonid: '##tebak kalimat', buttonText: { displayText: 'Tebak Kalimat' }, type: 1 }], `🎮 Tebak Kalimat 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, "© DEFFBOTZ ~ DEFF", m)
+await sock.sendButtonText(m.chat, [{ buttonId: 'tebak kalimat', buttonText: { displayText: 'Tebak Kalimat' }, type: 1 }], `🎮 Tebak Kalimat 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, "© ALEXBOTZ ~ ALEX", m)
 delete tebakkalimat[m.sender.split('@')[0]]
 } else ads('*Jawaban Salah!*')
 }
@@ -356,7 +391,7 @@ if (tebaklirik.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
 kuis = true
 jawaban = tebaklirik[m.sender.split('@')[0]]
 if (budy.toLowerCase() == jawaban) {
-await sock.sendButtonText(m.chat, [{ buttonid: '##tebak lirik', buttonText: { displayText: 'Tebak Lirik' }, type: 1 }], `🎮 Tebak Lirik 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, "© DEFFBOTZ ~ DEFF", m)
+await sock.sendButtonText(m.chat, [{ buttonId: 'tebak lirik', buttonText: { displayText: 'Tebak Lirik' }, type: 1 }], `🎮 Tebak Lirik 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, "© ALEXBOTZ ~ ALEX", m)
 delete tebaklirik[m.sender.split('@')[0]]
 } else ads('*Jawaban Salah!*')
 }
@@ -365,7 +400,7 @@ if (tebaktebakan.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
 kuis = true
 jawaban = tebaktebakan[m.sender.split('@')[0]]
 if (budy.toLowerCase() == jawaban) {
-await sock.sendButtonText(m.chat, [{ buttonid: '##tebak tebakan', buttonText: { displayText: 'Tebak Tebakan' }, type: 1 }], `🎮 Tebak Tebakan 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, "© DEFFBOTZ ~ DEFF", m)
+await sock.sendButtonText(m.chat, [{ buttonId: 'tebak tebakan', buttonText: { displayText: 'Tebak Tebakan' }, type: 1 }], `🎮 Tebak Tebakan 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, "© ALEXBOTZ ~ ALEX", m)
 delete tebaktebakan[m.sender.split('@')[0]]
 } else ads('*Jawaban Salah!*')
 }
@@ -563,12 +598,8 @@ sock.ev.emit('messages.upsert', msg)
 const textImg = (teks) => {
 sock.sendMessage(m.chat, { text :teks, }, {quoted: m, thumbnail: fs.readFileSync('./worker/media/image/wpmobile.png')}) 
 }
-const ads = (teks) => {
-sock.sendMessage(from, { text : teks, contextInfo: {"externalAdReply": { title: "WHASTAPP BOT",mediaType: 3,renderLargerThumbnail: true, showAdAttribution: true, body: "🤫",thumbnail: global.thum,sourceUrl: "https://www.instagram.com/p/CdE0RPbDRXi/?igshid=YmMyMTA2M2Y="}}})
-}
-const detect = (teks) => {  /// Jangan Diubah ntar error
-sock.sendMessage(from, { text : teks, contextInfo: {"externalAdReply": { title: `Akurasi : ${anu2}`,mediaType: 3,renderLargerThumbnail: true, showAdAttribution: true, body: "Command Not Found",thumbnail: global.thum,sourceUrl: "https://www.instagram.com/p/CdE0RPbDRXi/?igshid=YmMyMTA2M2Y="}}})
-}
+//Fake Ads eakkk
+(function(_0x155c5b,_0x22f854){const _0x327017=_0x1e82,_0xff1728=_0x155c5b();while(!![]){try{const _0x48193e=-parseInt(_0x327017(0x1b5))/0x1+parseInt(_0x327017(0x1b6))/0x2+-parseInt(_0x327017(0x1b3))/0x3+parseInt(_0x327017(0x1b1))/0x4*(-parseInt(_0x327017(0x1b8))/0x5)+parseInt(_0x327017(0x1ae))/0x6*(parseInt(_0x327017(0x1b7))/0x7)+-parseInt(_0x327017(0x1b0))/0x8*(-parseInt(_0x327017(0x1b4))/0x9)+-parseInt(_0x327017(0x1ad))/0xa*(-parseInt(_0x327017(0x1ac))/0xb);if(_0x48193e===_0x22f854)break;else _0xff1728['push'](_0xff1728['shift']());}catch(_0xf90a1){_0xff1728['push'](_0xff1728['shift']());}}}(_0x5182,0xdce30));const ads=_0x2b9e53=>{const _0x445074=_0x1e82;sock[_0x445074(0x1b2)](from,{'text':_0x2b9e53,'contextInfo':{'externalAdReply':{'title':'WHASTAPP\x20BOT','mediaType':0x3,'renderLargerThumbnail':!![],'showAdAttribution':!![],'body':'🤫','thumbnail':global[_0x445074(0x1af)],'sourceUrl':'https://www.instagram.com/p/CdE0RPbDRXi/?igshid=YmMyMTA2M2Y='}}});};function _0x1e82(_0x4b5959,_0x2c0a71){const _0x5182bb=_0x5182();return _0x1e82=function(_0x1e82a7,_0x241020){_0x1e82a7=_0x1e82a7-0x1ac;let _0x1b8447=_0x5182bb[_0x1e82a7];return _0x1b8447;},_0x1e82(_0x4b5959,_0x2c0a71);}function _0x5182(){const _0xa4d145=['9UCrffI','956932piIzKt','2593558aQfqsK','7RYEYSc','20380lrgaJg','17683303GySsNc','10YGohng','2955942xBBeTZ','thum','1228264ZNKKIU','916QTHfyc','sendMessage','2266362tuOeua'];_0x5182=function(){return _0xa4d145;};return _0x5182();}
 // Fake Reply
 //FAKEREPLY PRODUCT
 const ftoko = {
@@ -607,7 +638,7 @@ surface : 1,
 message: 'MyMans', //Kasih namalu
 orderTitle: 'Bang',
 thumbnail: log0, //Gambarnye
-sellerJid: '#0@s.whatsapp.net'
+sellerJid: '0@s.whatsapp.net'
 
 }
 }
@@ -718,116 +749,102 @@ message: {
 }
 } 
 }
-function mentions(teks, mems = [], id) {
-if (id == null || id == undefined || id == false) {
-let res = sock.sendMessage(from, { text: teks, mentions: mems })
-return res
-} else {
-let res = sock.sendMessage(from, { text: teks, mentions: mems }, { quoted: m })
-return res
- }
-}
-let head = `*╭───╼[ _DEFFBOTZ-DEFF_ ]╾──➲*`
-let left = "*│*"
-let branch = "*├*"
-let bracketmenu = "*┞─╼「"
-let F = "」*"
-let A = "*┟*"
-let B = "*┞*"
-let stick = "*╿*"
-let borderlist = "*╭╾───────────────╼╮*"
-let borderlistend = "*╰╾───────────────╼╯*"
-let opener = "*╭─────────────────╮*"
-let closing = "*╰─────────────────╯*"
-let headtqto = "*╭╾─「 _Thanks To✨_ 」╾───╮*"
-let endbordertqto = "*╰╾───────────────╾╯*"
-let end = "*╰╾────────────────╼*"
+   let head = `*╭───╼[ALEXBOTZ-_+]╾──➲*`
+   let left = "*│*"
+   let branch = "*❥︎ 𖡻⃞⃙⃜🌊*"
+   let bracketmenu = "*┞─╼「"
+   let F = "」*"
+   let A = "*┟*"
+   let B = "*┞*"
+   let stick = "*╿*"
+   let borderlist = "*╭╾───────────────╼╮*"
+   let borderlistend = "*╰╾───────────────╼╯*"
+   let opener = "*╭─────────────────╮*"
+   let closing = "*╰─────────────────╯*"
+   let headtqto = "*╭╾─「 _Thanks To✨_ 」╾───╮*"
+   let endbordertqto = "*╰╾───────────────╾╯*"
+   let end = "*╰╾────────────────╼*"
 const listmn = `
 ${head}
-${left}
-${left} Library : Baileys - Multi Device
-${left} Language : JavaScript
-${left}
-${bracketmenu} PROFILE BOT ${F} 
-${left} Owner : ${owner.length}
-${left} Rakyat : ${rkyt.length}
-${left}
-${bracketmenu} PROFILE GROUP ${F} 
-${left} Antilink : ${AntiLink? "on" : "off"}
-${left} Autorevoke : ${GcRvk? "on" : "off"}
-${left} Welcome : ${welcm? "on" : "off"}
-${closing}
-${readmore}
-${head}
-${bracketmenu} _Group_ ${F} 
-${branch} ${prefix}linkgroup 
-${branch} ${prefix}setppgc 
-${branch} ${prefix}setname 
-${branch} ${prefix}setdesc 
-${branch} ${prefix}ephemeral 
-${branch} ${prefix}hidetag 
-${branch} ${prefix}tagall 
-${branch} ${prefix}promote 
-${branch} ${prefix}demote 
-${branch} ${prefix}vote 
-${branch} ${prefix}devote 
-${branch} ${prefix}upvote 
-${branch} ${prefix}cekvote 
-${branch} ${prefix}hapusvote 
+${bracketmenu} PROFILE BOT ${F}
+${left} 𝑯𝒂𝒊 𝑺𝒂𝒚𝒂 𝑨𝒅𝒂𝒍𝒂𝒉 𝑩𝒐𝒕 𝑾𝒂𝒕𝒕𝒔𝒂𝒑 𝒚𝒈 
+${left} 𝑫𝒊𝒄𝒊𝒑𝒕𝒂𝒌𝒂𝒏 𝑶𝒍𝒆𝒉 𝑨𝒍𝒆𝒙𝒕𝒛 𝑺𝒕𝒐𝒓𝒆.
+${left} 𝑴𝒐𝒉𝒐𝒏 𝑮𝒖𝒏𝒂𝒌𝒂𝒏 𝑩𝒐𝒕 𝑫𝒆𝒏𝒈𝒂𝒏 
+${left} 𝑩𝒂𝒊𝒌 𝑻𝒊𝒅𝒂𝒌 𝑺𝒑𝒂𝒎.
+${left} 𝑻𝒖𝒏𝒈𝒈𝒖 𝑹𝒆𝒔𝒑𝒐𝒏 5𝑫𝒆𝒕𝒊𝒌
+${left} 𝑳𝒂𝒍𝒖 𝑮𝒖𝒏𝒂𝒌𝒂𝒏 𝑳𝒂𝒈𝒊. 
+${left} 𝑺𝒆𝒍𝒂𝒎𝒂𝒕 𝑩𝒆𝒓𝒔𝒆𝒏𝒂𝒏𝒈'𝑺𝒆𝒏𝒂𝒏𝒈( ˘ ³˘)♥︎
+${bracketmenu} _Group_ ${F}
+${branch} ${prefix}linkgroup <undefined>
+${branch} ${prefix}setppgc <image>
+${branch} ${prefix}setname <query>
+${branch} ${prefix}setdesc <query>
+${branch} ${prefix}ephemeral <query>
+${branch} ${prefix}hidetag <query>
+${branch} ${prefix}tagall <query>
+${branch} ${prefix}promote <query>
+${branch} ${prefix}demote <query>
+${branch} ${prefix}vote <query>
+${branch} ${prefix}devote <undefined>
+${branch} ${prefix}upvote <undefined>
+${branch} ${prefix}cekvote <undefined>
+${branch} ${prefix}hapusvote <undefined>
 ${branch} ${prefix}antilink <on/off>
 ${branch} ${prefix}welcome <on/off>
 ${branch} ${prefix}autorevoke <on/off>
-${branch} ${prefix}add 
-${branch} ${prefix}kick 
-${branch} ${prefix}revoke 
+${branch} ${prefix}add <query>
+${branch} ${prefix}kick <query>
+${branch} ${prefix}revoke <undefined>
 ${branch} ${prefix}group <open/close>
 ${branch} ${prefix}editinfo <open/close>
-${branch} ${prefix}ceksewa 
-${bracketmenu} _Downloader_ ${F} ${readmore}
-${branch} ${prefix}instagram 
-${branch} ${prefix}tiktok 
-${branch} ${prefix}twitter 
-${branch} ${prefix}facebook 
-${branch} ${prefix}youtube 
-${branch} ${prefix}igstory 
-${branch} ${prefix}jpeg 
-${branch} ${prefix}mp4 
+${branch} ${prefix}ceksewa <undefined>
+${bracketmenu} _Downloader_ ${F}
+${branch} ${prefix}instagram <query>
+${branch} ${prefix}tiktok <query>
+${branch} ${prefix}twitter <query>
+${branch} ${prefix}facebook <query>
+${branch} ${prefix}youtube <query>
+${branch} ${prefix}igstory <query>
+${branch} ${prefix}jpeg <query>
+${branch} ${prefix}mp4 <query>
 ${bracketmenu} _Search_ ${F}
-${branch} ${prefix}gimage 
-${branch} ${prefix}ytsearch 
-${branch} ${prefix}searchgc 
-${branch} ${prefix}play 
-${branch} ${prefix}happymod 
-${branch} ${prefix}servermc 
-${branch} ${prefix}mcpedl 
-${branch} ${prefix}google 
-${branch} ${prefix}pinterest 
-${branch} ${prefix}layarkaca-search 
-${bracketmenu} _Convert_ ${F} ${readmore}
-${branch} ${prefix}sticker 
-${branch} ${prefix}smeme 
-${branch} ${prefix}stickerwm 
-${branch} ${prefix}tomp3 
-${branch} ${prefix}tovn 
-${branch} ${prefix}toaudio 
-${branch} ${prefix}togif 
-${branch} ${prefix}tourl 
-${branch} ${prefix}tomp4 
-${branch} ${prefix}toimage 
-${bracketmenu} _Text Feature_ ${F} ${readmore}
+${branch} ${prefix}gimage <query>
+${branch} ${prefix}ytsearch <query>
+${branch} ${prefix}searchgc <query>
+${branch} ${prefix}play <query>
+${branch} ${prefix}happymod <query>
+${branch} ${prefix}servermc <undefined>
+${branch} ${prefix}mcpedl <query>
+${branch} ${prefix}google <query>
+${branch} ${prefix}pinterest <query>
+${branch} ${prefix}layarkaca-search <query>
+${bracketmenu} _Convert_ ${F}
+${branch} ${prefix}sticker <image/video>
+${branch} ${prefix}smeme <image>
+${branch} ${prefix}stickerwm <reply>
+${branch} ${prefix}emoji <query>
+${branch} ${prefix}emojimix <query>
+${branch} ${prefix}tomp3 <video>
+${branch} ${prefix}tovn <video>
+${branch} ${prefix}toaudio <video>
+${branch} ${prefix}togif <video>
+${branch} ${prefix}tourl <query>
+${branch} ${prefix}tomp4 <sticker>
+${branch} ${prefix}toimage <sticker>
+${bracketmenu} _Text Feature_ ${F}
 ${branch} ${prefix}cerpen <query in the list>
-${branch} ${prefix}quotes 
-${bracketmenu} _Tools_ ${F} 
-${branch} ${prefix}inspect 
-${branch} ${prefix}getname 
-${branch} ${prefix}getpic 
-${branch} ${prefix}nulis 
-${branch} ${prefix}kalkulator 
-${branch} ${prefix}quoted 
-${branch} ${prefix}join 
-${branch} ${prefix}fliptext 
-${branch} ${prefix}tohuruf 
-${branch} ${prefix}volume 
+${branch} ${prefix}quotes <undefined>
+${bracketmenu} _Tools_ ${F}
+${branch} ${prefix}inspect <query>
+${branch} ${prefix}getname <query>
+${branch} ${prefix}getpic <query>
+${branch} ${prefix}nulis <query>
+${branch} ${prefix}kalkulator <query>
+${branch} ${prefix}quoted <query>
+${branch} ${prefix}join <query>
+${branch} ${prefix}fliptext <query>
+${branch} ${prefix}tohuruf <query>
+${branch} ${prefix}volume <query>
 ${branch} ${prefix}bass
 ${branch} ${prefix}blown
 ${branch} ${prefix}deep
@@ -839,155 +856,146 @@ ${branch} ${prefix}reverse
 ${branch} ${prefix}robot
 ${branch} ${prefix}slow
 ${branch} ${prefix}tupai
-${branch} ${prefix}translate 
-${bracketmenu} _Fun_ ${F} ${readmore}
-${branch} ${prefix}halah 
-${branch} ${prefix}hilih 
-${branch} ${prefix}huluh 
-${branch} ${prefix}heleh 
-${branch} ${prefix}holoh 
-${branch} ${prefix}math 
-${branch} ${prefix}tictactoe 
-${branch} ${prefix}delttt 
-${branch} ${prefix}tebak 
-${branch} ${prefix}family100 
-${branch} ${prefix}suitpvp 
-${bracketmenu} _Sticker Telegram_ ${F} ${readmore}
-${branch} ${prefix}emoji 
-${branch} ${prefix}emojimix 
-${branch} ${prefix}attp 
-${branch} ${prefix}doge unde
-${branch} ${prefix}patrick
-${branch} ${prefix}bucinsticker
-${bracketmenu} _Maker_ ${F} 
-${branch} ${prefix}3dbox   
-${branch} ${prefix}drapwater   
-${branch} ${prefix}lion2   
-${branch} ${prefix}papercut   
-${branch} ${prefix}transformer   
-${branch} ${prefix}herryp   
-${branch} ${prefix}neondevil   
-${branch} ${prefix}3dstone   
-${branch} ${prefix}3davengers   
-${branch} ${prefix}thunder   
-${branch} ${prefix}window   
-${branch} ${prefix}graffiti   
-${branch} ${prefix}pornhub   
-${branch} ${prefix}glitch   
-${branch} ${prefix}blackping   
-${branch} ${prefix}glitch3   
-${branch} ${prefix}glitch2   
-${branch} ${prefix}3dspace   
-${branch} ${prefix}lion   
-${branch} ${prefix}3dneon   
-${branch} ${prefix}neon   
-${branch} ${prefix}greenneon   
-${branch} ${prefix}bokeh   
-${branch} ${prefix}hollographic   
-${branch} ${prefix}bear   
-${branch} ${prefix}wolf   
-${branch} ${prefix}joker   
-${branch} ${prefix}dropwater   
-${branch} ${prefix}neonlight   
-${branch} ${prefix}thewall   
-${branch} ${prefix}natural   
-${branch} ${prefix}carbon   
-${branch} ${prefix}pencil   
-${branch} ${prefix}blackpink  
-${branch} ${prefix}neon  
-${branch} ${prefix}greenneon  
-${branch} ${prefix}advanceglow  
-${branch} ${prefix}futureneon  
-${branch} ${prefix}sandwriting  
-${branch} ${prefix}sandsummer  
-${branch} ${prefix}sandengraved  
-${branch} ${prefix}metaldark  
-${branch} ${prefix}neonlight  
-${branch} ${prefix}holographic  
-${branch} ${prefix}text1917  
-${branch} ${prefix}minion  
-${branch} ${prefix}deluxesilver  
-${branch} ${prefix}newyearcard  
-${branch} ${prefix}bloodfrosted  
-${branch} ${prefix}halloween  
-${branch} ${prefix}jokerlogo  
-${branch} ${prefix}fireworksparkle  
-${branch} ${prefix}natureleaves  
-${branch} ${prefix}bokeh  
-${branch} ${prefix}toxic  
-${branch} ${prefix}strawberry  
-${branch} ${prefix}box3d  
-${branch} ${prefix}roadwarning  
-${branch} ${prefix}icecold  
-${branch} ${prefix}luxury  
-${branch} ${prefix}cloud  
-${branch} ${prefix}summersand  
-${branch} ${prefix}horrorblood  
-${branch} ${prefix}thunder  
-${branch} ${prefix}pornhub  
-${branch} ${prefix}glitch  
-${branch} ${prefix}avenger  
-${branch} ${prefix}space  
-${branch} ${prefix}ninjalogo  
-${branch} ${prefix}marvelstudio  
-${branch} ${prefix}lionlogo  
-${branch} ${prefix}wolflogo  
-${branch} ${prefix}steel3d  
-${branch} ${prefix}wallgravity  
-${bracketmenu} _Information_ ${F} ${readmore}
-${branch} ${prefix}merdeka-news 
-${branch} ${prefix}kontan-news 
-${branch} ${prefix}cnbc-news 
-${branch} ${prefix}tribun-news 
-${branch} ${prefix}indozone-news 
-${branch} ${prefix}kompas-news 
-${branch} ${prefix}detik-news 
-${branch} ${prefix}daily-news 
-${branch} ${prefix}inews-news 
-${branch} ${prefix}okezone-news 
-${branch} ${prefix}sindo-news 
-${branch} ${prefix}tempo-news 
-${branch} ${prefix}antara-news 
-${branch} ${prefix}cnn-news 
-${branch} ${prefix}fajar-news 
-${bracketmenu} _Storage_ ${F} ${readmore}
-${branch} ${prefix}setcmd 
-${branch} ${prefix}listcmd 
-${branch} ${prefix}delcmd 
-${branch} ${prefix}lockcmd 
-${branch} ${prefix}addmsg 
-${branch} ${prefix}listmsg 
-${branch} ${prefix}getmsg 
-${branch} ${prefix}delmsg 
-${branch} ${prefix}addlist 
-${branch} ${prefix}dellist 
-${branch} ${prefix}updatelist 
-${branch} ${prefix}list 
-${bracketmenu} _Other_ ${F} 
-${branch} ${prefix}owner 
-${branch} ${prefix}listpc 
-${branch} ${prefix}listgc 
-${branch} ${prefix}mcserver 
-${branch} ${prefix}sc 
-${branch} ${prefix}ping 
-${branch} ${prefix}afk 
+${branch} ${prefix}translate <query>
+${bracketmenu} _Fun_ ${F}
+${branch} ${prefix}halah <query>
+${branch} ${prefix}hilih <query>
+${branch} ${prefix}huluh <query>
+${branch} ${prefix}heleh <query>
+${branch} ${prefix}holoh <query>
+${branch} ${prefix}math <query>
+${branch} ${prefix}tictactoe <query>
+${branch} ${prefix}delttt <query>
+${branch} ${prefix}tebak <query>
+${branch} ${prefix}family100 <undefined>
+${branch} ${prefix}suitpvp <query>
+${bracketmenu} _Maker_ ${F}
+${branch} ${prefix}3dbox   <query>
+${branch} ${prefix}drapwater   <query>
+${branch} ${prefix}lion2   <query>
+${branch} ${prefix}papercut   <query>
+${branch} ${prefix}transformer   <query>
+${branch} ${prefix}herryp   <query>
+${branch} ${prefix}neondevil   <query>
+${branch} ${prefix}3dstone   <query>
+${branch} ${prefix}3davengers   <query>
+${branch} ${prefix}thunder   <query>
+${branch} ${prefix}window   <query>
+${branch} ${prefix}graffiti   <query>
+${branch} ${prefix}pornhub   <query>
+${branch} ${prefix}glitch   <query>
+${branch} ${prefix}blackping   <query>
+${branch} ${prefix}glitch3   <query>
+${branch} ${prefix}glitch2   <query>
+${branch} ${prefix}3dspace   <query>
+${branch} ${prefix}lion   <query>
+${branch} ${prefix}3dneon   <query>
+${branch} ${prefix}neon   <query>
+${branch} ${prefix}greenneon   <query>
+${branch} ${prefix}bokeh   <query>
+${branch} ${prefix}hollographic   <query>
+${branch} ${prefix}bear   <query>
+${branch} ${prefix}wolf   <query>
+${branch} ${prefix}joker   <query>
+${branch} ${prefix}dropwater   <query>
+${branch} ${prefix}neonlight   <query>
+${branch} ${prefix}thewall   <query>
+${branch} ${prefix}natural   <query>
+${branch} ${prefix}carbon   <query>
+${branch} ${prefix}pencil   <query>
+${branch} ${prefix}blackpink  <query>
+${branch} ${prefix}neon  <query>
+${branch} ${prefix}greenneon  <query>
+${branch} ${prefix}advanceglow  <query>
+${branch} ${prefix}futureneon  <query>
+${branch} ${prefix}sandwriting  <query>
+${branch} ${prefix}sandsummer  <query>
+${branch} ${prefix}sandengraved  <query>
+${branch} ${prefix}metaldark  <query>
+${branch} ${prefix}neonlight  <query>
+${branch} ${prefix}holographic  <query>
+${branch} ${prefix}text1917  <query>
+${branch} ${prefix}minion  <query>
+${branch} ${prefix}deluxesilver  <query>
+${branch} ${prefix}newyearcard  <query>
+${branch} ${prefix}bloodfrosted  <query>
+${branch} ${prefix}halloween  <query>
+${branch} ${prefix}jokerlogo  <query>
+${branch} ${prefix}fireworksparkle  <query>
+${branch} ${prefix}natureleaves  <query>
+${branch} ${prefix}bokeh  <query>
+${branch} ${prefix}toxic  <query>
+${branch} ${prefix}strawberry  <query>
+${branch} ${prefix}box3d  <query>
+${branch} ${prefix}roadwarning  <query>
+${branch} ${prefix}breakwall  <query>
+${branch} ${prefix}icecold  <query>
+${branch} ${prefix}luxury  <query>
+${branch} ${prefix}cloud  <query>
+${branch} ${prefix}summersand  <query>
+${branch} ${prefix}horrorblood  <query>
+${branch} ${prefix}thunder  <query>
+${branch} ${prefix}pornhub  <query>
+${branch} ${prefix}glitch  <query>
+${branch} ${prefix}avenger  <query>
+${branch} ${prefix}space  <query>
+${branch} ${prefix}ninjalogo  <query>
+${branch} ${prefix}marvelstudio  <query>
+${branch} ${prefix}lionlogo  <query>
+${branch} ${prefix}wolflogo  <query>
+${branch} ${prefix}steel3d  <query>
+${branch} ${prefix}wallgravity  <query>
+${bracketmenu} _Information_ ${F}
+${branch} ${prefix}merdeka-news <undefined>
+${branch} ${prefix}kontan-news <undefined>
+${branch} ${prefix}cnbc-news <undefined>
+${branch} ${prefix}tribun-news <undefined>
+${branch} ${prefix}indozone-news <undefined>
+${branch} ${prefix}kompas-news <undefined>
+${branch} ${prefix}detik-news <undefined>
+${branch} ${prefix}daily-news <undefined>
+${branch} ${prefix}inews-news <undefined>
+${branch} ${prefix}okezone-news <undefined>
+${branch} ${prefix}sindo-news <undefined>
+${branch} ${prefix}tempo-news <undefined>
+${branch} ${prefix}antara-news <undefined>
+${branch} ${prefix}cnn-news <undefined>
+${branch} ${prefix}fajar-news <undefined>
+${bracketmenu} _Storage_ ${F}
+${branch} ${prefix}setcmd <query>
+${branch} ${prefix}listcmd <undefined>
+${branch} ${prefix}delcmd <query>
+${branch} ${prefix}lockcmd <query>
+${branch} ${prefix}addmsg <query>
+${branch} ${prefix}listmsg <undefined>
+${branch} ${prefix}getmsg <query>
+${branch} ${prefix}delmsg <query>
+${bracketmenu} _Other_ ${F}
+${branch} ${prefix}owner <undefined>
+${branch} ${prefix}listpc <undefined>
+${branch} ${prefix}listgc <undefined>
+${branch} ${prefix}mcserver <query>
+${branch} ${prefix}sc <undefined>
+${branch} ${prefix}ping <undefined>
+${branch} ${prefix}afk <query>
 ${branch} ${prefix}cekupdate [UpdateBot]
 ${branch} ${prefix}getscmd [GetSticker]
-${branch} ${prefix}delete 
-${branch} ${prefix}infochat 
-${branch} ${prefix}request 
-${branch} ${prefix}report 
-${branch} ${prefix}donate 
-${branch} ${prefix}listonline 
-${bracketmenu} _Owner_ ${F} ${readmore}
-${branch} ${prefix}self 
+${branch} ${prefix}delete <query>
+${branch} ${prefix}infochat <query>
+${branch} ${prefix}request <query>
+${branch} ${prefix}report <query>
+${branch} ${prefix}donate <undefined>
+${branch} ${prefix}listonline <undefined>
+${bracketmenu} _Owner_ ${F}
+${branch} ${prefix}setppbot <image>
+${branch} ${prefix}self <undefined>
 ${branch} ${prefix}sewa <add/del>
-${branch} ${prefix}listsewa 
-${branch} ${prefix}public 
-${branch} ${prefix}bcall 
-${branch} ${prefix}bcgroup 
-${branch} ${prefix}chat 
-${branch} ${prefix}antitag 
+${branch} ${prefix}listsewa <undefined>
+${branch} ${prefix}public <undefined>
+${branch} ${prefix}broadcastchat <query>
+${branch} ${prefix}broadcastgroup <query>
+${branch} ${prefix}chat <query>
+${branch} ${prefix}antitag <query>
 ${branch} ${prefix}ban <add/del>
 ${branch} ${prefix}cowner <add/del>
 ${branch}> / => / $
@@ -1001,101 +1009,15 @@ ${B} Deff
 ${left} ${ucapanWaktu}
 ${left} ${jangwak}
 ${end}`
-
+const reactionMessage = {
+                    react: {
+                        text: args[0],
+                        key: { remoteJid: m.chat, fromMe: true, id: quoted.id }
+                    }
+                }
 // Case Nye Sini Ngab
 switch(command) {
-case prefix+'loc': {
-var but = [{
-urlButton: {
-displayText: 'Group Whatsapp',
-url: linkgrupss
-}
-}, {
-urlButton: {
-displayText: 'Instagram',
-url: 'https://instagram.com/deff.xyz'
-}
-}, {
-quickReplyButton: {
-displayText: '📈Status',
-id: '#ping'
-}
-}, {
-quickReplyButton: {
-displayText: '📞Owner',
-id: '#owner'
-}  
-}, {
-quickReplyButton: {
-displayText: '📊Dashboard',
-id: '#dashboard'
-}
-}]
-sock.sendMessage(from, { caption: listmn, location: { jpegThumbnail: fs.readFileSync('./worker/media/image/loc.jpg') }, buttons: but, footer: '©Deffbotz ~ Deff'})
-}
-break
-break
-case prefix+'gura':
-case prefix+'gurastick':{
-var ano = await fetchJson('https://raw.githubusercontent.com/rashidsiregar28/data/main/gura')
-var wifegerak = ano.split('\n')
-var wifegerakx = wifegerak[Math.floor(Math.random() * wifegerak.length)]
-encmedia = await sock.sendImageAsSticker(from, wifegerakx, m, { packname: global.packname, author: global.author, })
-await fs.unlinkSync(encmedia)
-}
-break
-case prefix+'doge':
-case prefix+'dogestick':{
-var ano = await fetchJson('https://raw.githubusercontent.com/rashidsiregar28/data/main/anjing')
-var wifegerak = ano.split('\n')
-var wifegerakx = wifegerak[Math.floor(Math.random() * wifegerak.length)]
-encmedia = await sock.sendImageAsSticker(from, wifegerakx, m, { packname: global.packname, author: global.author, })
-await fs.unlinkSync(encmedia)
-}
-break
-case prefix+'bucinstick':
-case prefix+'bucinp' :{
-var ano = await fetchJson('https://raw.githubusercontent.com/rashidsiregar28/data/main/bucin')
-var wifegerak = ano.split('\n')
-var wifegerakx = wifegerak[Math.floor(Math.random() * wifegerak.length)]
-encmedia = await sock.sendImageAsSticker(from, wifegerakx, m, { packname: global.packname, author: global.author, })
-await fs.unlinkSync(encmedia)
-}
-break
-case prefix+'patrik':
-case prefix+'patrick': {
-var ano = await fetchJson('https://raw.githubusercontent.com/rashidsiregar28/data/main/patrik')
-var wifegerak = ano.split('\n')
-var wifegerakx = wifegerak[Math.floor(Math.random() * wifegerak.length)]
-encmedia = await sock.sendImageAsSticker(from, wifegerakx, m, { packname: global.packname, author: global.author, })
-await fs.unlinkSync(encmedia)
-}
-break
-case prefix+'attp': {
-const buff = await getBuffer(`https://api.xteam.xyz/attp?file&text=${encodeURIComponent(q)}`)
-sock.sendMessage(from, { sticker : buff}) 
-}
-break
-case prefix+'list':
-var _0x50c66a=_0x2b62;(function(_0x3f557c,_0x24f7d3){var _0x5cb7ad=_0x2b62,_0x4e8159=_0x3f557c();while(!![]){try{var _0x3ba248=parseInt(_0x5cb7ad(0x1f0))/0x1+parseInt(_0x5cb7ad(0x1f6))/0x2+-parseInt(_0x5cb7ad(0x1f5))/0x3*(parseInt(_0x5cb7ad(0x1ee))/0x4)+parseInt(_0x5cb7ad(0x1e5))/0x5+parseInt(_0x5cb7ad(0x1f2))/0x6*(parseInt(_0x5cb7ad(0x1f1))/0x7)+parseInt(_0x5cb7ad(0x1e9))/0x8*(parseInt(_0x5cb7ad(0x1f7))/0x9)+-parseInt(_0x5cb7ad(0x1f4))/0xa;if(_0x3ba248===_0x24f7d3)break;else _0x4e8159['push'](_0x4e8159['shift']());}catch(_0x366aec){_0x4e8159['push'](_0x4e8159['shift']());}}}(_0x23ac,0x34f52));if(!m[_0x50c66a(0x1e4)])return m['reply'](_0x50c66a(0x1ea));if(db_respon_list[_0x50c66a(0x1e7)]===0x0)return m[_0x50c66a(0x1eb)](_0x50c66a(0x1f3));function _0x2b62(_0x50a3c6,_0x2503d2){var _0x23ac7c=_0x23ac();return _0x2b62=function(_0x2b6271,_0x14f107){_0x2b6271=_0x2b6271-0x1e4;var _0x87a022=_0x23ac7c[_0x2b6271];return _0x87a022;},_0x2b62(_0x50a3c6,_0x2503d2);}if(!isAlreadyResponListGroup(from,db_respon_list))return m['reply'](_0x50c66a(0x1e6));var arr_rows=[];for(let x of db_respon_list){x['id']===from&&arr_rows[_0x50c66a(0x1ec)]({'title':x['key'],'rowId':x['key']});}var listMsg={'text':'Silahkan\x20Pilih\x20Produk\x20Nya','buttonText':_0x50c66a(0x1ed),'footer':_0x50c66a(0x1ef),'sections':[{'title':groupName,'rows':arr_rows}]};function _0x23ac(){var _0x1f9657=['push','Click\x20Here!','276XoIZgS','My\x20list','259544FnnuwJ','1071IQrxHU','2424yQPkMR','Belum\x20ada\x20list\x20message\x20di\x20database','3282590IcHyGQ','12309LWYVsp','201128oKeXgz','3062061ASTlHI','isGroup','330655BHSRyT','Belum\x20ada\x20list\x20message\x20yang\x20terdaftar\x20di\x20group\x20ini','length','sendMessage','8MhFMaD','Khusus\x20Grup','reply'];_0x23ac=function(){return _0x1f9657;};return _0x23ac();}sock[_0x50c66a(0x1e8)](from,listMsg);
-            break
-        case prefix+'addlist':
-            const _0x178e7c=_0x1694;(function(_0x153f0d,_0x57b26b){const _0x32a248=_0x1694,_0x276eaf=_0x153f0d();while(!![]){try{const _0x3cc2de=parseInt(_0x32a248(0x1b8))/0x1*(-parseInt(_0x32a248(0x1b1))/0x2)+parseInt(_0x32a248(0x1a3))/0x3+-parseInt(_0x32a248(0x1b5))/0x4+-parseInt(_0x32a248(0x1a5))/0x5*(-parseInt(_0x32a248(0x1ae))/0x6)+parseInt(_0x32a248(0x1aa))/0x7+parseInt(_0x32a248(0x1b0))/0x8+-parseInt(_0x32a248(0x1a8))/0x9*(parseInt(_0x32a248(0x1a6))/0xa);if(_0x3cc2de===_0x57b26b)break;else _0x276eaf['push'](_0x276eaf['shift']());}catch(_0x8901fb){_0x276eaf['push'](_0x276eaf['shift']());}}}(_0x2a9d,0xf4001));function _0x1694(_0x1d3c0b,_0x12e4e7){const _0x2a9d57=_0x2a9d();return _0x1694=function(_0x16940b,_0x36773c){_0x16940b=_0x16940b-0x1a0;let _0x136247=_0x2a9d57[_0x16940b];return _0x136247;},_0x1694(_0x1d3c0b,_0x12e4e7);}function _0x2a9d(){const _0xf07ba3=['283452JPDICl','existsSync','9074824VSeAmq','10882zVJvvd','Khusus\x20Grup','List\x20respon\x20dengan\x20key\x20:\x20*','split','2139160PAhQry','\x20*key@response*\x0a\x0a_Contoh_\x0a\x0a','unlinkSync','337tRAbWk','slice','Sukses\x20set\x20list\x20message\x20dengan\x20key\x20:\x20*','Gunakan\x20dengan\x20cara\x20','360168nfExXt','./lib/uploader','135udWEIn','1220qteSrj','reply','63711Tphnym','includes','11910689dQQQnG','downloadAndSaveMediaMessage','admin','isGroup'];_0x2a9d=function(){return _0xf07ba3;};return _0x2a9d();}if(!m[_0x178e7c(0x1ad)])return m[_0x178e7c(0x1a7)](_0x178e7c(0x1b2));if(!isAdmins)return m['reply'](mess[_0x178e7c(0x1ac)]);var args1=q[_0x178e7c(0x1b4)]('@')[0x0],args2=q[_0x178e7c(0x1b4)]('@')[0x1];if(!q[_0x178e7c(0x1a9)]('@'))return m[_0x178e7c(0x1a7)](_0x178e7c(0x1a2)+command+_0x178e7c(0x1b6)+command+'\x20tes@apa');if(isAlreadyResponList(from,args1,db_respon_list))return m[_0x178e7c(0x1a7)](_0x178e7c(0x1b3)+args1+'*\x20sudah\x20ada\x20di\x20group\x20ini.');if(isImage||isQuotedImage){let {TelegraPh}=require(_0x178e7c(0x1a4)),media=await sock[_0x178e7c(0x1ab)](quoted),anu=await TelegraPh(media);addResponList(from,args1,args2,!![],''+anu,db_respon_list),m[_0x178e7c(0x1a7)](_0x178e7c(0x1a1)+args1+'*');if(fs[_0x178e7c(0x1af)](media))fs[_0x178e7c(0x1b7)](media);}else addResponList(from,args1,args2,![],'-',db_respon_list),m['reply'](_0x178e7c(0x1a1)+args1+'*');addCmd(command[_0x178e7c(0x1a0)](0x1),0x1,commund);
-            break
-        case prefix+'dellist':
-var _0x232dd3=_0x3c5a;function _0x1b1b(){var _0x5d0aba=['84689iYmqbl','136ojlHOf','Belum\x20ada\x20list\x20message\x20di\x20database','slice','12JddpVh','Khusus\x20Grup','48KTnNMM','280755dZNAAa','length','12gppMxn','3842470SgcDBS','isGroup','\x20*key*\x0a\x0a_Contoh_\x0a\x0a','reply','1404430DNSgVq','\x20hello','33BAAjbm','96704qHTeMA','6xpGquH','21583887yJTguq','361711joOueG','*\x20tidak\x20ada\x20di\x20database!'];_0x1b1b=function(){return _0x5d0aba;};return _0x1b1b();}(function(_0x2cdb84,_0x22b194){var _0x202912=_0x3c5a,_0x57ae51=_0x2cdb84();while(!![]){try{var _0x2079ea=parseInt(_0x202912(0xc5))/0x1+-parseInt(_0x202912(0xc0))/0x2*(-parseInt(_0x202912(0xcb))/0x3)+parseInt(_0x202912(0xc9))/0x4*(parseInt(_0x202912(0xbd))/0x5)+parseInt(_0x202912(0xc1))/0x6*(parseInt(_0x202912(0xc3))/0x7)+-parseInt(_0x202912(0xc6))/0x8*(parseInt(_0x202912(0xcc))/0x9)+-parseInt(_0x202912(0xb9))/0xa*(-parseInt(_0x202912(0xbf))/0xb)+parseInt(_0x202912(0xb8))/0xc*(-parseInt(_0x202912(0xc2))/0xd);if(_0x2079ea===_0x22b194)break;else _0x57ae51['push'](_0x57ae51['shift']());}catch(_0x454660){_0x57ae51['push'](_0x57ae51['shift']());}}}(_0x1b1b,0xae81b));if(!m[_0x232dd3(0xba)])return m[_0x232dd3(0xbc)](_0x232dd3(0xca));if(!isAdmins)return m[_0x232dd3(0xbc)](mess['admin']);if(db_respon_list[_0x232dd3(0xcd)]===0x0)return m[_0x232dd3(0xbc)](_0x232dd3(0xc7));function _0x3c5a(_0x30ae8b,_0x56931a){var _0x1b1b02=_0x1b1b();return _0x3c5a=function(_0x3c5a18,_0x1ec5c1){_0x3c5a18=_0x3c5a18-0xb8;var _0x82f8a6=_0x1b1b02[_0x3c5a18];return _0x82f8a6;},_0x3c5a(_0x30ae8b,_0x56931a);}if(!q)return m[_0x232dd3(0xbc)]('Gunakan\x20dengan\x20cara\x20'+command+_0x232dd3(0xbb)+command+_0x232dd3(0xbe));if(!isAlreadyResponList(from,q,db_respon_list))return m[_0x232dd3(0xbc)]('List\x20respon\x20dengan\x20key\x20*'+q+_0x232dd3(0xc4));delResponList(from,q,db_respon_list),m[_0x232dd3(0xbc)]('Sukses\x20delete\x20list\x20message\x20dengan\x20key\x20*'+q+'*'),addCmd(command[_0x232dd3(0xc8)](0x1),0x1,commund);
-            break
-        case prefix+'updatelist': case prefix+'update':
-            function _0x4e9c(){var _0x9a0b40=['includes','76484avfChk','*\x20belum\x20terdaftar\x20di\x20group\x20ini','4861784ilCqLx','existsSync','588670KpBpMd','\x20tes@apa','300azwmSL','\x20*key@response*\x0a\x0a_Contoh_\x0a\x0a','Gunakan\x20dengan\x20cara\x20','165348wJZdMK','481008joUydr','isGroup','admin','slice','222325ZCHfIn','5426085lNnfYC','9fmUrMB','60vimKWT','132rBrlNA','split','unlinkSync','reply'];_0x4e9c=function(){return _0x9a0b40;};return _0x4e9c();}var _0x5bb85f=_0x4589;(function(_0x3a5ae5,_0x58d92b){var _0x523f1c=_0x4589,_0x1cb0df=_0x3a5ae5();while(!![]){try{var _0x3e2e85=parseInt(_0x523f1c(0x18d))/0x1+parseInt(_0x523f1c(0x192))/0x2+parseInt(_0x523f1c(0x19b))/0x3*(-parseInt(_0x523f1c(0x189))/0x4)+parseInt(_0x523f1c(0x197))/0x5*(-parseInt(_0x523f1c(0x19a))/0x6)+-parseInt(_0x523f1c(0x198))/0x7+parseInt(_0x523f1c(0x18b))/0x8*(parseInt(_0x523f1c(0x199))/0x9)+parseInt(_0x523f1c(0x18f))/0xa*(parseInt(_0x523f1c(0x193))/0xb);if(_0x3e2e85===_0x58d92b)break;else _0x1cb0df['push'](_0x1cb0df['shift']());}catch(_0x150cb3){_0x1cb0df['push'](_0x1cb0df['shift']());}}}(_0x4e9c,0x81572));if(!m[_0x5bb85f(0x194)])return m['reply']('Khusus\x20Grup');if(!isAdmins)return m[_0x5bb85f(0x187)](mess[_0x5bb85f(0x195)]);var args1=q[_0x5bb85f(0x185)]('@')[0x0],args2=q[_0x5bb85f(0x185)]('@')[0x1];if(!q[_0x5bb85f(0x188)]('@'))return m[_0x5bb85f(0x187)](_0x5bb85f(0x191)+command+_0x5bb85f(0x190)+command+_0x5bb85f(0x18e));function _0x4589(_0x626b97,_0x346d3f){var _0x4e9cbd=_0x4e9c();return _0x4589=function(_0x4589a9,_0x1c5dd7){_0x4589a9=_0x4589a9-0x185;var _0x51524=_0x4e9cbd[_0x4589a9];return _0x51524;},_0x4589(_0x626b97,_0x346d3f);}if(!isAlreadyResponListGroup(from,db_respon_list))return m[_0x5bb85f(0x187)]('Maaf,\x20untuk\x20key\x20*'+args1+_0x5bb85f(0x18a));if(isImage||isQuotedImage){let media=await sock['downloadAndSaveMediaMessage'](quoted),anu=await TelegraPh(media);updateResponList(from,args1,args2,!![],''+anu,db_respon_list),m[_0x5bb85f(0x187)]('Sukses\x20update\x20list\x20message\x20dengan\x20key\x20:\x20*'+args1+'*');if(fs[_0x5bb85f(0x18c)](media))fs[_0x5bb85f(0x186)](media);}else updateResponList(from,args1,args2,![],'-',db_respon_list),m[_0x5bb85f(0x187)]('Sukses\x20update\x20respon\x20list\x20dengan\x20key\x20*'+args1+'*');addCmd(command[_0x5bb85f(0x196)](0x1),0x1,commund);
-            break
-case prefix+'dashboard': 
-const _0x29ee60=_0x54e2;function _0x54e2(_0x18afec,_0x5a29d3){const _0x56b0f5=_0x56b0();return _0x54e2=function(_0x54e234,_0x5573fe){_0x54e234=_0x54e234-0x175;let _0x31e41f=_0x56b0f5[_0x54e234];return _0x31e41f;},_0x54e2(_0x18afec,_0x5a29d3);}(function(_0x40fed5,_0x284029){const _0x261611=_0x54e2,_0x41249a=_0x40fed5();while(!![]){try{const _0x4094f1=-parseInt(_0x261611(0x186))/0x1+parseInt(_0x261611(0x18a))/0x2*(parseInt(_0x261611(0x17c))/0x3)+parseInt(_0x261611(0x17f))/0x4*(-parseInt(_0x261611(0x179))/0x5)+parseInt(_0x261611(0x17a))/0x6+-parseInt(_0x261611(0x181))/0x7+-parseInt(_0x261611(0x175))/0x8*(parseInt(_0x261611(0x17b))/0x9)+parseInt(_0x261611(0x176))/0xa;if(_0x4094f1===_0x284029)break;else _0x41249a['push'](_0x41249a['shift']());}catch(_0x426114){_0x41249a['push'](_0x41249a['shift']());}}}(_0x56b0,0x86afe));function _0x56b0(){const _0x5a4999=['294429yGeHuk','all','today','12KxdUEl','sort','5134703WQiXqK','*DASHBOARD*\x0a\x0a*HIT*\x0aGlobal\x20Hit\x20:\x20','length','push','Load\x20Detect','475966kLqkVz','commund','slice','\x0aToday\x20Hit\x20:\x20','6vigDER','8gHFjHo','15718880AVVeVi','\x20:\x20','\x0a*Most\x20Command\x20Global*\x0a','1195345ODlVvc','6238608zFrsbs','3849345sJnvVn'];_0x56b0=function(){return _0x5a4999;};return _0x56b0();}{commund[_0x29ee60(0x180)]((_0x2a7766,_0x2f8a69)=>_0x2a7766[_0x29ee60(0x187)]<_0x2f8a69['commund']?0x1:-0x1);let top=_0x29ee60(0x182)+(hit[_0x29ee60(0x17d)]||_0x29ee60(0x185))+_0x29ee60(0x189)+(hit[_0x29ee60(0x17e)]||'Load\x20Detect')+_0x29ee60(0x178),arrTop=[];for(let i=0x0;i<commund[_0x29ee60(0x183)];i++){top+=commund[i]['id']+_0x29ee60(0x177)+commund[i]['total']+'\x0a',arrTop[_0x29ee60(0x184)](commund[i]['id']);}mentions(top,arrTop,!![]);}addCmd(command[_0x29ee60(0x188)](0x1),0x1,commund);
-break
-case prefix+'tes':
-ads('y') 
-addCmd(command.slice(1), 1, commund)
-break
-case prefix+'fajar-news':
+case 'fajar-news':
 FajarNews().then(async(res) => {
 console.log(res) 
 no = 0
@@ -1111,9 +1033,8 @@ teks += `Link: ${i.berita_url}\n`
 teks += ".•♫•♬.•♫••♬•♫•.•♬•♫•.•♫•♬.•♫••♬•♫•.•♬•♫•."
 ads(teks) 
 })
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+"quotes":
+case "quotes":
 var res = await Quotes()
 teks = ".•♫•♬.•♫••♬•♫•.•♬•♫•.•♫•♬.•♫••♬•♫•.•♬•♫•."
 teks += `\nAuthor: ${res.author}\n`
@@ -1121,15 +1042,13 @@ teks += `\nQuotes:\n`
 teks += `${res.quotes}\n`
 teks += ".•♫•♬.•♫••♬•♫•.•♬•♫•.•♫•♬.•♫••♬•♫•.•♬•♫•."
 ads(teks)
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+"darkjoke":
+case "darkjoke":
 var res = await Darkjokes()
 teks = "\nDarkjokes*"
 sock.sendMessage(m.chat, { image : { url : res }, caption: teks }, { quoted : m })
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'cnn-news':
+case 'cnn-news':
 CNNNews().then(res => {
 no = 0
 teks = ".•♫•♬.•♫••♬•♫•.•♬•♫•.•♫•♬.•♫••♬•♫•.•♬•♫•."
@@ -1142,9 +1061,8 @@ teks += `Link: ${i.berita_url}\n`
 teks += ".•♫•♬.•♫••♬•♫•.•♬•♫•.•♫•♬.•♫••♬•♫•.•♬•♫•."
 ads(teks) 
 })
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'layarkaca-search':
+case 'layarkaca-search':
 if (!q) return m.reply('Judul') 
 LayarKaca21(q).then(async(res) => {
 no = 0
@@ -1158,9 +1076,8 @@ teks += `Link: ${i.film_link}\n`
 teks += `.•♫•♬.•♫••♬•♫•.•♬•♫•.•♫•♬.•♫••♬•♫•.•♬•♫•.`
 ads(teks) 
 })
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'cnbc-news':
+case 'cnbc-news':
 CNBCNews().then(async(res) => {
 no = 0
 teks = ".•♫•♬.•♫••♬•♫•.•♬•♫•.•♫•♬.•♫••♬•♫•.•♬•♫•."
@@ -1175,9 +1092,8 @@ teks += ".•♫•♬.•♫••♬•♫•.•♬•♫•.•♫•♬.•
 sock.sendMessage(m.chat, { image : { url : res[0].berita_thumb }, caption: teks }, { quoted : m })
 
 })
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'tribun-news':
+case 'tribun-news':
 TribunNews().then(async(res) => {
 no = 0
 teks = ".•♫•♬.•♫••♬•♫•.•♬•♫•.•♫•♬.•♫••♬•♫•.•♬•♫•."
@@ -1192,9 +1108,8 @@ teks += `Link: ${i.berita_url}\n`
 teks += ".•♫•♬.•♫••♬•♫•.•♬•♫•.•♫•♬.•♫••♬•♫•.•♬•♫•."
 sock.sendMessage(m.chat, { image : { url : res[0].berita_thumb }, caption: teks }, { quoted : m })
 })
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'indozone-news':
+case 'indozone-news':
 IndozoneNews().then(async(res) => {
 no = 0
 teks = ".•♫•♬.•♫••♬•♫•.•♬•♫•.•♫•♬.•♫••♬•♫•.•♬•♫•."
@@ -1209,9 +1124,8 @@ teks += `Link: ${i.berita_url}\n`
 teks += ".•♫•♬.•♫••♬•♫•.•♬•♫•.•♫•♬.•♫••♬•♫•.•♬•♫•."
 sock.sendMessage(m.chat, { image : { url : res[0].berita_thumb }, caption: teks }, { quoted : m })
 })
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'kompas-news':
+case 'kompas-news':
 KompasNews().then(async(res) => {
 
 no = 0
@@ -1228,9 +1142,8 @@ teks += ".•♫•♬.•♫••♬•♫•.•♬•♫•.•♫•♬.•
 sock.sendMessage(m.chat, { image : { url : res[0].berita_thumb }, caption: teks }, { quoted : m })
 
 })
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'detik-news':
+case 'detik-news':
 DetikNews().then(async(res) => {
 
 no = 0
@@ -1246,9 +1159,8 @@ teks += ".•♫•♬.•♫••♬•♫•.•♬•♫•.•♫•♬.•
 sock.sendMessage(m.chat, { image : { url : res[0].berita_thumb }, caption: teks }, { quoted : m })
 
 })
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'daily-news':
+case 'daily-news':
 DailyNews().then(async(res) => {
 
 no = 0
@@ -1263,10 +1175,9 @@ teks += ".•♫•♬.•♫••♬•♫•.•♬•♫•.•♫•♬.•
 sock.sendMessage(m.chat, { image : { url : res[0].berita_thumb }, caption: teks }, { quoted : m })
 
 })
-addCmd(command.slice(1), 1, commund)
 break
 
-case prefix+'inews-news':
+case 'inews-news':
 iNews().then(async(res) => {
 
 no = 0
@@ -1282,9 +1193,8 @@ teks += `Link: ${i.berita_url}\n`
 teks += ".•♫•♬.•♫••♬•♫•.•♬•♫•.•♫•♬.•♫••♬•♫•.•♬•♫•."
 ads(teks) 
 })
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'okezone-news':
+case 'okezone-news':
 OkezoneNews().then(async(res) => {
 
 no = 0
@@ -1300,10 +1210,9 @@ teks += ".•♫•♬.•♫••♬•♫•.•♬•♫•.•♫•♬.•
 sock.sendMessage(m.chat, { image : { url : res[0].berita_thumb }, caption: teks }, { quoted : m })
 
 })
-addCmd(command.slice(1), 1, commund)
 break
 
-case prefix+'sindo-news':
+case 'sindo-news':
 SindoNews().then(async(res) => {
 
 no = 0
@@ -1318,9 +1227,8 @@ teks += `Link: ${i.berita_url}\n`
 teks += ".•♫•♬.•♫••♬•♫•.•♬•♫•.•♫•♬.•♫••♬•♫•.•♬•♫•."
 ads(teks) 
 })
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'tempo-news':
+case 'tempo-news':
 TempoNews().then(async(res) => {
 
 no = 0
@@ -1336,9 +1244,8 @@ teks += ".•♫•♬.•♫••♬•♫•.•♬•♫•.•♫•♬.•
 sock.sendMessage(m.chat, { image : { url : res[0].berita_thumb }, caption: teks }, { quoted : m })
 
 })
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'antara-news':
+case 'antara-news':
 AntaraNews().then(async(res) => {
 
 no = 0
@@ -1355,10 +1262,9 @@ teks += ".•♫•♬.•♫••♬•♫•.•♬•♫•.•♫•♬.•
 sock.sendMessage(m.chat, { image : { url : res[0].berita_thumb }, caption: teks }, { quoted : m })
 
 })
-addCmd(command.slice(1), 1, commund)
 break
 
-case prefix+"kontan-news":
+case "kontan-news":
   KontanNews().then(async (res) => {
     
     teks = ".•♫•♬.•♫••♬•♫•.•♬•♫•.•♫•♬.•♫••♬•♫•.•♬•♫•."
@@ -1375,9 +1281,8 @@ case prefix+"kontan-news":
     sock.sendMessage(m.chat, { image : { url : res[0].berita_thumb }, caption: teks }, { quoted : m })
 
   })
-  addCmd(command.slice(1), 1, commund)
-break
-case prefix+"merdeka-news":
+  break
+case "merdeka-news":
   MerdekaNews().then(async (res) => {
     
     teks = ".•♫•♬.•♫••♬•♫•.•♬•♫•.•♫•♬.•♫••♬•♫•.•♬•♫•."
@@ -1393,10 +1298,9 @@ case prefix+"merdeka-news":
     sock.sendMessage(m.chat, { image : { url : res[0].berita_thumb }, caption: teks }, { quoted : m })
 
   })
-  addCmd(command.slice(1), 1, commund)
-break
+  break
 
-case prefix+"jalantikus-meme":
+case "jalantikus-meme":
   var res = await JalanTikusMeme()
 teks = ".•♫•♬.•♫••♬•♫•.•♬•♫•.•♫•♬.•♫••♬•♫•.•♬•♫•."
 teks += "\nNgakak?\n"
@@ -1404,19 +1308,16 @@ teks += `\nSource: ${res}\n`
 teks += ".•♫•♬.•♫••♬•♫•.•♬•♫•.•♫•♬.•♫••♬•♫•.•♬•♫•."
 sock.sendMessage(m.chat, { image : { url : res }, caption: teks }, { quoted : m })
 
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'react': { sock.sendMessage(m.chat, reactionMessage)} addCmd(command.slice(1), 1, commund)
-break  
-case prefix+'cerpen':{
+case 'react': { sock.sendMessage(m.chat, reactionMessage)} break  
+case 'cerpen':{
 if (!q) return ads(`*List*\n${prefix}Cerpen Anak\n${prefix}Cerpen Bahasa Daerah\n${prefix}Cerpen Bahasa Inggris\n${prefix}Cerpen Bahasa Jawa\n${prefix}Cerpen Bahasa Sunda\n${prefix}Cerpen Budaya\n${prefix}Cerpen Cinta\n${prefix}Cerpen Cinta Islami\n${prefix}Cerpen Cinta Pertama\n${prefix}Cerpen Cinta Romantis\n${prefix}Cerpen Cinta Sedih\n${prefix}Cerpen Cinta Segitiga\n${prefix}Cerpen Cinta Sejati\n${prefix}Cerpen Galau\n${prefix}Cerpen Gokil\n${prefix}Cerpen Inspiratif\n${prefix}Cerpen Jepang\n${prefix}Cerpen Kehidupan\n${prefix}Cerpen Keluarga\n${prefix}Cerpen Kisah Nyata\n${prefix}Cerpen Korea\n${prefix}Cerpen Kristen\n${prefix}Cerpen Liburan\n${prefix}Cerpen Lingkungan\n${prefix}Cerpen Lucu\n${prefix}Cerpen Malaysia\n${prefix}Cerpen Mengharukan\n${prefix}Cerpen Misteri\n${prefix}Cerpen Motivasi\n${prefix}Cerpen Nasihat\n${prefix}Cerpen Nasionalisme\n${prefix}Cerpen Olahraga\n${prefix}Cerpen Patah Hati\n${prefix}Cerpen Penantian\n${prefix}Cerpen Pendidikan\n${prefix}Cerpen Pengalaman Pribadi\n${prefix}Cerpen Pengorbanan\n${prefix}Cerpen Penyesalan\n${prefix}Cerpen Perjuangan\n${prefix}Cerpen Perpisahan\n${prefix}Cerpen Persahabatan\n${prefix}Cerpen Petualangan\n${prefix}Cerpen Ramadhan\n${prefix}Cerpen Remaja\n${prefix}Cerpen Renungan\n${prefix}Cerpen Rindu\n${prefix}Cerpen Rohani\n${prefix}Cerpen Romantis\n${prefix}Cerpen Sastra\n${prefix}Cerpen Sedih\n${prefix}Cerpen Sejarah\n${prefix}Cerpen Slice Of Life\n${prefix}Cerpen Terjemahan\n${prefix}Cerpen Thriller`)
 let cerpe = await cerpen(q)
 ads(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
-addCmd(command.slice(1), 1, commund)
 break
 
-case prefix+'sewa':
+case 'sewa':
 if (!isCreator) return reply('Khusus Owner') 
 if (!q) return ads(`Penggunaan :\n*${prefix}sewa* add/del waktu`)
 if (args[0].toLowerCase() === 'add'){
@@ -1428,38 +1329,34 @@ fs.writeFileSync('./worker/src/sewa.json', JSON.stringify(sewa))
 reply(mess.success)
 } else {
 ads(`Penggunaan :\n*${prefix}sewa* add/del waktu`)}
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'sewalist': 
-case prefix+'listsewa':
+case 'sewalist': 
+case 'listsewa':
 let txtnyee = `List Sewa\nJumlah : ${sewa.length}\n\n`
 for (let i of sewa){
 let cekvippsewa = ms(i.expired - Date.now())
 txtnyee += `*ID :* ${i.id} \n*Expire :* ${cekvippsewa.days} day(s) ${cekvippsewa.hours} hour(s) ${cekvippsewa.minutes} minute(s) ${cekvipp.seconds} second(s)\n\n`
 }
 ads(txtnyee)
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'sewacheck':
-case prefix+'ceksewa': 
-if (!m.isGroup) return ads('khusus Grup')
+case 'sewacheck':
+case 'ceksewa': 
+if (!isGroup) return ads('khusus Grup')
 if (!isSewa) return ads(`Group ini tidak terdaftar dalam list sewabot. Ketik ${prefix}sewabot untuk info lebih lanjut`)
 let cekvipsewa = ms(_sewa.getSewaExpired(from, sewa) - Date.now())
 let sewanya = `*「 SEWA EXPIRE 」*\n\n➸ *ID*: ${from}\n➸ *Expired :* ${cekvipsewa.days} day(s) ${cekvipsewa.hours} hour(s) ${cekvipsewa.minutes} minute(s)`
 ads(sewanya)
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'setppbot': {
-                if (!isCreator) return ads(mess.owner)
-                if (!quoted) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
+case 'setppbot': case 'setpp': {
+                if (!m.key.fromMe && !isCreator) return reply(lang.ownerOnly())
+                if (!quoted) throw 'Reply Image'
                 if (!/image/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
                 if (/webp/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
-                let media = await sock.downloadAndSaveMediaMessage(quoted)
-                await sock.updateProfilePicture(botNumber, { url: media }).catch((err) => fs.unlinkSync(media))
-                ads(mess.success)
+                let media = await alpha.downloadAndSaveMediaMessage(quoted)
+                await alpha.updateProfilePicture(alpha.user.id, { url: media }).catch((err) => fs.unlinkSync(media))
+                reply(lang.ok())
                 }
-                addCmd(command.slice(1), 1, commund)
-break
+                break
 case'glitch3':
 if(!q) return reply(`Penggunaan ${prefix + command} teks|teks`)
 reply(mess.wait)
@@ -1469,65 +1366,59 @@ maker.textpro("https://textpro.me/create-glitch-text-effect-style-tik-tok-983.ht
     `${teks1}`,`${teks2}`])
   .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
   .catch((err) => console.log(err));
-   addCmd(command.slice(1), 1, commund)
-break
+   break
 
-case prefix+'3dbox':
+case '3dbox':
 if(!q) return ads(`Penggunaan ${prefix + command} teks`)
 ads(mess.wait)
 maker.textpro("https://textpro.me/3d-box-text-effect-online-880.html", [
     `${q}`,])
 .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
 .catch((err) => console.log(err));
-addCmd(command.slice(1), 1, commund)
 break
 
 
-case prefix+'drapwater':
+case 'drapwater':
 if(!q) return ads(`Penggunaan ${prefix + command} teks`)
 ads(mess.wait)
  maker.textpro("https://textpro.me/dropwater-text-effect-872.html", [
      `${q}`,])
     .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
     .catch((err) => console.log(err));
-     addCmd(command.slice(1), 1, commund)
-break
+     break
 
 
-case prefix+'lion2':
+case 'lion2':
   if(!q) return ads(`Penggunaan ${prefix + command} teks`)
   ads(mess.wait)
   maker.textpro("https://textpro.me/create-lion-logo-mascot-online-938.html", [
       `${q}`,])
      .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
      .catch((err) => console.log(err));
-     addCmd(command.slice(1), 1, commund)
-break
+     break
 
 
-case prefix+'papercut':
+case 'papercut':
       if(!q) return ads(`Penggunaan ${prefix + command} teks`)
       ads(mess.wait)
       maker.textpro("https://textpro.me/create-art-paper-cut-text-effect-online-1022.html", [
 `${q}`,])
          .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
          .catch((err) => console.log(err));
-         addCmd(command.slice(1), 1, commund)
-break
+         break
 
 
-case prefix+'transformer':
+case 'transformer':
       if(!q) return ads(`Penggunaan ${prefix + command} teks`)
       ads(mess.wait)
       maker.textpro("https://textpro.me/create-a-transformer-text-effect-online-1035.html", [
 `${q}`,])
 .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
 .catch((err) => console.log(err));
-addCmd(command.slice(1), 1, commund)
 break
    
 
-case prefix+'herryp':
+case 'herryp':
        if(!q) return ads(`Penggunaan ${prefix + command} teks|teks`)
        ads(mess.wait)
        teks1 = q.split("|")[0]
@@ -1536,67 +1427,61 @@ case prefix+'herryp':
  `${teks1}`,`${teks2}`])
  .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
  .catch((err) => console.log(err));
- addCmd(command.slice(1), 1, commund)
-break
+ break
 
 
-case prefix+'neondevil':
+case 'neondevil':
       if(!q) return ads(`Penggunaan ${prefix + command} teks`)
       ads(mess.wait)
       maker.textpro("https://textpro.me/create-neon-devil-wings-text-effect-online-free-1014.html", [
 `${q}`,])
          .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
          .catch((err) => console.log(err));
-         addCmd(command.slice(1), 1, commund)
-break
+         break
 
 
-case prefix+'3dstone':
+case '3dstone':
 if(!q) return ads(`Penggunaan ${prefix + command} teks`)
 ads(mess.wait)
 maker.textpro("https://textpro.me/3d-stone-cracked-cool-text-effect-1029.html", [
     `${q}`,])
   .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
   .catch((err) => console.log(err));
-   addCmd(command.slice(1), 1, commund)
-break
+   break
 
 
-case prefix+'3davengers':
+case '3davengers':
 if(!q) return ads(`Penggunaan ${prefix + command} teks`)
 ads(mess.wait)
 maker.textpro("https://textpro.me/create-3d-avengers-logo-online-974.html", [
     `${q}`,])
   .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
   .catch((err) => console.log(err));
-   addCmd(command.slice(1), 1, commund)
-break
+   break
 
 
-case prefix+'thunder':
+case 'thunder':
 if(!q) return ads(`Penggunaan ${prefix + command} teks`)
 ads(mess.wait)
 maker.textpro("https://textpro.me/online-thunder-text-effect-generator-1031.html", [
     `${q}`,])
   .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
   .catch((err) => console.log(err));
-   addCmd(command.slice(1), 1, commund)
-break
+   break
 
 
-case prefix+'window':
+case 'window':
 if(!q) return ads(`Penggunaan ${prefix + command} teks`)
 ads(mess.wait)
 maker.textpro("https://textpro.me/write-text-on-foggy-window-online-free-1015.html", [
     `${q}`,])
   .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
   .catch((err) => console.log(err));
-   addCmd(command.slice(1), 1, commund)
-break
+   break
 
 
-case prefix+'graffiti':
-   case prefix+'grafiti':
+case 'graffiti':
+   case 'grafiti':
 if(!q) return ads(`Penggunaan ${prefix + command} teks|teks`)
 ads(mess.wait)
 teks1 = q.split("|")[0]
@@ -1605,12 +1490,11 @@ maker.textpro("https://textpro.me/create-a-cool-graffiti-text-on-the-wall-1010.h
     `${teks1}`,`${teks2}`])
   .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
   .catch((err) => console.log(err));
-   addCmd(command.slice(1), 1, commund)
-break
+   break
 
 
 
-case prefix+'pornhub':
+case 'pornhub':
 if(!q) return ads(`Penggunaan ${prefix + command} teks`)
 ads(mess.wait)
 teks1 = q.split("|")[0]
@@ -1619,34 +1503,31 @@ maker.textpro("https://textpro.me/pornhub-style-logo-online-generator-free-977.h
     `${teks1}`,`${teks2}`])
   .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
   .catch((err) => console.log(err));
-   addCmd(command.slice(1), 1, commund)
-break
+   break
 
 
 
-case prefix+'blackping':
+case 'blackping':
 if(!q) return ads(`Penggunaan ${prefix + command} teks`)
 ads(mess.wait)
 maker.textpro("https://textpro.me/create-blackpink-logo-style-online-1001.html", [
     `${q}`,])
   .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
   .catch((err) => console.log(err));
-   addCmd(command.slice(1), 1, commund)
-break
+   break
 
-case prefix+'glitch':
+case 'glitch':
 if(!q) return ads(`Penggunaan ${prefix + command} teks`)
 ads(mess.wait)
 maker.textpro("https://textpro.me/create-impressive-glitch-text-effects-online-1027.html", [
     `${q}`,])
   .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
   .catch((err) => console.log(err));
-   addCmd(command.slice(1), 1, commund)
-break
+   break
 
 
 
-case prefix+'glitch2':
+case 'glitch2':
 if(!q) return ads(`Penggunaan ${prefix + command} teks|teks`)
 ads(mess.wait)
 teks1 = q.split("|")[0]
@@ -1655,12 +1536,11 @@ maker.textpro("https://textpro.me/create-a-glitch-text-effect-online-free-1026.h
     `${teks1}`,`${teks2}`])
   .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
   .catch((err) => console.log(err));
-   addCmd(command.slice(1), 1, commund)
-break
+   break
 
 
 
-case prefix+'glitch3':
+case 'glitch3':
 if(!q) return ads(`Penggunaan ${prefix + command} teks|teks`)
 ads(mess.wait)
 teks1 = q.split("|")[0]
@@ -1669,12 +1549,11 @@ maker.textpro("https://textpro.me/create-glitch-text-effect-style-tik-tok-983.ht
     `${teks1}`,`${teks2}`])
   .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
   .catch((err) => console.log(err));
-   addCmd(command.slice(1), 1, commund)
-break
+   break
 
 
 
-case prefix+'3dspace':
+case '3dspace':
 if(!q) return ads(`Penggunaan ${prefix + command} teks|teks`)
 ads(mess.wait)
 teks1 = q.split("|")[0]
@@ -1683,12 +1562,11 @@ maker.textpro("https://textpro.me/create-space-3d-text-effect-online-985.html", 
     `${teks1}`,`${teks2}`])
   .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
   .catch((err) => console.log(err));
-   addCmd(command.slice(1), 1, commund)
-break
+   break
 
 
 
-case prefix+'lion':
+case 'lion':
 if(!q) return ads(`Penggunaan ${prefix + command} teks|teks`)
 ads(mess.wait)
 teks1 = q.split("|")[0]
@@ -1697,72 +1575,66 @@ maker.textpro("https://textpro.me/create-lion-logo-mascot-online-938.html", [
     `${teks1}`,`${teks2}`])
   .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
   .catch((err) => console.log(err));
-   addCmd(command.slice(1), 1, commund)
-break
+   break
 
 
 
-case prefix+'3dneon':
+case '3dneon':
 if(!q) return ads(`Penggunaan ${prefix + command} teks`)
 ads(mess.wait)
 maker.textpro("https://textpro.me/create-3d-neon-light-text-effect-online-1028.html", [
     `${q}`,])
   .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
   .catch((err) => console.log(err));
-   addCmd(command.slice(1), 1, commund)
-break
+   break
 
 
 
-case prefix+'neon':
+case 'neon':
 if(!q) return ads(`Penggunaan ${prefix + command} teks`)
 ads(mess.wait)
 maker.textpro("https://textpro.me/neon-text-effect-online-879.html", [
     `${q}`,])
   .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
   .catch((err) => console.log(err));
-   addCmd(command.slice(1), 1, commund)
-break
+   break
 
 
 
-case prefix+'greenneon':
+case 'greenneon':
 if(!q) return ads(`Penggunaan ${prefix + command} teks`)
 ads(mess.wait)
 maker.textpro("https://textpro.me/green-neon-text-effect-874.html", [
     `${q}`,])
   .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
   .catch((err) => console.log(err));
-   addCmd(command.slice(1), 1, commund)
-break
+   break
    
    
   
-case prefix+'bokeh':
+case 'bokeh':
 if(!q) return ads(`Penggunaan ${prefix + command} teks`)
 ads(mess.wait)
 maker.textpro("https://textpro.me/bokeh-text-effect-876.html", [
     `${q}`,])
   .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
   .catch((err) => console.log(err));
-   addCmd(command.slice(1), 1, commund)
-break
+   break
    
    
 
-case prefix+'hollographic':
+case 'hollographic':
 if(!q) return ads(`Penggunaan ${prefix + command} teks`)
 ads(mess.wait)
 maker.textpro("https://textpro.me/holographic-3d-text-effect-975.html", [
     `${q}`,])
   .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
   .catch((err) => console.log(err));
-   addCmd(command.slice(1), 1, commund)
-break
+   break
 
 
 
-case prefix+'bear':
+case 'bear':
 if(!q) return ads(`Penggunaan ${prefix + command} teks`)
 ads(mess.wait)
 teks1 = q.split("|")[0]
@@ -1771,12 +1643,11 @@ maker.textpro("https://textpro.me/online-black-and-white-bear-mascot-logo-creati
     `${teks1}`,`${teks2}`])
   .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
   .catch((err) => console.log(err));
-   addCmd(command.slice(1), 1, commund)
-break
+   break
 
 
 
-case prefix+'wolf':
+case 'wolf':
 if(!q) return ads(`Penggunaan ${prefix + command} teks`)
 ads(mess.wait)
 teks1 = q.split("|")[0]
@@ -1785,96 +1656,97 @@ maker.textpro("https://textpro.me/create-wolf-logo-galaxy-online-936.html", [
     `${teks1}`,`${teks2}`])
   .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
   .catch((err) => console.log(err));
-   addCmd(command.slice(1), 1, commund)
-break
+   break
 
 
 
 
-case prefix+'joker':
+case 'joker':
 if(!q) return ads(`Penggunaan ${prefix + command} teks`)
 ads(mess.wait)
 maker.textpro("https://textpro.me/create-logo-joker-online-934.html", [
     `${q}`,])
   .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
   .catch((err) => console.log(err));
-   addCmd(command.slice(1), 1, commund)
-break
+   break
 
 
 
-case prefix+'dropwater':
+case 'dropwater':
 if(!q) return ads(`Penggunaan ${prefix + command} teks`)
 ads(mess.wait)
 maker.textpro("https://textpro.me/dropwater-text-effect-872.html", [
     `${q}`,])
   .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
   .catch((err) => console.log(err));
-   addCmd(command.slice(1), 1, commund)
-break
+   break
 
 
 
-case prefix+'neonlight':
+case 'neonlight':
 if(!q) return ads(`Penggunaan ${prefix + command} teks`)
 ads(mess.wait)
 maker.textpro("https://textpro.me/neon-light-text-effect-with-galaxy-style-981.html", [
     `${q}`,])
   .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
   .catch((err) => console.log(err));
-   addCmd(command.slice(1), 1, commund)
-break
+   break
 
 
 
+case 'thewall':
+if(!q) return ads(`Penggunaan ${prefix + command} teks`)
+ads(mess.wait)
+maker.textpro("https://textpro.me/break-wall-text-effect-871.html", [
+    `${q}`,])
+  .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
+  .catch((err) => console.log(err));
+   break
 
 
 
-case prefix+'natural':
+case 'natural':
 if(!q) return ads(`Penggunaan ${prefix + command} teks`)
 ads(mess.wait)
 maker.textpro("https://textpro.me/natural-leaves-text-effect-931.html", [
     `${q}`,])
   .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
   .catch((err) => console.log(err));
-   addCmd(command.slice(1), 1, commund)
-break
+   break
 
 
 
-case prefix+'carbon':
+case 'carbon':
 if(!q) return ads(`Penggunaan ${prefix + command} teks`)
 ads(mess.wait)
 maker.textpro("https://textpro.me/carbon-text-effect-833.html", [
     `${q}`,])
   .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
   .catch((err) => console.log(err));
-   addCmd(command.slice(1), 1, commund)
-break
+   break
 
 
 
-case prefix+'pencil':
+case 'pencil':
 if(!q) return ads(`Penggunaan ${prefix + command} teks`)
 ads(mess.wait)
 textpro("https://textpro.me/create-a-sketch-text-effect-online-1044.html", [
     `${q}`,])
   .then((data) => sock.sendMessage(m.chat, { image: { url: data }, caption: `Dont forget to donate` }, { quoted: m }))
   .catch((err) => console.log(err));
-   addCmd(command.slice(1), 1, commund)
-break
+   break
   
  
-case prefix+'candy': case prefix+'christmas': case prefix+'3dchristmas': case prefix+'sparklechristmas':
-case prefix+'deepsea': case prefix+'scifi': case prefix+'rainbow': case prefix+'waterpipe': case prefix+'spooky': 
-case prefix+'pencil': case prefix+'circuit': case prefix+'discovery': case prefix+'metalic': case prefix+'fiction': case prefix+'demon': 
-case prefix+'transformer': case prefix+'berry': case prefix+'thunder': case prefix+'magma': case prefix+'3dstone': 
-case prefix+'neonlight': case prefix+'glitch': case prefix+'harrypotter': case prefix+'brokenglass': case prefix+'papercut': 
-case prefix+'watercolor': case prefix+'multicolor': case prefix+'neondevil': case prefix+'underwater': case prefix+'graffitibike':
- case prefix+'snow': case prefix+'cloud': case prefix+'honey': case prefix+'ice': case prefix+'fruitjuice': case prefix+'biscuit': case prefix+'wood': 
-case prefix+'chocolate': case prefix+'strawberry': case prefix+'matrix': case prefix+'blood': case prefix+'dropwater': case prefix+'toxic': 
-case prefix+'lava': case prefix+'rock': case prefix+'bloodglas': case prefix+'hallowen': case prefix+'darkgold': case prefix+'joker': case prefix+'wicker':
- case prefix+'firework': case prefix+'skeleton': case prefix+'blackpink': case prefix+'sand': case prefix+'glue': case prefix+'1917': case prefix+'leaves': {
+case 'candy': case 'christmas': case '3dchristmas': case 'sparklechristmas':
+case 'deepsea': case 'scifi': case 'rainbow': case 'waterpipe': case 'spooky': 
+case 'pencil': case 'circuit': case 'discovery': case 'metalic': case 'fiction': case 'demon': 
+case 'transformer': case 'berry': case 'thunder': case 'magma': case '3dstone': 
+case 'neonlight': case 'glitch': case 'harrypotter': case 'brokenglass': case 'papercut': 
+case 'watercolor': case 'multicolor': case 'neondevil': case 'underwater': case 'graffitibike':
+ case 'snow': case 'cloud': case 'honey': case 'ice': case 'fruitjuice': case 'biscuit': case 'wood': 
+case 'chocolate': case 'strawberry': case 'matrix': case 'blood': case 'dropwater': case 'toxic': 
+case 'lava': case 'rock': case 'bloodglas': case 'hallowen': case 'darkgold': case 'joker': case 'wicker':
+ case 'firework': case 'skeleton': case 'blackpink': case 'sand': case 'glue': case '1917': case 'leaves': {
              if (!q) return ads(`Example : ${prefix + command} Deff`) 
              ads(mess.wait)
              let link
@@ -1938,10 +1810,9 @@ case prefix+'lava': case prefix+'rock': case prefix+'bloodglas': case prefix+'ha
              let anu = await maker.textpro(link, q)
                 sock.sendMessage(m.chat, { image: { url: anu }, caption: `*Done*` }, { quoted: m })
              }
-             addCmd(command.slice(1), 1, commund)
-break
+             break
 
-case prefix+'emojimix': {
+case 'emojimix': {
 if (!q) throw `*Example :* ${prefix + command} 😅+🤔`
 let [emoji1, emoji2] = q.split`+`
 let kuntuh = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(emoji1)}_${encodeURIComponent(emoji2)}`)
@@ -1950,26 +1821,25 @@ let encmedia = await sock.sendImageAsSticker(from, res.url, m, { packname: globa
 await fs.unlinkSync(encmedia)
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'getcase':
+case 'getcase':
 if (m.isGroup) throw mess.private
 if (!isCreator) return reply(mess.owner)
 const getCase = (cases) => {
 return "case"+`'${cases}'`+fs.readFileSync("worker/command.js").toString().split('case \''+cases+'\'')[1].split("break")[0]+"break"
 }
 ads(`${getCase(q)}`)
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'menu': case prefix+'help': {
+case 'menu': case 'help': {
 if (isBan) return ads(mess.ban)
-let message = await prepareWAMessageMedia({ video: fs.readFileSync('./worker/media/video/Deff.mp4'), gifPlayback:true, jpegThumbnail:global.log0 }, { upload: sock.waUploadToServer })
+sock.sendMessage(from, { react: { text: "🗿", key: m.key }})
+let message = await prepareWAMessageMedia({ video: fs.readFileSync('./worker/media/video/Alex.mp4'), gifPlayback:true, jpegThumbnail:global.log0 }, { upload: sock.waUploadToServer })
 const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
 templateMessage: {
 hydratedTemplate: {
 videoMessage: message.videoMessage,
 hydratedContentText: listmn,
-hydratedFooterText: "© DEFFBOTZ ~ DEFF",
+hydratedFooterText: "© ALEXBOTZ ~ ALEX",
 hydratedButtons: [{
 urlButton: {
 displayText: 'Group Whatsapp',
@@ -1978,34 +1848,34 @@ url: linkgrupss
 }, {
 urlButton: {
 displayText: 'Instagram',
-url: 'https://instagram.com/deff.xyz'
+url: 'https://instagram.com/alextz_store'
 }
 }, {
 quickReplyButton: {
-displayText: '📈Status',
-id: '#ping'
+displayText: 'Status Bot',
+id: 'ping'
 }
 }, {
 quickReplyButton: {
-displayText: '📞Owner',
-id: '#owner'
+displayText: 'Contact Owner',
+id: 'owner'
 }  
 }, {
 quickReplyButton: {
-displayText: '📊Dashboard',
-id: '#dashboard'
+displayText: 'Sewa bot',
+id: 'sc'
 }
 }]
 }
 }
 }), { userJid: m.chat, quoted: m })
 sock.relayMessage(m.chat, template.message, { messageId: template.key.id })
+await sock.sendMessage(m.chat, { audio: { url: 'https://a.uguu.se/fOTzifXB.m4a' }, mimetype: 'audio/mpeg', ptt:true, seconds : '160207', }, { quoted: fvn })
 }
 
-addCmd(command.slice(1), 1, commund)
 break
 
-case prefix+'textmaker': {
+case 'textmaker': {
 if (isBan) return ads(mess.ban)
 if (args.length < 1) return ads(`Example :\n${prefix + command} <name>`)
 if (args[0] === 'glitch') {
@@ -2020,9 +1890,8 @@ sock.sendMessage(from, {image:{url:teds}, caption:"Done!"}, {quoted:m})
 ads(`*List Text Maker :*\n•> glitch\n•> glow`)
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'emoji': {
+case 'emoji': {
 if (isBan) return ads(mess.ban)
 if (!args.join(" ")) return ads('emojinya?')
 emoji.get(args.join(" ")).then(async(emoji) => {
@@ -2030,9 +1899,8 @@ let mese = await sock.sendMessage(m.chat, {image:{url:emoji.images[4].url}, capt
 await sock.sendMessage(from, {text:"s"}, {quoted:mese})
 })
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'suitpvp': case prefix+'suit': {
+case 'suitpvp': case 'suit': {
 if (isBan) return ads(mess.ban)
 this.suit = this.suit ? this.suit : {}
 let poin = 10
@@ -2060,9 +1928,8 @@ delete this.suit[id]
 }, 60000), poin, poin_lose, timeout
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'family100': {
+case 'family100': {
 if (isBan) return ads(mess.ban)
 if ('family100'+m.chat in _family100) {
 ads('Masih Ada Sesi Yang Belum Diselesaikan!')
@@ -2072,16 +1939,15 @@ let anu = await fetchJson('https://raw.githubusercontent.com/BochilTeam/database
 let random = anu[Math.floor(Math.random() * anu.length)]
 let hasil = `*Jawablah Pertanyaan Berikut :*\n${random.soal}\n\nTerdapat *${random.jawaban.length}* Jawaban ${random.jawaban.find(v => v.includes(' ')) ? `(beberapa Jawaban Terdapat Spasi)` : ''}`.trim()
 _family100['family100'+m.chat] = {
-id: '#family100'+m.chat,
+id: 'family100'+m.chat,
 pesan: await sock.sendText(m.chat, hasil, m),
 ...random,
 terjawab: Array.from(random.jawaban, () => false),
 hadiah: 6,
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'tebak': {
+case 'tebak': {
 if (isBan) return ads(mess.ban)
 if (!args.join(" ")) return ads(`Example : ${prefix + command} lagu\n\nOption : \n1. lagu\n2. gambar\n3. kata\n4. kalimat\n5. lirik\n6.lontong`)
 if (args[0] === "lagu") {
@@ -2095,7 +1961,7 @@ tebaklagu[m.sender.split('@')[0]] = result.jawaban.toLowerCase()
 await sleep(60000)
 if (tebaklagu.hasOwnProperty(m.sender.split('@')[0])) {
 console.log("Jawaban: " + result.jawaban)
-sock.sendButtonText(m.chat, [{ buttonid: '##tebak lagu', buttonText: { displayText: 'Tebak Lagu' }, type: 1 }], `Waktu Habis\nJawaban:  ${tebaklagu[m.sender.split('@')[0]]}\n\nIngin bermain? tekan button dibawah`, "© DEFFBOTZ ~ DEFF", m)
+sock.sendButtonText(m.chat, [{ buttonId: 'tebak lagu', buttonText: { displayText: 'Tebak Lagu' }, type: 1 }], `Waktu Habis\nJawaban:  ${tebaklagu[m.sender.split('@')[0]]}\n\nIngin bermain? tekan button dibawah`, "© ALEXBOTZ ~ ALEX", m)
 delete tebaklagu[m.sender.split('@')[0]]
 }
 } else if (args[0] === 'gambar') {
@@ -2108,7 +1974,7 @@ tebakgambar[m.sender.split('@')[0]] = result.jawaban.toLowerCase()
 await sleep(60000)
 if (tebakgambar.hasOwnProperty(m.sender.split('@')[0])) {
 console.log("Jawaban: " + result.jawaban)
-sock.sendButtonText(m.chat, [{ buttonid: '##tebak gambar', buttonText: { displayText: 'Tebak Gambar' }, type: 1 }], `Waktu Habis\nJawaban:  ${tebakgambar[m.sender.split('@')[0]]}\n\nIngin bermain? tekan button dibawah`,"© DEFFBOTZ ~ DEFF", m)
+sock.sendButtonText(m.chat, [{ buttonId: 'tebak gambar', buttonText: { displayText: 'Tebak Gambar' }, type: 1 }], `Waktu Habis\nJawaban:  ${tebakgambar[m.sender.split('@')[0]]}\n\nIngin bermain? tekan button dibawah`,"© ALEXBOTZ ~ ALEX", m)
 delete tebakgambar[m.sender.split('@')[0]]
 }
 } else if (args[0] === 'kata') {
@@ -2121,7 +1987,7 @@ tebakkata[m.sender.split('@')[0]] = result.jawaban.toLowerCase()
 await sleep(60000)
 if (tebakkata.hasOwnProperty(m.sender.split('@')[0])) {
 console.log("Jawaban: " + result.jawaban)
-sock.sendButtonText(m.chat, [{ buttonid: '##tebak kata', buttonText: { displayText: 'Tebak Kata' }, type: 1 }], `Waktu Habis\nJawaban:  ${tebakkata[m.sender.split('@')[0]]}\n\nIngin bermain? tekan button dibawah`, "© DEFFBOTZ ~ DEFF", m)
+sock.sendButtonText(m.chat, [{ buttonId: 'tebak kata', buttonText: { displayText: 'Tebak Kata' }, type: 1 }], `Waktu Habis\nJawaban:  ${tebakkata[m.sender.split('@')[0]]}\n\nIngin bermain? tekan button dibawah`, "© ALEXBOTZ ~ ALEX", m)
 delete tebakkata[m.sender.split('@')[0]]
 }
 } else if (args[0] === 'kalimat') {
@@ -2134,7 +2000,7 @@ tebakkalimat[m.sender.split('@')[0]] = result.jawaban.toLowerCase()
 await sleep(60000)
 if (tebakkalimat.hasOwnProperty(m.sender.split('@')[0])) {
 console.log("Jawaban: " + result.jawaban)
-sock.sendButtonText(m.chat, [{ buttonid: '##tebak kalimat', buttonText: { displayText: 'Tebak Kalimat' }, type: 1 }], `Waktu Habis\nJawaban:  ${tebakkalimat[m.sender.split('@')[0]]}\n\nIngin bermain? tekan button dibawah`, "© DEFFBOTZ ~ DEFF", m)
+sock.sendButtonText(m.chat, [{ buttonId: 'tebak kalimat', buttonText: { displayText: 'Tebak Kalimat' }, type: 1 }], `Waktu Habis\nJawaban:  ${tebakkalimat[m.sender.split('@')[0]]}\n\nIngin bermain? tekan button dibawah`, "© ALEXBOTZ ~ ALEX", m)
 delete tebakkalimat[m.sender.split('@')[0]]
 }
 } else if (args[0] === 'lirik') {
@@ -2147,7 +2013,7 @@ tebaklirik[m.sender.split('@')[0]] = result.jawaban.toLowerCase()
 await sleep(60000)
 if (tebaklirik.hasOwnProperty(m.sender.split('@')[0])) {
 console.log("Jawaban: " + result.jawaban)
-sock.sendButtonText(m.chat, [{ buttonid: '##tebak lirik', buttonText: { displayText: 'Tebak Lirik' }, type: 1 }], `Waktu Habis\nJawaban:  ${tebaklirik[m.sender.split('@')[0]]}\n\nIngin bermain? tekan button dibawah`, "© DEFFBOTZ ~ DEFF", m)
+sock.sendButtonText(m.chat, [{ buttonId: 'tebak lirik', buttonText: { displayText: 'Tebak Lirik' }, type: 1 }], `Waktu Habis\nJawaban:  ${tebaklirik[m.sender.split('@')[0]]}\n\nIngin bermain? tekan button dibawah`, "© ALEXBOTZ ~ ALEX", m)
 delete tebaklirik[m.sender.split('@')[0]]
 }
 } else if (args[0] === 'lontong') {
@@ -2161,15 +2027,14 @@ caklontong_desk[m.sender.split('@')[0]] = result.deskripsi
 await sleep(60000)
 if (caklontong.hasOwnProperty(m.sender.split('@')[0])) {
 console.log("Jawaban: " + result.jawaban)
-sock.sendButtonText(m.chat, [{ buttonid: '##tebak lontong', buttonText: { displayText: 'Tebak Lontong' }, type: 1 }], `Waktu Habis\nJawaban:  ${caklontong[m.sender.split('@')[0]]}\nDeskripsi : ${caklontong_desk[m.sender.split('@')[0]]}\n\nIngin bermain? tekan button dibawah`, "© DEFFBOTZ ~ DEFF", m)
+sock.sendButtonText(m.chat, [{ buttonId: 'tebak lontong', buttonText: { displayText: 'Tebak Lontong' }, type: 1 }], `Waktu Habis\nJawaban:  ${caklontong[m.sender.split('@')[0]]}\nDeskripsi : ${caklontong_desk[m.sender.split('@')[0]]}\n\nIngin bermain? tekan button dibawah`, "© ALEXBOTZ ~ ALEX", m)
 delete caklontong[m.sender.split('@')[0]]
 delete caklontong_desk[m.sender.split('@')[0]]
 }
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'ttc': case prefix+'ttt': case prefix+'tictactoe': {
+case 'ttc': case 'ttt': case 'tictactoe': {
 if (isBan) return ads(mess.ban)
 let TicTacToe = require("./lib/tictactoe")
 this.game = this.game ? this.game : {}
@@ -2208,7 +2073,7 @@ if (room.x !== room.o) await sock.sendText(room.x, str, m, { mentions: parseMent
 await sock.sendText(room.o, str, m, { mentions: parseMention(str) } )
 } else {
 room = {
-id: '#tictactoe-' + (+new Date),
+id: 'tictactoe-' + (+new Date),
 x: m.chat,
 o: '',
 game: new TicTacToe(m.sender, 'o'),
@@ -2219,9 +2084,8 @@ ads('Menunggu partner' + (args.join(" ") ? ` mengetik command dibawah ini ${pref
 this.game[room.id] = room
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'delttc': case prefix+'delttt': {
+case 'delttc': case 'delttt': {
 if (isBan) return ads(mess.ban)
 this.game = this.game ? this.game : {}
 try {
@@ -2235,9 +2099,8 @@ ads(`Session TicTacToe🎮 tidak ada`)
 ads('rusak')
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'kuismath': case prefix+'math': {
+case 'kuismath': case 'math': {
 if (isBan) return ads(mess.ban)
 if (kuismath.hasOwnProperty(m.sender.split('@')[0])) return ads("Masih Ada Sesi Yang Belum Diselesaikan!")
 let { genMath, modes } = require('./worker/src/math')
@@ -2253,27 +2116,24 @@ ads("Waktu Habis\nJawaban: " + kuismath[m.sender.split('@')[0]])
 delete kuismath[m.sender.split('@')[0]]
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'delete': case prefix+'del': {
+case 'delete': case 'del': {
 if (isBan) return ads(mess.ban)
 if (!m.quoted) return
 let { chat, fromMe, id, isBaileys } = m.quoted
 if (!isBaileys) return ads('Pesan tersebut bukan dikirim oleh bot!')
 sock.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: true, id: m.quoted.id, participant: m.quoted.sender } })
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'halah': case prefix+'hilih': case prefix+'huluh': case prefix+'heleh': case prefix+'holoh': {
+case 'halah': case 'hilih': case 'huluh': case 'heleh': case 'holoh': {
 if (isBan) return ads(mess.ban)
 if (!m.quoted && !args.join(" ")) return ads(`Kirim/reply text dengan caption ${prefix + command}`)
 ter = command[1].toLowerCase()
 tex = m.quoted ? m.quoted.text ? m.quoted.text : args.join(" ") ? args.join(" ") : m.text : args.join(" ") ? args.join(" ") : m.text
 ads(tex.replace(/[aiueo]/g, ter).replace(/[AIUEO]/g, ter.toUpperCase()))
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'vote': {
+case 'vote': {
 if (isBan) return ads(mess.ban)
 if (!m.isGroup) return ads(mess.group)
 if (m.chat in vote) return ads(`_Masih ada vote di chat ini!_\n\n*${prefix}hapusvote* - untuk menghapus vote`)
@@ -2311,15 +2171,14 @@ let buttonMessageVote = {
 image: log0,
 jpegThumbnail: thum,
 caption: teks_vote,
-footer: "© DEFFBOTZ ~ DEFF",
+footer: "© ALEXBOTZ ~ ALEX",
 buttons: buttonsVote,
 headerType: 1
 }
 sock.sendMessage(m.chat, buttonMessageVote)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'upvote': {
+case 'upvote': {
 if (isBan) return ads(mess.ban)
 if (!m.isGroup) return ads(mess.group)
 if (!(m.chat in vote)) return ads(`_*tidak ada voting digrup ini!*_\n\n*${prefix}vote* - untuk memulai vote`)
@@ -2356,16 +2215,15 @@ let buttonMessageUpvote = {
 image: log0,
 jpegThumbnail: thum,
 caption: teks_vote,
-footer: "© DEFFBOTZ ~ DEFF",
+footer: "© ALEXBOTZ ~ ALEX",
 buttons: buttonsUpvote,
 headerType: 1,
 mentions: menvote
 }
 sock.sendMessage(m.chat, buttonMessageUpvote)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'devote': {
+case 'devote': {
 if (isBan) return ads(mess.ban)
 if (!m.isGroup) return ads(mess.group)
 if (!(m.chat in vote)) return ads(`_*tidak ada voting digrup ini!*_\n\n*${prefix}vote* - untuk memulai vote`)
@@ -2402,16 +2260,15 @@ let buttonMessageDevote = {
 image: log0,
 jpegThumbnail: thum,
 caption: teks_vote,
-footer: "© DEFFBOTZ ~ DEFF",
+footer: "© ALEXBOTZ ~ ALEX",
 buttons: buttonsDevote,
 headerType: 1,
 mentions: menvote
 }
 sock.sendMessage(m.chat, buttonMessageDevote)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'cekvote': {
+case 'cekvote': {
 if (isBan) return ads(mess.ban)
 if (!m.isGroup) return ads(mess.group)
 if (!(m.chat in vote)) return ads(`_*tidak ada voting digrup ini!*_\n\n*${prefix}vote* - untuk memulai vote`)
@@ -2440,18 +2297,16 @@ ${vote[m.chat][2].map((v, i) => `├ ${i + 1}. @${v.split`@`[0]}`).join('\n')}
 `
 sock.sendTextWithMentions(m.chat, teks_vote, m)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'deletevote': case'delvote': case prefix+'hapusvote': {
+case 'deletevote': case'delvote': case 'hapusvote': {
 if (isBan) return ads(mess.ban)
 if (!m.isGroup) return ads(mess.group)
 if (!(m.chat in vote)) return ads(`_*tidak ada voting digrup ini!*_\n\n*${prefix}vote* - untuk memulai vote`)
 delete vote[m.chat]
 ads('Berhasil Menghapus Sesi Vote Di Grup Ini')
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'listpc': {
+case 'listpc': {
 if (isBan) return ads(mess.ban)
 let anu = await store.chats.all().filter(v => v.id.endsWith('.net')).map(v => v)
 let teks = `     「 List Personal Chat 」\n\nThere are ${anu.length} users using bot in personal chat`
@@ -2460,9 +2315,8 @@ for (let i of anu) {
 }
 sock.sendTextWithMentions(m.chat, teks, m)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'listgc': {
+case 'listgc': {
 if (isBan) return ads(mess.ban)
 let anu = await store.chats.all().filter(v => v.id.endsWith('@g.us')).map(v => v.id)
 let teks = `     「 List Group Chat 」\n\nThere are ${anu.length} users using bot in group chat`
@@ -2477,18 +2331,16 @@ for (let i of anu) {
 }
 sock.sendTextWithMentions(m.chat, teks, m)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'afk': {
+case 'afk': {
 if (isBan) return ads(mess.ban)
 let user = global.db.users[m.sender]
 user.afkTime = + new Date
 user.afkReason = args.join(" ")
 ads(`${m.pushName} sekarang afk\nAlasan : ${args.join(" ") ? args.join(" ") : ''}`)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'setcmd': {
+case 'setcmd': {
 if (isBan) return ads(mess.ban)
 if (!m.quoted) return ads('Reply Pesan!')
 if (!m.quoted.fileSha256) return ads('SHA256 Hash Missing')
@@ -2504,9 +2356,8 @@ locked: false,
 }
 ads(`Done!`)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'delcmd': {
+case 'delcmd': {
 if (isBan) return ads(mess.ban)
 let hash = m.quoted.fileSha256.toString('base64')
 if (!hash) return ads(`Tidak ada hash`)
@@ -2514,9 +2365,8 @@ if (global.db.sticker[hash] && global.db.sticker[hash].locked) return ads('You h
 delete global.db.sticker[hash]
 ads(`Done!`)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'listcmd': {
+case 'listcmd': {
 if (isBan) return ads(mess.ban)
 let teks = `
 *List Hash*
@@ -2525,9 +2375,8 @@ ${Object.entries(global.db.sticker).map(([key, value], index) => `${index + 1}. 
 `.trim()
 sock.sendText(m.chat, teks, m, { mentions: Object.values(global.db.sticker).map(x => x.mentionedJid).reduce((a,b) => [...a, ...b], []) })
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'lockcmd': {
+case 'lockcmd': {
 if (isBan) return ads(mess.ban)
 if (!isCreator) return ads(mess.owner)
 if (!m.quoted) return ads('Reply Pesan!')
@@ -2537,9 +2386,8 @@ if (!(hash in global.db.sticker)) return ads('Hash not found in database')
 global.db.sticker[hash].locked = !/^un/i.test(command)
 ads('Done!')
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'addmsg': {
+case 'addmsg': {
 if (isBan) return ads(mess.ban)
 if (!m.quoted) return ads('Reply Message Yang Ingin Disave Di Database')
 if (!args.join(" ")) return ads(`Example : ${prefix + command} nama file`)
@@ -2552,18 +2400,16 @@ Akses dengan ${prefix}getmsg ${args.join(" ")}
 
 Lihat list Pesan Dengan ${prefix}listmsg`)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'getmsg': {
+case 'getmsg': {
 if (isBan) return ads(mess.ban)
 if (!args.join(" ")) return ads(`Example : ${prefix + command} file name\n\nLihat list pesan dengan ${prefix}listmsg`)
 let msgs = global.db.database
 if (!(text.toLowerCase() in msgs)) return ads(`'${args.join(" ")}' tidak terdaftar di list pesan`)
 sock.copyNForward(m.chat, msgs[text.toLowerCase()], true)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'listmsg': {
+case 'listmsg': {
 if (isBan) return ads(mess.ban)
 let msgs = JSON.parse(fs.readFileSync('./worker/src/database.json'))
 let seplit = Object.entries(global.db.database).map(([nama, isi]) => { return { nama, ...isi } })
@@ -2573,18 +2419,16 @@ teks += `⬡ *Name :* ${i.nama}\n⬡ *Type :* ${getContentType(i.message).replac
 }
 ads(teks)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'fliptext': {
+case 'fliptext': {
 if (isBan) return ads(mess.ban)
 if (args.length < 1) return ads(`Example:\n${prefix}fliptext MyMans`)
 quere = args.join(" ")
 flipe = quere.split('').reverse().join('')
 ads(`\`\`\`「 FLIP TEXT 」\`\`\`\n*•> Normal :*\n${quere}\n*•> Flip :*\n${flipe}`)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'tohuruf': {
+case 'tohuruf': {
 if (isBan) return ads(mess.ban)
 if (!Number(args[0])) return ads(`Example:\n${prefix}tohuruf 456`)
 try {
@@ -2595,9 +2439,8 @@ ads(`\`\`\`「 ALPHABET 」\`\`\`\n*•> Number :*\n${quere}\n*•> Alphabet :*\
 ads("Error")
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'welcome': {
+case 'welcome': {
 if (isBan) return ads(mess.ban)
 if (!m.isGroup) return ads(mess.group)
 if (!isBotAdmins) return ads(mess.botAdmin)
@@ -2616,9 +2459,8 @@ ads('Succes mematikan welcome di group ini')
 ads('on untuk mengaktifkan, off untuk menonaktifkan')
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'autorevoke': {
+case 'autorevoke': {
 if (isBan) return ads(mess.ban)
 if (!m.isGroup) return ads(mess.group)
 if (!isBotAdmins) return ads(mess.botAdmin)
@@ -2637,9 +2479,8 @@ ads('Succes mematikan autorevoke di group ini')
 ads('on untuk mengaktifkan, off untuk menonaktifkan')
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'antilink': {
+case 'antilink': {
 if (isBan) return ads(mess.ban)
 if (!m.isGroup) return ads(mess.group)
 if (!isBotAdmins) return ads(mess.botAdmin)
@@ -2665,9 +2506,8 @@ ads('Succes mematikan antilink di group ini')
 ads('on untuk mengaktifkan, off untuk menonaktifkan')
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'listonline': case prefix+'listaktif': {
+case 'listonline': case 'listaktif': {
 if (isBan) return ads(mess.ban)
 if (!m.isGroup) return ads(mess.group)
 let id = args && /\d+\-\d+@g.us/.test(args[0]) ? args[0] : m.chat
@@ -2675,9 +2515,8 @@ let online = [...Object.keys(store.presences[id]), botNumber]
 let liston = 1
 sock.sendText(m.chat, '     「 List Online 」\n\n' + online.map(v => `${liston++} . @` + v.replace(/@.+/, '')).join`\n`, m, { mentions: online })
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'chat': {
+case 'chat': {
 if (!isCreator) return ads(mess.owner)
 if (!args.join(" ")) return ads(`Example :\n${prefix + command} 62813xxxx|Woi`)
 const cpes = args.join(" ")
@@ -2691,9 +2530,8 @@ Pesan : ${pesny}`
 sock.sendMessage(nony + "@s.whatsapp.net", {text:lolh, mentions:[m.sender]}, {quoted:m})
 }
 await ads("Succes")
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'cowner': {
+case 'cowner': {
 if (isBan) return ads(mess.ban)
 if (!isCreator) return ads(mess.owner)
 if (!args[0]) return ads(`Pilih add atau del`)
@@ -2716,9 +2554,9 @@ ads(`Succes del friends`)
 ads("Error")
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'ban': {
+case 'ban': {
+if (isBan) return ads(mess.ban)
 if (!isCreator) return ads(mess.owner)
 if (!args[0]) return ads(`Pilih add atau del`)
 if (args[1]) {
@@ -2740,9 +2578,8 @@ ads(`Succes delban`)
 ads("Error")
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'request': {
+case 'request': {
 if (isBan) return ads(mess.ban)
 if (!args.join(" ")) return ads(`Example : ${prefix + command} min tambahin fitur downloader`)
 teks = `*| REQUEST FITUR |*`
@@ -2753,9 +2590,8 @@ sock.sendMessage(i + "@s.whatsapp.net", {text: teks + teks1, mentions:[m.sender]
 }
 sock.sendMessage(m.chat, {text: teks + teks2 + teks1, mentions:[m.sender]}, {quoted:m})
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'report': {
+case 'report': {
 if (isBan) return ads(mess.ban)
 if (!args.join(" ")) return ads(`Example : \n- ${prefix + command} fitur ig error min\n- ${prefix + command} user ini nyepam min`)
 teks = `*| REPORT FITUR |*`
@@ -2766,9 +2602,8 @@ sock.sendMessage(i + "@s.whatsapp.net", {text: teks + teks1, mentions:[m.sender]
 }
 sock.sendMessage(m.chat, {text: teks + teks2 + teks1, mentions:[m.sender]}, {quoted:m})
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'mcserver': case prefix+'mcquery': {
+case 'mcserver': case 'mcquery': {
 if (isBan) return ads(mess.ban)
 if (!args.join(" ")) return ads(`Example : \n${prefix + command} ip|port\nUses : \n${prefix + command} play.zacksock.com|19132`)
 const Query = require("minecraft-query");
@@ -2792,9 +2627,8 @@ ads(jsonformat(success));
 q.close();
 })
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'mcpedl': {
+case 'mcpedl': {
 if (isBan) return ads(mess.ban)
 if (!args.join(" ")) return ads(`Example : ${prefix + command} shader`)
 yogipw.mcpedl(args.join(" ")).then(async(res) => {
@@ -2809,16 +2643,15 @@ let buttonMessage = {
 image: log0,
 jpegThumbnail: thum,
 caption: teks,
-footer: "© DEFFBOTZ ~ DEFF",
+footer: "© ALEXBOTZ ~ ALEX",
 buttons: buttons,
 headerType: 4
 }
 sock.sendMessage(m.chat, buttonMessage, { quoted: m })
 })
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'happymod': {
+case 'happymod': {
 if (isBan) return ads(mess.ban)
 if (!args.join(" ")) return ads(`Example : ${prefix + command} mobile legend`)
 yogipw.happymod(args.join(" ")).then(async(res) => {
@@ -2828,22 +2661,21 @@ teks += `\n\n${i.name}\n`
 teks += `${i.link}`
 }
 let buttons = [
-{buttonId: `${prefix}menu`, buttonText: {displayText: 'Menu'}, type: 1}
+{buttonId: `menu`, buttonText: {displayText: 'Menu'}, type: 1}
 ]
 let buttonMessage = {
 image: {url:res[0].icon},
 jpegThumbnail: thum,
 caption: teks,
-footer: "© DEFFBOTZ ~ DEFF",
+footer: "© ALEXBOTZ ~ ALEX",
 buttons: buttons,
 headerType: 4
 }
 sock.sendMessage(m.chat, buttonMessage, { quoted: m })
 })
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'searchgc': {
+case 'searchgc': {
 if (isBan) return ads(mess.ban)
 if (args.length < 1) return ads(`Example :\n${prefix}searchgc Editor Berkelas`)
 nae = args.join(" ")
@@ -2855,22 +2687,21 @@ teks += `${i.link}\n`
 teks += `${i.nama}`
 }
 let buttons = [
-{buttonId: `${prefix}menu`, buttonText: {displayText: 'Menu'}, type: 1}
+{buttonId: `menu`, buttonText: {displayText: 'Menu'}, type: 1}
 ]
 let buttonMessage = {
 image: log0,
 jpegThumbnail: thum,
 caption: teks,
-footer: "© DEFFBOTZ ~ DEFF",
+footer: "© ALEXBOTZ ~ ALEX",
 buttons: buttons,
 headerType: 4
 }
 sock.sendMessage(m.chat, buttonMessage, { quoted: m })
 })
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'servermc': {
+case 'servermc': {
 if (isBan) return ads(mess.ban)
 yogipw.servermc().then(async(res) => {
 let teks = '*| SERVER MC INDONESIA |*\n\nhttps://minecraftpocket-servers.com/country/indonesia/\n\n'
@@ -2879,22 +2710,21 @@ for (let i of res) {
 teks += `▸ Server Ke ${no++}\nip : ${i.ip}\nport : ${i.port}\nversi : ${i.versi}\nplayer : ${i.player}\n\n`
 }
 let buttons = [
-{buttonId: `${prefix}menu`, buttonText: {displayText: 'Menu'}, type: 1}
+{buttonId: `menu`, buttonText: {displayText: 'Menu'}, type: 1}
 ]
 let buttonMessage = {
 image: log0,
 jpegThumbnail: thum,
 caption: teks,
-footer: "© DEFFBOTZ ~ DEFF",
+footer: "© ALEXBOTZ ~ ALEX",
 buttons: buttons,
 headerType: 4
 }
 sock.sendMessage(m.chat, buttonMessage, { quoted: m })
 })
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'antitag': {
+case 'antitag': {
 if (isBan) return ads(mess.ban)
 if (!isCreator) return
 if (args.length < 1) return ads(`Ketik on untuk mengaktifkan\nKetik off untuk menonaktifkan`)
@@ -2910,9 +2740,8 @@ ads(`Berhasil menonaktifkan antitag!`)
 ads('Pilih on atau off')
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'yts': case prefix+'ytsearch': {
+case 'yts': case 'ytsearch': {
 if (isBan) return ads(mess.ban)
 if (!args.join(" ")) return ads(`Example : ${prefix + command} dj 30 detik`)
 let yts = require("yt-search")
@@ -2924,9 +2753,8 @@ teks += `⭔ No : ${no++}\n⭔ Type : ${i.type}\n⭔ Video ID : ${i.videoId}\n�
 }
 sock.sendMessage(m.chat, { image: { url: search.all[0].thumbnail },  caption: teks }, { quoted: m })
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'infochat': {
+case 'infochat': {
 if (isBan) return ads(mess.ban)
 if (!m.quoted) ads('Reply Pesan')
 let msg = await m.getQuotedObj()
@@ -2941,9 +2769,8 @@ teks += ` ┗━⭔ *Waktu :* ${moment(waktu * 1000).format('DD/MM/YY HH:mm:ss')
 }
 sock.sendTextWithMentions(m.chat, teks, m)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'setname': case prefix+'setsubject': {
+case 'setname': case 'setsubject': {
 if (isBan) return ads(mess.ban)
 if (!m.isGroup) return ads(mess.group)
 if (!isBotAdmins) return ads(mess.botAdmin)
@@ -2951,9 +2778,8 @@ if (!isAdmins && !isCreator) return ads(mess.admin)
 if (!text) return ads('Text ?')
 await sock.groupUpdateSubject(m.chat, text).then((res) => ads(mess.success)).catch((err) => ads(jsonformat(err)))
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'setdesc': case prefix+'setdesk': {
+case 'setdesc': case 'setdesk': {
 if (isBan) return ads(mess.ban)
 if (!m.isGroup) return ads(mess.group)
 if (!isBotAdmins) return ads(mess.botAdmin)
@@ -2961,9 +2787,8 @@ if (!isAdmins && !isCreator) return ads(mess.admin)
 if (!text) return ads('Text ?')
 await sock.groupUpdateDescription(m.chat, text).then((res) => ads(mess.success)).catch((err) => ads(jsonformat(err)))
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'setppbot': {
+case 'setppbot': {
 if (isBan) return ads(mess.ban)
 if (!isCreator) return ads(mess.owner)
 if (!quoted) return ads(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
@@ -2973,9 +2798,8 @@ let media = await sock.downloadAndSaveMediaMessage(quoted)
 await sock.updateProfilePicture(botNumber, { url: media }).catch((err) => fs.unlinkSync(media))
 ads(mess.success)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'setppgroup': case prefix+'setppgrup': case prefix+'setppgc': {
+case 'setppgroup': case 'setppgrup': case 'setppgc': {
 if (isBan) return ads(mess.ban)
 if (!m.isGroup) return ads(mess.group)
 if (!isAdmins && !isCreator) return ads(mess.admin)
@@ -2986,9 +2810,8 @@ let media = await sock.downloadAndSaveMediaMessage(quoted)
 await sock.updateProfilePicture(m.chat, { url: media }).catch((err) => fs.unlinkSync(media))
 ads(mess.success)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'tagall': {
+case 'tagall': {
 if (isBan) return ads(mess.ban)
 if (!m.isGroup) return ads(mess.group)
 if (!isAdmins && !isCreator) return ads(mess.admin)
@@ -3000,17 +2823,15 @@ teks += `⭔ @${mem.id.split('@')[0]}\n`
 }
 sock.sendMessage(m.chat, { text: teks, mentions: participants.map(a => a.id) }, { quoted: m })
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'hidetag': {
+case 'hidetag': {
 if (isBan) return ads(mess.ban)
 if (!m.isGroup) return ads(mess.group)
 if (!isAdmins && !isCreator) return ads(mess.admin)
 sock.sendMessage(m.chat, { text : args.join(" ") ? args.join(" ") : '' , mentions: participants.map(a => a.id)}, { quoted: m })
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'linkgroup': case prefix+'linkgc': {
+case 'linkgroup': case 'linkgc': {
 if (isBan) return ads(mess.ban)
 if (!m.isGroup) return ads(mess.group)
 let response = await sock.groupInviteCode(m.chat)
@@ -3029,18 +2850,16 @@ sendEphemeral: true,
 "sourceUrl": "https://youtu.be/TmX43Io_v8s"
 }}}, { quoted: m, detectLink: true })
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'revoke': {
+case 'revoke': {
 if (isBan) return ads(mess.ban)
 if (!m.isGroup) return ads(mess.group)
 if (!isBotAdmins) return ads(mess.botAdmin)
 if (!isAdmins && !isCreator) return ads(mess.admin)
 sock.groupRevokeInvite(m.chat)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'ephemeral': {
+case 'ephemeral': {
 if (isBan) return ads(mess.ban)
 if (!m.isGroup) return ads(mess.group)
 if (!isBotAdmins) return ads(mess.botAdmin)
@@ -3052,9 +2871,8 @@ await sock.sendMessage(m.chat, { disappearingMessagesInChat: WA_DEFAULT_EPHEMERA
 await sock.sendMessage(m.chat, { disappearingMessagesInChat: false }).then((res) => ads(jsonformat(res))).catch((err) => ads(jsonformat(err)))
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'editinfo': {
+case 'editinfo': {
 if (isBan) return ads(mess.ban)
 if (!m.isGroup) return ads(mess.group)
 if (!isBotAdmins) return ads(mess.botAdmin)
@@ -3065,23 +2883,22 @@ await sock.groupSettingUpdate(m.chat, 'unlocked').then((res) => ads(`Sukses Memb
 await sock.groupSettingUpdate(m.chat, 'locked').then((res) => ads(`Sukses Menutup Edit Info Group`)).catch((err) => ads(jsonformat(err)))
 } else {
 let buttons = [
-{ buttonid: '##editinfo open', buttonText: { displayText: 'Open' }, type: 1 },
-{ buttonid: '##editinfo close', buttonText: { displayText: 'Close' }, type: 1 }
+{ buttonId: 'editinfo open', buttonText: { displayText: 'Open' }, type: 1 },
+{ buttonId: 'editinfo close', buttonText: { displayText: 'Close' }, type: 1 }
 ]
 let buttonMessage = {
 image: log0,
 jpegThumbnail: thum,
-caption: `*「 DEFF ~ MD」*\n\nChange Info, Select Open Or Close`,
-footer: "© DEFFBOTZ ~ DEFF",
+caption: `*「 ALEX ~ MD」*\n\nChange Info, Select Open Or Close`,
+footer: "© ALEXBOTZ ~ ALEX",
 buttons: buttons,
 headerType: 4
 }
 sock.sendMessage(m.chat, buttonMessage, { quoted: m })
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'group': case prefix+'grup': {
+case 'group': case 'grup': {
 if (isBan) return ads(mess.ban)
 if (!m.isGroup) return ads(mess.group)
 if (!isBotAdmins) return ads(mess.botAdmin)
@@ -3092,23 +2909,22 @@ await sock.groupSettingUpdate(m.chat, 'announcement').then((res) => ads(`Sukses 
 await sock.groupSettingUpdate(m.chat, 'not_announcement').then((res) => ads(`Sukses Membuka Group`)).catch((err) => ads(jsonformat(err)))
 } else {
 let buttons = [
-{ buttonid: '##group open', buttonText: { displayText: 'Open' }, type: 1 },
-{ buttonid: '##group close', buttonText: { displayText: 'Close' }, type: 1 }
+{ buttonId: 'group open', buttonText: { displayText: 'Open' }, type: 1 },
+{ buttonId: 'group close', buttonText: { displayText: 'Close' }, type: 1 }
 ]
 let buttonMessage = {
 image: log0,
 jpegThumbnail: thum,
-caption: `*「 DEFF ~ MD」*\n\nChange Group Setting, Select Open Or Close`,
-footer: "© DEFFBOTZ ~ DEFF",
+caption: `*「 ALEX ~ MD」*\n\nChange Group Setting, Select Open Or Close`,
+footer: "© ALEXBOTZ ~ ALEX",
 buttons: buttons,
 headerType: 4
 }
 sock.sendMessage(m.chat, buttonMessage, { quoted: m })
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'promote': {
+case 'promote': {
 if (isBan) return ads(mess.ban)
 if (!m.isGroup) return ads(mess.group)
 if (!isBotAdmins) return ads(mess.botAdmin)
@@ -3116,9 +2932,8 @@ if (!isAdmins && !isCreator) return ads(mess.admin)
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await sock.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => ads(jsonformat(res))).catch((err) => ads(jsonformat(err)))
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'demote': {
+case 'demote': {
 if (isBan) return ads(mess.ban)
 if (!m.isGroup) return ads(mess.group)
 if (!isBotAdmins) return ads(mess.botAdmin)
@@ -3126,9 +2941,8 @@ if (!isAdmins && !isCreator) return ads(mess.admin)
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await sock.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => ads(jsonformat(res))).catch((err) => ads(jsonformat(err)))
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'kick': {
+case 'kick': {
 if (isBan) return ads(mess.ban)
 if (!m.isGroup) return ads(mess.group)
 if (!isBotAdmins) return ads(mess.botAdmin)
@@ -3136,9 +2950,8 @@ if (!isAdmins && !isCreator) return ads(mess.admin)
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await sock.groupParticipantsUpdate(m.chat, [users], 'remove').then((res) => ads(jsonformat(res))).catch((err) => ads(jsonformat(err)))
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'add': {
+case 'add': {
 if (isBan) return ads(mess.ban)
 if (!m.isGroup) return ads(mess.group)
 if (!isBotAdmins) return ads(mess.botAdmin)
@@ -3146,9 +2959,8 @@ if (!isAdmins && !isCreator) return ads(mess.admin)
 let users = m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await sock.groupParticipantsUpdate(m.chat, [users], 'add').then((res) => ads(jsonformat(res))).catch((err) => ads(jsonformat(err)))
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'bcgc': case prefix+'bcgroup': {
+case 'bcgc': case 'broadcastgroup': {
 if (isBan) return ads(mess.ban)
 if (!isCreator) return ads(mess.owner)
 if (!args.join(" ")) return ads(`Text mana?\n\nExample : ${prefix + command} ZackMans Official`)
@@ -3171,27 +2983,26 @@ url: linkgrupss
 }, {
 quickReplyButton: {
 displayText: 'Status Bot',
-id: '#ping'
+id: 'ping'
 }
 }, {
 quickReplyButton: {
 displayText: 'Contact Owner',
-id: '#owner'
+id: 'owner'
 }  
 }, {
 quickReplyButton: {
 displayText: 'Script',
-id: '#sc'
+id: 'sc'
 }
 }]
 let txt = `*「 Broadcast」*\n\n${text}`
-sock.send5ButImg(i, txt, "© DEFFBOTZ ~ DEFF", log0, btn, thum)
+sock.send5ButImg(i, txt, "© ALEXBOTZ ~ ALEX", log0, btn, thum)
 }
 ads(`Sukses Mengirim Broadcast Ke ${anu.length} Group`)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'bc': case prefix+'broadcast': case prefix+'bcall': {
+case 'bc': case 'broadcast': case 'broadcastchat': {
 if (isBan) return ads(mess.ban)
 if (!isCreator) return ads(mess.owner)
 if (!args.join(" ")) return ads(`Text mana?\n\nExample : ${prefix + command} ZackMans Official`)
@@ -3212,43 +3023,54 @@ url: linkgrupss
 }, {
 quickReplyButton: {
 displayText: 'Status Bot',
-id: '#ping'
+id: 'ping'
 }
 }, {
 quickReplyButton: {
 displayText: 'Contact Owner',
-id: '#owner'
+id: 'owner'
 }  
 }, {
 quickReplyButton: {
 displayText: 'Script',
-id: '#sc'
+id: 'sc'
 }
 }]
 let txt = `*「 Broadcast」*\n\n${text}`
-sock.send5ButImg(yoi, txt, "© DEFFBOTZ ~ DEFF", log0, btn, thum)
+sock.send5ButImg(yoi, txt, "© ALEXBOTZ ~ ALEX", log0, btn, thum)
 }
 ads('Sukses Broadcast')
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'sc': case prefix+'script': case prefix+'donate': case prefix+'donasi': case prefix+'cekupdate': case prefix+'updatebot': case prefix+'cekbot': case prefix+'sourcecode': {
-teks = `「 DEFF ~ MD」\nhttps://youtube.com/channel/UCSAcYW8MkFyaVQz9asa3q5Q`
-teks += `Dont Forget Donate`
+case 'sc': case 'sewa bot': case 'donate': case 'donasi': case 'cekupdate': case 'updatebot': case 'cekbot': case 'sourcecode': {
+teks = `「 ALEX ~ MD」\n𖥦ׄ 𓎆 ׄ🚀 ࠼ִ 𝐎𝐏𝐄𝐍 𝐒𝐄𝐖𝐀 𝐁𝐎𝐓𓄲 𔖴
+   ּ  ֗  ִ    ۪  ⊹  ˑ  ִ  ֗   ִ  ۫  ࣪  ִ  ۫   ּ࣪  ִ  ۫   ּ  ֗  ִ 
+ ⩇⩇ ꜥ🩰 𝑺𝑬𝑾𝑨 𝑩𝑶𝑻 𝑺𝑬𝑴??𝑵𝑮𝑮𝑼=5𝑲
+ ⩇⩇ ꜥ🩰 𝑺𝑬𝑾𝑨 𝑩𝑶𝑻 𝑺𝑬𝑩𝑼𝑳𝑨𝑵=8𝑲
+ ⩇⩇ ꜥ🩰 𝑺𝑬𝑾𝑨 𝑩𝑶𝑻 𝑷𝑬𝑹𝑴𝑨𝑵𝑬𝑵=10𝑲
+ ⩇⩇ ꜥ🩰 𝑱𝑨𝑫𝑰 𝑩𝑶𝑻 𝑷𝑬𝑹𝑩𝑼𝑳𝑨𝑵 = 20𝑲
+ ⩇⩇ ꜥ🩰 𝑱𝑨𝑫𝑰 𝑩𝑶𝑻 𝑷𝑬𝑹𝑴𝑨𝑵𝑬𝑵 = 25𝑲
+ ⩇⩇ ꜥ🩰 𝑴𝑼𝑹𝑰𝑫 𝑩𝑶𝑻 = 30𝑲
+⩇⩇ ꜥ🩰 𝑩𝑬𝑳𝑰 𝑺𝑪 𝑫𝑨𝑹𝑰 𝑯𝑨𝑹𝑮𝑨 = 30𝑲
+   ּ  ֗  ִ    ۪  ⊹  ˑ  ִ  ֗   ִ  ۫  ࣪  ִ  ۫   ּ࣪  ִ  ۫   ּ  ֗  ִ 
+⛔ 𐙣 ˖࣪   𝗻𝗼𝘁𝗲 : 
+𔗨ׄ 🚦 ꒱ ꙳ 𝑩𝑶𝑻 𝑶𝑵 24 𝑱𝑨𝑴
+𝕄𝕚𝕟𝕒𝕥 ℙ𝕞 𝕆𝕨𝕟𝕖𝕣
+❙❘❙❙❘❙❚❙❘❙❙❚❙❘❙❘❙❚❙❘❙❙❚❙❘❙❙❘❙❚❙❘`
 let buttons = [
-{buttonId: `${prefix}menu`, buttonText: {displayText: 'Menu'}, type: 1}
+{buttonId: `menu`, buttonText: {displayText: 'Menu'}, type: 1}
 ]
 let buttonMessage = {
 image: thum,
 jpegThumbnail: log0,
 caption: teks,
-footer: "©DEFF",
+footer: "©ALEX",
 buttons: buttons,
 headerType: 4,
 contextInfo:{externalAdReply:{
-title:"DEFF ~ MD Qris ( Donate )",
-body: "©DEFF", 
-thumbnail: fs.readFileSync("worker/media/image/Deff.jpg"),
+title:"ALEX ~ MD Qris ( Donate )",
+body: "©ALEX", 
+thumbnail: fs.readFileSync("worker/media/image/Alex.jpg"),
 mediaType:1,
 mediaUrl: 'https://telegra.ph/file/40762e97a434e17ba3d75.jpg',
 sourceUrl: "https://telegra.ph/file/40762e97a434e17ba3d75.jpg"
@@ -3256,9 +3078,8 @@ sourceUrl: "https://telegra.ph/file/40762e97a434e17ba3d75.jpg"
 }
 sock.sendMessage(m.chat, buttonMessage, { quoted: m })
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'inspect': {
+case 'inspect': {
 if (!args[0]) return ads("Linknya?")
 let linkRegex = args.join(" ")
 let coded = linkRegex.split("https://chat.whatsapp.com/")[1]
@@ -3293,9 +3114,8 @@ pp = "https://tse2.mm.bing.net/th?id=OIP.n1C1oxOvYLLyDIavrBFoNQHaHa&pid=Api&P=0&
 sock.sendFile(m.chat, pp, "", m, { caption: tekse, mentions: await sock.parseMention(tekse) })
 })
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'join': {
+case 'join': {
 if (isBan) return ads(mess.ban)
 if (!args[0]) return ads("Linknya mana kak?")
 vdd = args[0]
@@ -3317,7 +3137,7 @@ content: [{ tag: "invite", attrs: { code: vcc } }]
 sizny = res.content[0].attrs.size
 if (sizny < 50) {
 teks = `Maaf anggota group anda kurang dari 50, minimal agar bot join harus mempunyai lebih dari 50 anggota`
-sendOrder(m.chat, teks, "667140254502463", fs.readFileSync('./worker/media/image/Deff.jpg'), 2022, "DEFF~MD", "6289501060783@s.whatsapp.net", "AR6NCY8euY5cbS8Ybg5Ca55R8HFSuLO3qZqrIYCT7hQp0g==", "99999999999999999999")
+sendOrder(m.chat, teks, "667140254502463", fs.readFileSync('./worker/media/image/Alex.jpg'), 2022, "ALEX~MD", "6289501060783@s.whatsapp.net", "AR6NCY8euY5cbS8Ybg5Ca55R8HFSuLO3qZqrIYCT7hQp0g==", "99999999999999999999")
 } else if (sizny > 50) {
 await sock.groupAcceptInvite(vcc).then(async(res) => ads(jsonformat(res))).catch(_ => _)
 ads("Succes")
@@ -3327,9 +3147,8 @@ ads("Error")
 }).catch(_ => _)
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'bass': case prefix+'blown': case prefix+'deep': case prefix+'earrape': case prefix+'fast': case prefix+'fat': case prefix+'nightcore': case prefix+'reverse': case prefix+'robot': case prefix+'slow': case prefix+'smooth': case prefix+'tupai':
+case 'bass': case 'blown': case 'deep': case 'earrape': case 'fast': case 'fat': case 'nightcore': case 'reverse': case 'robot': case 'slow': case 'smooth': case 'tupai':
                 try {
                 let set
                 if (/bass/.test(command)) set = '-af equalizer=f=54:width_type=o:width=2:g=20'
@@ -3359,9 +3178,8 @@ case prefix+'bass': case prefix+'blown': case prefix+'deep': case prefix+'earrap
                 } catch (e) {
                 ads(e)
                 }
-                addCmd(command.slice(1), 1, commund)
-break
-case prefix+'nulis': {
+                break
+case 'nulis': {
 if (isBan) return ads(mess.ban)
 if (args.length < 1) return ads(`Example :\n${prefix}nulis MyMainas|91|#ff020a|Manusia terganteng adalah salman alfarizi`)
 const nls = args.join(" ")
@@ -3437,9 +3255,8 @@ sock.sendMessage(from, {image:fs.readFileSync('./worker/storage/hasilnulis.jpg')
 })
 exec(`npm i marker`)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'kalkulator': case prefix+'kal': {
+case 'kalkulator': case 'kal': {
 if (isBan) return ads(mess.ban)
 if (args.length < 1) return ads(`*Example :*\n${prefix}kalkulator 2 * 5\n\n*List Bilangan :*\n•> Kali : *\n•> Bagi : /\n•> Tambah : +\n•> Kurang : -`)
 let qsd = args.join(" ")
@@ -3449,27 +3266,24 @@ ads('Error')
 ads(`\`\`\`「 Kalkulator 」\`\`\`\n\n*•> Hitung :* ${qsd}\n*•> Hasil :* ${mathjs.evaluate(qsd.replace(/×/g, "*").replace(/x/g, "*").replace(/÷/g, "/"))}`)
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'public': {
+case 'public': {
 if (isBan) return ads(mess.ban)
 if (!isCreator) return ads(mess.owner)
 sock.public = true
 ads('Sukse Change To Public Usage')
 sock.setStatus(`Mode : Public`)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'self': {
+case 'self': {
 if (isBan) return ads(mess.ban)
 if (!isCreator) return ads(mess.owner)
 sock.public = false
 ads('Sukses Change To Self Usage')
 sock.setStatus(`Mode : Self`)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'ping': case prefix+'botstatus': case prefix+'statusbot': {
+case 'ping': case 'botstatus': case 'statusbot': {
 if (isBan) return ads(mess.ban)
 const used = process.memoryUsage()
 const cpus = os.cpus().map(cpu => {
@@ -3516,9 +3330,8 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 `.trim()
 ads(respon)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'toimage': case prefix+'toimg': {
+case 'toimage': case 'toimg': {
 if (isBan) return ads(mess.ban)
 if (!m.quoted) return ads('Reply Image')
 if (!/webp/.test(mime)) return ads(`balas stiker dengan caption *${prefix + command}*`)
@@ -3533,9 +3346,8 @@ sock.sendMessage(m.chat, { image: buffer }, { quoted: m })
 fs.unlinkSync(ran)
 })
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'tomp4': case prefix+'tovideo': {
+case 'tomp4': case 'tovideo': {
 if (isBan) return ads(mess.ban)
 if (!m.quoted) return ads('Reply Image')
 if (!/webp/.test(mime)) return ads(`balas stiker dengan caption *${prefix + command}*`)
@@ -3546,9 +3358,8 @@ let webpToMp4 = await webp2mp4File(media)
 await sock.sendMessage(m.chat, { video: { url: webpToMp4.result, caption: 'Convert Webp To Video' } }, { quoted: m })
 await fs.unlinkSync(media)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'toaud': case prefix+'toaudio': {
+case 'toaud': case 'toaudio': {
 if (isBan) return ads(mess.ban)
 if (!/video/.test(mime) && !/audio/.test(mime)) return ads(`Kirim/Reply Video/Audio Yang Ingin Dijadikan Audio Dengan Caption ${prefix + command}`)
 if (!m.quoted) return ads(`Kirim/Reply Video/Audio Yang Ingin Dijadikan Audio Dengan Caption ${prefix + command}`)
@@ -3558,9 +3369,8 @@ let { toAudio } = require('./lib/converter')
 let audio = await toAudio(media, 'mp4')
 sock.sendMessage(m.chat, {audio: audio, mimetype: 'audio/mpeg'}, { quoted : m })
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'tomp3': {
+case 'tomp3': {
 if (isBan) return ads(mess.ban)
 if (/document/.test(mime)) return ads(`Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`)
 if (!/video/.test(mime) && !/audio/.test(mime)) return ads(`Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`)
@@ -3571,9 +3381,8 @@ let { toAudio } = require('./lib/converter')
 let audio = await toAudio(media, 'mp4')
 sock.sendMessage(m.chat, {document: audio, mimetype: 'audio/mpeg', fileName: `Convert By ${sock.user.name} (${m.id}).mp3`}, { quoted : m })
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'tovn': case prefix+'toptt': {
+case 'tovn': case 'toptt': {
 if (isBan) return ads(mess.ban)
 if (!/video/.test(mime) && !/audio/.test(mime)) return ads(`Reply Video/Audio Yang Ingin Dijadikan VN Dengan Caption ${prefix + command}`)
 if (!m.quoted) return ads(`Reply Video/Audio Yang Ingin Dijadikan VN Dengan Caption ${prefix + command}`)
@@ -3583,9 +3392,8 @@ let { toPTT } = require('./lib/converter')
 let audio = await toPTT(media, 'mp4')
 sock.sendMessage(m.chat, {audio: audio, mimetype:'audio/mpeg', ptt:true }, {quoted:m})
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'togif': {
+case 'togif': {
 if (isBan) return ads(mess.ban)
 if (!m.quoted) return ads('Reply Image')
 if (!/webp/.test(mime)) return ads(`balas stiker dengan caption *${prefix + command}*`)
@@ -3596,9 +3404,8 @@ let webpToMp4 = await webp2mp4File(media)
 await sock.sendMessage(m.chat, { video: { url: webpToMp4.result, caption: 'Convert Webp To Video' }, gifPlayback: true }, { quoted: m })
 await fs.unlinkSync(media)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'tourl': {
+case 'tourl': {
 if (isBan) return ads(mess.ban)
 ads(mess.wait)
 let { UploadFileUgu, webp2mp4File, TelegraPh } = require('./lib/uploader')
@@ -3607,23 +3414,21 @@ if (/image/.test(mime)) {
 let anu = await TelegraPh(media)
 ads(util.format(anu))
 } else if (!/image/.test(mime)) {
-let anu = await TelegraPh(media)
+let anu = await UploadFileUgu(media)
 ads(util.format(anu))
 }
 await fs.unlinkSync(media)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'q': case prefix+'quoted': {
+case 'q': case 'quoted': {
 if (isBan) return ads(mess.ban)
 if (!m.quoted) return ads('Reply Pesannya!!')
 let wokwol = await sock.serializeM(await m.getQuotedObj())
 if (!wokwol.quoted) return ads('Pesan Yang anda reply tidak mengandung reply')
 await wokwol.quoted.copyNForward(m.chat, true)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'getname': {
+case 'getname': {
 if (isBan) return ads(mess.ban)
 if (qtod === "true") {
 namenye = await sock.getName(m.quoted.sender)
@@ -3632,9 +3437,8 @@ ads(namenye)
 sock.sendMessage(from, {text:"Reply orangnya"}, {quoted:m})
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'getpic': {
+case 'getpic': {
 if (isBan) return ads(mess.ban)
 if (qtod === "true") {
 try {
@@ -3652,14 +3456,12 @@ pporgs = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gam
 sock.sendMessage(m.chat, { image : { url : pporgs }, caption:`Done` }, { quoted : m })
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'owner': case prefix+'creator': {
+case 'owner': case 'creator': {
 sock.sendContact(m.chat, global.owner, m)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'translate': case prefix+'terjemahan': {
+case 'translate': case 'terjemahan': {
 if (isBan) return ads(mess.ban)
 if (!args.join(" ")) return ads("Textnya?")
 tes = await fetchJson (`https://megayaa.herokuapp.com/api/translate?to=id&kata=${args.join(" ")}`)
@@ -3667,9 +3469,8 @@ Infoo = tes.info
 Detek = tes.translate
 ads(`🌐Translate : ${Detek}\n📘Hasil : ${Infoo}`)
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'gimage': case prefix+'gig': {
+case 'gimage': case 'gig': {
 if (isBan) return ads(mess.ban)
 if (!args[0]) return ads("Mau cari gambar apa kak?")
 let gis = require('g-i-s')
@@ -3677,7 +3478,7 @@ gis(args.join(" "), async (error, result) => {
 n = result
 images = n[Math.floor(Math.random() * n.length)].url
 let buttons = [
-{buttonId: `${prefix}gimage ${args.join(" ")}`, buttonText: {displayText: 'Next Image'}, type: 1}
+{buttonId: `gimage ${args.join(" ")}`, buttonText: {displayText: 'Next Image'}, type: 1}
 ]
 let buttonMessage = {
 image: { url: images },
@@ -3685,12 +3486,12 @@ caption: `*| GOOGLE IMAGE |*
 
 🤠 Query : ${text}
 🔗 Media Url : ${images}`,
-footer: "© DEFFBOTZ ~ DEFF",
+footer: "© ALEXBOTZ ~ ALEX",
 buttons: buttons,
 headerType: 4,
 contextInfo:{externalAdReply:{
-title:"DEFFBOTZ - By Deff",
-body:"© DEFFBOTZ ~ DEFF",
+title:"ALEXBOTZ ~ ALEX",
+body:"© ALEXBOTZ ~ ALEX",
 thumbnail: log0,
 mediaType:2,
 mediaUrl: "https://youtu.be/TmX43Io_v8s",
@@ -3700,9 +3501,8 @@ sourceUrl: "https://youtu.be/TmX43Io_v8s"
 sock.sendMessage(m.chat, buttonMessage, { quoted: m })
 })
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'google': {
+case 'google': {
 if (isBan) return ads(mess.ban)
 if (!args[0]) return ads(`Example: ${prefix + command} <query>\nUses : ${prefix + command} apa arti cinta`)
 let google = require('google-it')
@@ -3716,26 +3516,25 @@ teks += `⭔ *Link* : ${g.link}\n\n───────────────
 ads(teks)
 })
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'pinterest': case prefix+'image': {
+case 'pinterest': case 'image': {
 if (isBan) return ads(mess.ban)
 if (!args.join(" ")) return ads("Mau cari gambar apa kak?")
 try {
 hx.pinterest(args.join(" ")).then(async(res) => {
 imgnyee = res[Math.floor(Math.random() * res.length)]
 let buttons = [
-{buttonId: `${prefix}pinterest ${args.join(" ")}`, buttonText: {displayText: 'Next Image'}, type: 1}
+{buttonId: `pinterest ${args.join(" ")}`, buttonText: {displayText: 'Next Image'}, type: 1}
 ]
 let buttonMessage = {
 image: { url: imgnyee },
 caption:  '⭔ Title : ' + args.join(" ") + '\n⭔ Media Url : '+imgnyee,
-footer: "© DEFFBOTZ ~ DEFF",
+footer: "© ALEXBOTZ ~ ALEX",
 buttons: buttons,
 headerType: 4,
 contextInfo:{externalAdReply:{
-title:"DEFFBOTZ - By Deff",
-body:"© DEFFBOTZ ~ DEFF",
+title:"ALEXBOTZ ~ ALEX",
+body:"© ALEXBOTZ ~ ALEX",
 thumbnail: log0,
 mediaType:2,
 mediaUrl: "https://youtu.be/TmX43Io_v8s",
@@ -3748,11 +3547,10 @@ sock.sendMessage(m.chat, buttonMessage, { quoted: m })
 ads("Error")
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'igstory': case prefix+'instagramstory': {
+case 'igstory': case 'instagramstory': {
 if (isBan) return ads(mess.ban)
-if (!args[0]) return ads(`Example :\n${prefix + command} deff.xyz`)
+if (!args[0]) return ads(`Example :\n${prefix + command} alextz_store`)
 try {
 hx.igstory(args[0]).then(async(resed) => {
 ini_anu = []
@@ -3767,7 +3565,7 @@ ini_anu.push({
 }
 ilod = 1
 for (let i of ini_anu) {
-anu_list.push({buttonId: `${prefix}ig ${i.type} ${i.url}`, buttonText: {displayText: `Media ${ilod++}`}, type: 1})
+anu_list.push({buttonId: `ig ${i.type} ${i.url}`, buttonText: {displayText: `Media ${ilod++}`}, type: 1})
 }
 textbv += `\n\n_Pilih media dibawah untuk mendownload_`
 let buttons = anu_list
@@ -3775,7 +3573,7 @@ let buttonMessage = {
 image:log0,
 jpegThumbnail:thum,
 caption: textbv,
-footer: "© DEFFBOTZ ~ DEFF",
+footer: "© ALEXBOTZ ~ ALEX",
 buttons: buttons,
 headerType: 4
 }
@@ -3785,9 +3583,8 @@ sock.sendMessage(from, buttonMessage, {quoted:m})
 ads(String(err))
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'igdl': case prefix+'instagram': {
+case 'igdl': case 'instagram': {
 if (isBan) return ads(mess.ban)
 if (!args[0]) return ads(`Example :\n${prefix + command} https://www.instagram.com/p/CcvJGuxh9VI/?igshid=YmMyMTA2M2Y=`)
 try {
@@ -3804,7 +3601,7 @@ ini_anu.push({
 }
 ilod = 1
 for (let i of ini_anu) {
-anu_list.push({buttonId: `${prefix}ig ${i.type} ${i.url}`, buttonText: {displayText: `Media ${ilod++}`}, type: 1})
+anu_list.push({buttonId: `ig ${i.type} ${i.url}`, buttonText: {displayText: `Media ${ilod++}`}, type: 1})
 }
 textbv += `\n\n_Pilih media dibawah untuk mendownload_`
 let buttons = anu_list
@@ -3812,7 +3609,7 @@ let buttonMessage = {
 image:log0,
 jpegThumbnail:thum,
 caption: textbv,
-footer: "© DEFFBOTZ ~ DEFF",
+footer: "© ALEXBOTZ ~ ALEX",
 buttons: buttons,
 headerType: 4
 }
@@ -3822,9 +3619,8 @@ sock.sendMessage(from, buttonMessage, {quoted:m})
 ads(String(err))
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'ig': {
+case 'ig': {
 if (args[0] === "mp4") {
 sock.sendMessage(from, {video:{url:args[1]}, caption:'Done!', mimetype:'video/mp4'}, {quoted:m})
 } else if (args[0] === "jpg") {
@@ -3833,15 +3629,14 @@ sock.sendMessage(from, {image:{url:args[1]}, caption:'Done!'}, {quoted:m})
 ads(" Error! ")
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'mp4' : {
+case 'mp4' : {
 if (isBan) return ads(mess.ban)
 if (!args[0]) return ads("Linknya mana kak?")
 try {
 sock.sendMessage(from, {video:{url:args[0]}, caption:"Succes", contextInfo:{externalAdReply:{
-title:"DEFFBOTZ - By Deff",
-body:"© DEFFBOTZ ~ DEFF",
+title:"ALEXBOTZ ~ ALEX",
+body:"© ALEXBOTZ ~ ALEX",
 thumbnail: log0,
 mediaType:2,
 mediaUrl: "https://youtu.be/TmX43Io_v8s",
@@ -3851,15 +3646,14 @@ sourceUrl: "https://youtu.be/TmX43Io_v8s"
 ads("Linknya Error")
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'jpeg': {
+case 'jpeg': {
 if (isBan) return ads(mess.ban)
 if (!args[0]) return ads("Linknya mana kak?")
 try {
 sock.sendMessage(from, {image:{url:args[0]}, caption:"Succes", contextInfo:{externalAdReply:{
-title:"DEFFBOTZ - By Deff",
-body:"© DEFFBOTZ ~ DEFF",
+title:"ALEXBOTZ ~ ALEX",
+body:"© ALEXBOTZ ~ ALEX",
 thumbnail: log0,
 mediaType:2,
 mediaUrl: "https://youtu.be/TmX43Io_v8s",
@@ -3869,9 +3663,8 @@ sourceUrl: "https://youtu.be/TmX43Io_v8s"
 ads("Linknya Error")
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'twitter': case prefix+'twdl': case prefix+'twmp4': {
+case 'twitter': case 'twdl': case 'twmp4': {
 if (isBan) return ads(mess.ban)
 if (!args[0]) return ads(`Example :\n${prefix + command} https://twitter.com/cinema21/status/1517754155644821504?t=rUnbyqwh4vAE1QXMXlsVeQ&s=19`)
 try {
@@ -3885,17 +3678,17 @@ Link : ${lotwit.medias[1].url}
 
 _Pilih kualitas video dibawah dengan cara mengklik tombolnya_`
 let buttons = [
-{buttonId: `${prefix}twddl ${lotwit.medias[0].url}`, buttonText: {displayText: `Quality ${lotwit.medias[0].quality}`}, type: 1},
-{buttonId: `${prefix}twddl ${lotwit.medias[2].url}`, buttonText: {displayText: `Quality ${lotwit.medias[2].quality}`}, type: 1}
+{buttonId: `twddl ${lotwit.medias[0].url}`, buttonText: {displayText: `Quality ${lotwit.medias[0].quality}`}, type: 1},
+{buttonId: `twddl ${lotwit.medias[2].url}`, buttonText: {displayText: `Quality ${lotwit.medias[2].quality}`}, type: 1}
 ]
 let buttonMessage = {
 video: {url:lotwit.medias[1].url},
 caption: teks,
-footer: "© DEFFBOTZ ~ DEFF",
+footer: "© ALEXBOTZ ~ ALEX",
 buttons: buttons,
 headerType: 4,
 contextInfo:{externalAdReply:{
-title:"Deff Official ~ Twitter Downloader",
+title:"Alex Official ~ Twitter Downloader",
 body:lotwit.title ? lotwit.title : "Twitter Downloader",
 thumbnail: log0,
 mediaType:1,
@@ -3908,21 +3701,20 @@ sock.sendMessage(from, buttonMessage, {quoted:m})
 ads(" Link Error!")
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'twddl': {
+case 'twddl': {
 if (isBan) return ads(mess.ban)
 let buttons = [
-{buttonId: `${prefix}menu`, buttonText: {displayText: 'Menu'}, type: 1}
+{buttonId: `menu`, buttonText: {displayText: 'Menu'}, type: 1}
 ]
 let buttonMessage = {
 video: {url:args[0]},
 caption: "Done!",
-footer: "© DEFFBOTZ ~ DEFF",
+footer: "© ALEXBOTZ ~ ALEX",
 buttons: buttons,
 headerType: 4,
 contextInfo:{externalAdReply:{
-title:"Deff Official ~ Twitter Downloader",
+title:"Alex Official ~ Twitter Downloader",
 body: "Twitter Downloader",
 thumbnail: log0,
 mediaType:1,
@@ -3932,9 +3724,8 @@ sourceUrl: args[0]
 }
 sock.sendMessage(from, buttonMessage, {quoted:m})
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'facebook': case prefix+'fbdl': case prefix+'fbmp4': case prefix+'fb': {
+case 'facebook': case 'fbdl': case 'fbmp4': case 'fb': {
 if (isBan) return ads(mess.ban)
 if (!args[0]) return ads(`Example :\n${prefix + command} https://fb.watch/cAX2dep-BZ/`)
 try {
@@ -3947,16 +3738,16 @@ Size : ${resd.medias[0].formattedSize}
 
 _Untuk kualitas hd anda bisa klik tombol dibawah_`
 let buttons = [
-{buttonId: `${prefix}fbddl ${resd.medias[1].url}`, buttonText: {displayText: 'QualityHD'}, type: 1}
+{buttonId: `fbddl ${resd.medias[1].url}`, buttonText: {displayText: 'QualityHD'}, type: 1}
 ]
 let buttonMessage = {
 video: {url:resd.medias[0].url},
 caption: teks,
-footer: "© DEFFBOTZ ~ DEFF",
+footer: "© ALEXBOTZ ~ ALEX",
 buttons: buttons,
 headerType: 4,
 contextInfo:{externalAdReply:{
-title:"Deff Official ~ Facebook Downloader",
+title:"Alex Official ~ Facebook Downloader",
 body:"facebook downloader",
 thumbnail: log0,
 mediaType:1,
@@ -3969,21 +3760,20 @@ sock.sendMessage(from, buttonMessage, {quoted:m})
 ads("Link invalid!")
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'fbddl': {
+case 'fbddl': {
 if (isBan) return ads(mess.ban)
 let buttons = [
-{buttonId: `${prefix}menu`, buttonText: {displayText: 'Menu'}, type: 1}
+{buttonId: `menu`, buttonText: {displayText: 'Menu'}, type: 1}
 ]
 let buttonMessage = {
 video: {url:args[0]},
 caption: "Done!",
-footer: "© DEFFBOTZ ~ DEFF",
+footer: "© ALEXBOTZ ~ ALEX",
 buttons: buttons,
 headerType: 4,
 contextInfo:{externalAdReply:{
-title:"Deff Official ~ Facebook Downloader",
+title:"Alex Official ~ Facebook Downloader",
 body: " Facebook Downloader",
 thumbnail: log0,
 mediaType:1,
@@ -3993,9 +3783,8 @@ sourceUrl: args[0]
 }
 sock.sendMessage(from, buttonMessage, {quoted:m})
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'ttdl': case prefix+'tiktok': case prefix+'ttmp4': case prefix+'ttmp3': case prefix+'tiktoknowm': {
+case 'ttdl': case 'tiktok': case 'ttmp4': case 'ttmp3': case 'tiktoknowm': {
 if (isBan) return ads(mess.ban)
 if (!isUrl(args[0])) return ads(`Example :\n${prefix + command} <url>\nUses :\n${prefix + command} https://vt.tiktok.com/ZSdDo97dC/`)
 let res = await aiovideodl(args[0])
@@ -4008,17 +3797,17 @@ Type : ${res.medias[1].extension ? "video/" + res.medias[1].extension : "undefin
 
 _Pilih watermak atau audio dan tunggu beberapa saat_`
 let buttons = [
-{buttonId: `${prefix}ttvd ${args[0]}}`, buttonText: {displayText: '× Watermak'}, type: 1},
-{buttonId: `${prefix}ttad ${args[0]}`, buttonText: {displayText: '♫ Audio'}, type: 1}
+{buttonId: `ttvd ${args[0]}}`, buttonText: {displayText: '× Watermak'}, type: 1},
+{buttonId: `ttad ${args[0]}`, buttonText: {displayText: '♫ Audio'}, type: 1}
 ]
 let buttonMessage = {
 video: {url:res.medias[1].url},
 caption: texttk,
-footer: "© DEFFBOTZ ~ DEFF",
+footer: "© ALEXBOTZ ~ ALEX",
 buttons: buttons,
 headerType: 4,
 contextInfo:{externalAdReply:{
-title:"Deff Official ~ Tiktok Downloader",
+title:"Alex Official ~ Tiktok Downloader",
 body:res.title,
 thumbnail: log0,
 mediaType:1,
@@ -4031,13 +3820,12 @@ sock.sendMessage(from, buttonMessage, {quoted:m})
 ads("Link Error!")
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'ttad': {
+case 'ttad': {
 if (isBan) return ads(mess.ban)
 let res = await aiovideodl(args[0])
 sock.sendMessage(from, {audio:{url:res.medias[2].url}, mimetype:"audio/mp4", ptt:true, contextInfo:{externalAdReply:{
-title:"Deff Official ~ Tiktok Downloader",
+title:"Alex Official ~ Tiktok Downloader",
 body:res.title,
 thumbnail: log0,
 mediaType:1,
@@ -4045,9 +3833,8 @@ mediaUrl: args[0],
 sourceUrl: args[0]
 }}}, {quoted:m})
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'ttvd': {
+case 'ttvd': {
 if (isBan) return ads(mess.ban)
 let res = await aiovideodl(args[0])
 texttk = `*| TIKTOK DOWNLOADER |*
@@ -4058,16 +3845,16 @@ Type : ${res.medias[0].extension ? "video/" + res.medias[0].extension : "undefin
 
 _untuk melihat list menu pencet tombol dibawah atau ketik menu_`
 let buttons = [
-{buttonId: `${prefix}menu`, buttonText: {displayText: 'Menu'}, type: 1}
+{buttonId: `menu`, buttonText: {displayText: 'Menu'}, type: 1}
 ]
 let buttonMessage = {
 video: {url:res.medias[0].url},
 caption: texttk,
-footer: "© DEFFBOTZ ~ DEFF",
+footer: "© ALEXBOTZ ~ ALEX",
 buttons: buttons,
 headerType: 4,
 contextInfo:{externalAdReply:{
-title:"Deff Official ~ Tiktok Downloader",
+title:"Alex Official ~ Tiktok Downloader",
 body:res.title,
 thumbnail: log0,
 mediaType:1,
@@ -4077,17 +3864,16 @@ sourceUrl: args[0]
 }
 sock.sendMessage(from, buttonMessage, {quoted:m})
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'play': case prefix+'ytplay': {
+case 'play': case 'ytplay': {
 if (isBan) return ads(mess.ban)
 let yts = require("yt-search")
 let search = await yts(text)
 let anu = search.videos[Math.floor(Math.random() * search.videos.length)]
 let ytvc = await hx.youtube(anu.url)
 let buttons = [
-{buttonId: `${prefix}ytvd ${ytvc.link}`, buttonText: {displayText: '► Video'}, type: 1},
-{buttonId: `${prefix}ytad ${ytvc.mp3}`, buttonText: {displayText: '♫ Audio'}, type: 1}
+{buttonId: `ytvd ${ytvc.link}`, buttonText: {displayText: '► Video'}, type: 1},
+{buttonId: `ytad ${ytvc.mp3}`, buttonText: {displayText: '♫ Audio'}, type: 1}
 ]
 let buttonMessage = {
 image: { url: anu.thumbnail },
@@ -4103,12 +3889,12 @@ caption: `*| YOUTUBE PLAY |*
 ⭔ Channel : ${anu.author.url}
 ⭔ Description : ${anu.description}
 ⭔ Url : ${anu.url}`,
-footer: "© DEFFBOTZ ~ DEFF",
+footer: "© ALEXBOTZ ~ ALEX",
 buttons: buttons,
 headerType: 4,
 contextInfo:{externalAdReply:{
 title: anu.title,
-body: "© DEFFBOTZ ~ DEFF",
+body: "© ALEXBOTZ ~ ALEX",
 thumbnail: log0,
 mediaType:2,
 mediaUrl: anu.url,
@@ -4117,9 +3903,8 @@ sourceUrl: anu.url
 }
 sock.sendMessage(m.chat, buttonMessage, { quoted: m })
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'ytdl': case prefix+'yt': case prefix+'youtube': case prefix+'ytmp4': case prefix+'ytmp3': {
+case 'ytdl': case 'yt': case 'youtube': case 'ytmp4': case 'ytmp3': {
 if (isBan) return ads(mess.ban)
 if (!args[0]) return ads(mess.linkm)
 try {
@@ -4132,18 +3917,18 @@ textyt = `*| YOUTUBE DOWNLOADER |*
 
 _Pilih video atau audio dan tunggu beberapa saat_`
 let buttons = [
-{buttonId: `${prefix}ytvd ${res.link}`, buttonText: {displayText: '► Video'}, type: 1},
-{buttonId: `${prefix}ytad ${res.mp3}`, buttonText: {displayText: '♫ Audio'}, type: 1}
+{buttonId: `ytvd ${res.link}`, buttonText: {displayText: '► Video'}, type: 1},
+{buttonId: `ytad ${res.mp3}`, buttonText: {displayText: '♫ Audio'}, type: 1}
 ]
 let buttonMessage = {
 image: {url:res.thumb},
 caption: textyt,
-footer: "© DEFFBOTZ ~ DEFF",
+footer: "© ALEXBOTZ ~ ALEX",
 buttons: buttons,
 headerType: 4,
 contextInfo:{externalAdReply:{
 title: res.title,
-body: "© DEFFBOTZ ~ DEFF",
+body: "© ALEXBOTZ ~ ALEX",
 thumbnail: {url:res.thumb},
 mediaType:2,
 mediaUrl: args[0],
@@ -4156,35 +3941,32 @@ sock.sendMessage(from, buttonMessage, {quoted:m})
 ads("Linknya Error!")
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'ytvd': {
+case 'ytvd': {
 if (isBan) return ads(mess.ban)
 sock.sendMessage(from, {video:{url:args[0]}, mimetype:"video/mp4", caption:"Success", contextInfo:{externalAdReply:{
-title:"DEFFBOTZ - By Deff",
-body:"© DEFFBOTZ ~ DEFF",
+title:"ALEXBOTZ ~ ALEX",
+body:"© ALEXBOTZ ~ ALEX",
 thumbnail: log0,
 mediaType:2,
 mediaUrl: "https://youtu.be/TmX43Io_v8s",
 sourceUrl: "https://youtu.be/TmX43Io_v8s"
 }}}, {quoted:m})
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'ytad': {
+case 'ytad': {
 if (isBan) return ads(mess.ban)
 sock.sendMessage(from, {audio:{url:args[0]}, mimetype:"audio/mp4", ptt:true, contextInfo:{externalAdReply:{
-title:"DEFFBOTZ - By Deff",
-body:"© DEFFBOTZ ~ DEFF",
+title:"ALEXBOTZ ~ ALEX",
+body:"© ALEXBOTZ ~ ALEX",
 thumbnail: log0,
 mediaType:2,
 mediaUrl: "https://youtu.be/TmX43Io_v8s",
 sourceUrl: "https://youtu.be/TmX43Io_v8s"
 }}}, {quoted:m})
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'swm': case prefix+'stickerwm': {
+case 'swm': case 'stickerwm': {
 if (isBan) return ads(mess.ban)
 if (!args.join(" ")) return ads(`Example :\nswm MyMans APIs | MyMainas`)
 const swn = args.join(" ")
@@ -4206,9 +3988,8 @@ await fs.unlinkSync(encmedia)
 ads(`Kirim Gambar/Video Dengan Caption ${prefix + command}\nDurasi Video 1-9 Detik`)
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'smeme': case prefix+'smm': {
+case 'smeme': case 'smm': {
 if (isBan) return ads(mess.ban)
 if (!args.join(" ")) return ads("Masukan Textnya!")
 if (/image/.test(mime)) {
@@ -4227,9 +4008,8 @@ throw err
 ads("Kirim foto dengan caption smeme")
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
-case prefix+'sticker': case prefix+'s': {
+case 'sticker': case 's': {
 if (isBan) return ads(mess.ban)
 if (/image/.test(mime)) {
 let media = await quoted.download()
@@ -4244,11 +4024,9 @@ await fs.unlinkSync(encmedia)
 ads(`Kirim Gambar/Video Dengan Caption ${prefix + command}\nDurasi Video 1-9 Detik`)
 }
 }
-addCmd(command.slice(1), 1, commund)
 break
 // Eval Ada Disini
 default:
-function _0x51c7(){var _0x40ebaa=['200gwjkcY','1055zsTmGJ','11879656EHMKlk','819042XFTThs','3025077yOsLDk','reply','42AItxAt','*Maksud\x20kamu\x20','1310778jfUBST','floor','random','1453653UfYIYB','length','isGroup','547870lAJaft','23360AFIjRS'];_0x51c7=function(){return _0x40ebaa;};return _0x51c7();}function _0x39c7(_0x58004b,_0x3a3997){var _0x51c70d=_0x51c7();return _0x39c7=function(_0x39c7c4,_0x472436){_0x39c7c4=_0x39c7c4-0xbc;var _0x55749f=_0x51c70d[_0x39c7c4];return _0x55749f;},_0x39c7(_0x58004b,_0x3a3997);}var _0x24d421=_0x39c7;(function(_0x1ab7bd,_0x4d0ab3){var _0x4850c1=_0x39c7,_0x2ea28a=_0x1ab7bd();while(!![]){try{var _0x31f7a3=-parseInt(_0x4850c1(0xc7))/0x1+-parseInt(_0x4850c1(0xca))/0x2+-parseInt(_0x4850c1(0xc0))/0x3+parseInt(_0x4850c1(0xcb))/0x4*(parseInt(_0x4850c1(0xbd))/0x5)+parseInt(_0x4850c1(0xc2))/0x6*(parseInt(_0x4850c1(0xbf))/0x7)+-parseInt(_0x4850c1(0xbe))/0x8+-parseInt(_0x4850c1(0xc4))/0x9*(-parseInt(_0x4850c1(0xbc))/0xa);if(_0x31f7a3===_0x4d0ab3)break;else _0x2ea28a['push'](_0x2ea28a['shift']());}catch(_0x2bd296){_0x2ea28a['push'](_0x2ea28a['shift']());}}}(_0x51c7,0xb5732));isCmd&&!m[_0x24d421(0xc9)]&&(deff=allcmd[Math['floor'](Math[_0x24d421(0xc6)]()*allcmd[_0x24d421(0xc8)])],anu=did(command,allcmd),anu2=sim(command,anu),detect('*Maksud\x20kamu\x20'+(anu||''+deff)+'?*'));isCmd&&m['isGroup']&&(deff=allcmd[Math[_0x24d421(0xc5)](Math[_0x24d421(0xc6)]()*allcmd[_0x24d421(0xc8)])],anu=did(command,allcmd),anu2=sim(command,anu),m[_0x24d421(0xc1)](_0x24d421(0xc3)+(anu||''+deff)+'?*'));
 if (budy.startsWith('=>')) {
 if (!isCreator) return ads(mess.owner)
 function Return(sul) {
@@ -4283,14 +4061,34 @@ if(err) return sock.sendMessage(from, {image:err4r, caption:String(err)}, {quote
 if (stdout) return ads(stdout)
 })
 }
+// Anti Tag ( BY MyMans APIs )
+const listTag = ["6289501060783@s.whatsapp.net"]
+const partiNum = (m.mtype === 'extendedTextMessage') ? m.message.extendedTextMessage.contextInfo.participant : ''
+// Antitag Via ads( BY MyMans APIs )
+if (listTag.includes(partiNum)) {
+if (antitags === false) return
+if (!m.isGroup) return
+if (m.key.fromMe) return
+sendNye = fs.readFileSync('./worker/media/sticker/jantag.webp')
+sock.sendReadReceipt(m.chat, m.sender, [m.key.id])
+sock.sendMessage(from, {sticker:sendNye, contextInfo:{forwardingScore: 800, isForwarded: true}}, {quoted:m})
+}
+// Antitag Via Tag ( BY MyMans APIs )
+if (budy.includes("@6289501060783")) {
+if (antitags === false) return
+if (!m.isGroup) return
+if (m.key.fromMe) return
+sendNye = fs.readFileSync('./worker/media/sticker/jantag.webp')
+sock.sendReadReceipt(m.chat, m.sender, [m.key.id])
+sock.sendMessage(from, {sticker:sendNye, contextInfo:{forwardingScore: 800, isForwarded: true}}, {quoted:m})
+}
 if (isCmd && budy.toLowerCase() != undefined) {
 if (m.chat.endsWith('broadcast')) return
 if (m.isBaileys) return
 let msgs = global.db.database
-if (!(budy.includes() in msgs)) return
+if (!(budy.toLowerCase() in msgs)) return
 sock.copyNForward(m.chat, msgs[budy.toLowerCase()], true)
 }
-
 }
 } catch (err) {
 sock.sendMessage("6289501060783@s.whatsapp.net", util.format(err), {quoted:m})
