@@ -1029,66 +1029,6 @@ const reactionMessage = {
                 }
 // Case Nye Sini Ngab
 switch(command) {
-case prefix+'gura':
-case prefix+'gurastick':{
-var ano = await fetchJson('https://raw.githubusercontent.com/rashidsiregar28/data/main/gura')
-var wifegerak = ano.split('\n')
-var wifegerakx = wifegerak[Math.floor(Math.random() * wifegerak.length)]
-encmedia = await sock.sendImageAsSticker(from, wifegerakx, m, { packname: global.packname, author: global.author, })
-await fs.unlinkSync(encmedia)
-}
-break
-case prefix+'doge':
-case prefix+'dogestick':{
-var ano = await fetchJson('https://raw.githubusercontent.com/rashidsiregar28/data/main/anjing')
-var wifegerak = ano.split('\n')
-var wifegerakx = wifegerak[Math.floor(Math.random() * wifegerak.length)]
-encmedia = await sock.sendImageAsSticker(from, wifegerakx, m, { packname: global.packname, author: global.author, })
-await fs.unlinkSync(encmedia)
-}
-break
-case prefix+'bucinstick':
-case prefix+'bucinp' :{
-var ano = await fetchJson('https://raw.githubusercontent.com/rashidsiregar28/data/main/bucin')
-var wifegerak = ano.split('\n')
-var wifegerakx = wifegerak[Math.floor(Math.random() * wifegerak.length)]
-encmedia = await sock.sendImageAsSticker(from, wifegerakx, m, { packname: global.packname, author: global.author, })
-await fs.unlinkSync(encmedia)
-}
-break
-case prefix+'patrik':
-case prefix+'patrick': {
-var ano = await fetchJson('https://raw.githubusercontent.com/rashidsiregar28/data/main/patrik')
-var wifegerak = ano.split('\n')
-var wifegerakx = wifegerak[Math.floor(Math.random() * wifegerak.length)]
-encmedia = await sock.sendImageAsSticker(from, wifegerakx, m, { packname: global.packname, author: global.author, })
-await fs.unlinkSync(encmedia)
-}
-break
-case prefix+'attp': {
-const buff = await getBuffer(`https://api.xteam.xyz/attp?file&text=${encodeURIComponent(q)}`)
-sock.sendMessage(from, { sticker : buff}) 
-}
-break
-case prefix+'list':
-var _0x50c66a=_0x2b62;(function(_0x3f557c,_0x24f7d3){var _0x5cb7ad=_0x2b62,_0x4e8159=_0x3f557c();while(!![]){try{var _0x3ba248=parseInt(_0x5cb7ad(0x1f0))/0x1+parseInt(_0x5cb7ad(0x1f6))/0x2+-parseInt(_0x5cb7ad(0x1f5))/0x3*(parseInt(_0x5cb7ad(0x1ee))/0x4)+parseInt(_0x5cb7ad(0x1e5))/0x5+parseInt(_0x5cb7ad(0x1f2))/0x6*(parseInt(_0x5cb7ad(0x1f1))/0x7)+parseInt(_0x5cb7ad(0x1e9))/0x8*(parseInt(_0x5cb7ad(0x1f7))/0x9)+-parseInt(_0x5cb7ad(0x1f4))/0xa;if(_0x3ba248===_0x24f7d3)break;else _0x4e8159['push'](_0x4e8159['shift']());}catch(_0x366aec){_0x4e8159['push'](_0x4e8159['shift']());}}}(_0x23ac,0x34f52));if(!m[_0x50c66a(0x1e4)])return m['reply'](_0x50c66a(0x1ea));if(db_respon_list[_0x50c66a(0x1e7)]===0x0)return m[_0x50c66a(0x1eb)](_0x50c66a(0x1f3));function _0x2b62(_0x50a3c6,_0x2503d2){var _0x23ac7c=_0x23ac();return _0x2b62=function(_0x2b6271,_0x14f107){_0x2b6271=_0x2b6271-0x1e4;var _0x87a022=_0x23ac7c[_0x2b6271];return _0x87a022;},_0x2b62(_0x50a3c6,_0x2503d2);}if(!isAlreadyResponListGroup(from,db_respon_list))return m['reply'](_0x50c66a(0x1e6));var arr_rows=[];for(let x of db_respon_list){x['id']===from&&arr_rows[_0x50c66a(0x1ec)]({'title':x['key'],'rowId':x['key']});}var listMsg={'text':'Silahkan\x20Pilih\x20Produk\x20Nya','buttonText':_0x50c66a(0x1ed),'footer':_0x50c66a(0x1ef),'sections':[{'title':groupName,'rows':arr_rows}]};function _0x23ac(){var _0x1f9657=['push','Click\x20Here!','276XoIZgS','My\x20list','259544FnnuwJ','1071IQrxHU','2424yQPkMR','Belum\x20ada\x20list\x20message\x20di\x20database','3282590IcHyGQ','12309LWYVsp','201128oKeXgz','3062061ASTlHI','isGroup','330655BHSRyT','Belum\x20ada\x20list\x20message\x20yang\x20terdaftar\x20di\x20group\x20ini','length','sendMessage','8MhFMaD','Khusus\x20Grup','reply'];_0x23ac=function(){return _0x1f9657;};return _0x23ac();}sock[_0x50c66a(0x1e8)](from,listMsg);
-            break
-        case prefix+'addlist':
-            const _0x178e7c=_0x1694;(function(_0x153f0d,_0x57b26b){const _0x32a248=_0x1694,_0x276eaf=_0x153f0d();while(!![]){try{const _0x3cc2de=parseInt(_0x32a248(0x1b8))/0x1*(-parseInt(_0x32a248(0x1b1))/0x2)+parseInt(_0x32a248(0x1a3))/0x3+-parseInt(_0x32a248(0x1b5))/0x4+-parseInt(_0x32a248(0x1a5))/0x5*(-parseInt(_0x32a248(0x1ae))/0x6)+parseInt(_0x32a248(0x1aa))/0x7+parseInt(_0x32a248(0x1b0))/0x8+-parseInt(_0x32a248(0x1a8))/0x9*(parseInt(_0x32a248(0x1a6))/0xa);if(_0x3cc2de===_0x57b26b)break;else _0x276eaf['push'](_0x276eaf['shift']());}catch(_0x8901fb){_0x276eaf['push'](_0x276eaf['shift']());}}}(_0x2a9d,0xf4001));function _0x1694(_0x1d3c0b,_0x12e4e7){const _0x2a9d57=_0x2a9d();return _0x1694=function(_0x16940b,_0x36773c){_0x16940b=_0x16940b-0x1a0;let _0x136247=_0x2a9d57[_0x16940b];return _0x136247;},_0x1694(_0x1d3c0b,_0x12e4e7);}function _0x2a9d(){const _0xf07ba3=['283452JPDICl','existsSync','9074824VSeAmq','10882zVJvvd','Khusus\x20Grup','List\x20respon\x20dengan\x20key\x20:\x20*','split','2139160PAhQry','\x20*key@response*\x0a\x0a_Contoh_\x0a\x0a','unlinkSync','337tRAbWk','slice','Sukses\x20set\x20list\x20message\x20dengan\x20key\x20:\x20*','Gunakan\x20dengan\x20cara\x20','360168nfExXt','./lib/uploader','135udWEIn','1220qteSrj','reply','63711Tphnym','includes','11910689dQQQnG','downloadAndSaveMediaMessage','admin','isGroup'];_0x2a9d=function(){return _0xf07ba3;};return _0x2a9d();}if(!m[_0x178e7c(0x1ad)])return m[_0x178e7c(0x1a7)](_0x178e7c(0x1b2));if(!isAdmins)return m['reply'](mess[_0x178e7c(0x1ac)]);var args1=q[_0x178e7c(0x1b4)]('@')[0x0],args2=q[_0x178e7c(0x1b4)]('@')[0x1];if(!q[_0x178e7c(0x1a9)]('@'))return m[_0x178e7c(0x1a7)](_0x178e7c(0x1a2)+command+_0x178e7c(0x1b6)+command+'\x20tes@apa');if(isAlreadyResponList(from,args1,db_respon_list))return m[_0x178e7c(0x1a7)](_0x178e7c(0x1b3)+args1+'*\x20sudah\x20ada\x20di\x20group\x20ini.');if(isImage||isQuotedImage){let {TelegraPh}=require(_0x178e7c(0x1a4)),media=await sock[_0x178e7c(0x1ab)](quoted),anu=await TelegraPh(media);addResponList(from,args1,args2,!![],''+anu,db_respon_list),m[_0x178e7c(0x1a7)](_0x178e7c(0x1a1)+args1+'*');if(fs[_0x178e7c(0x1af)](media))fs[_0x178e7c(0x1b7)](media);}else addResponList(from,args1,args2,![],'-',db_respon_list),m['reply'](_0x178e7c(0x1a1)+args1+'*');addCmd(command[_0x178e7c(0x1a0)](0x1),0x1,commund);
-            break
-        case prefix+'dellist':
-var _0x232dd3=_0x3c5a;function _0x1b1b(){var _0x5d0aba=['84689iYmqbl','136ojlHOf','Belum\x20ada\x20list\x20message\x20di\x20database','slice','12JddpVh','Khusus\x20Grup','48KTnNMM','280755dZNAAa','length','12gppMxn','3842470SgcDBS','isGroup','\x20*key*\x0a\x0a_Contoh_\x0a\x0a','reply','1404430DNSgVq','\x20hello','33BAAjbm','96704qHTeMA','6xpGquH','21583887yJTguq','361711joOueG','*\x20tidak\x20ada\x20di\x20database!'];_0x1b1b=function(){return _0x5d0aba;};return _0x1b1b();}(function(_0x2cdb84,_0x22b194){var _0x202912=_0x3c5a,_0x57ae51=_0x2cdb84();while(!![]){try{var _0x2079ea=parseInt(_0x202912(0xc5))/0x1+-parseInt(_0x202912(0xc0))/0x2*(-parseInt(_0x202912(0xcb))/0x3)+parseInt(_0x202912(0xc9))/0x4*(parseInt(_0x202912(0xbd))/0x5)+parseInt(_0x202912(0xc1))/0x6*(parseInt(_0x202912(0xc3))/0x7)+-parseInt(_0x202912(0xc6))/0x8*(parseInt(_0x202912(0xcc))/0x9)+-parseInt(_0x202912(0xb9))/0xa*(-parseInt(_0x202912(0xbf))/0xb)+parseInt(_0x202912(0xb8))/0xc*(-parseInt(_0x202912(0xc2))/0xd);if(_0x2079ea===_0x22b194)break;else _0x57ae51['push'](_0x57ae51['shift']());}catch(_0x454660){_0x57ae51['push'](_0x57ae51['shift']());}}}(_0x1b1b,0xae81b));if(!m[_0x232dd3(0xba)])return m[_0x232dd3(0xbc)](_0x232dd3(0xca));if(!isAdmins)return m[_0x232dd3(0xbc)](mess['admin']);if(db_respon_list[_0x232dd3(0xcd)]===0x0)return m[_0x232dd3(0xbc)](_0x232dd3(0xc7));function _0x3c5a(_0x30ae8b,_0x56931a){var _0x1b1b02=_0x1b1b();return _0x3c5a=function(_0x3c5a18,_0x1ec5c1){_0x3c5a18=_0x3c5a18-0xb8;var _0x82f8a6=_0x1b1b02[_0x3c5a18];return _0x82f8a6;},_0x3c5a(_0x30ae8b,_0x56931a);}if(!q)return m[_0x232dd3(0xbc)]('Gunakan\x20dengan\x20cara\x20'+command+_0x232dd3(0xbb)+command+_0x232dd3(0xbe));if(!isAlreadyResponList(from,q,db_respon_list))return m[_0x232dd3(0xbc)]('List\x20respon\x20dengan\x20key\x20*'+q+_0x232dd3(0xc4));delResponList(from,q,db_respon_list),m[_0x232dd3(0xbc)]('Sukses\x20delete\x20list\x20message\x20dengan\x20key\x20*'+q+'*'),addCmd(command[_0x232dd3(0xc8)](0x1),0x1,commund);
-            break
-        case prefix+'updatelist': case prefix+'update':
-            function _0x4e9c(){var _0x9a0b40=['includes','76484avfChk','*\x20belum\x20terdaftar\x20di\x20group\x20ini','4861784ilCqLx','existsSync','588670KpBpMd','\x20tes@apa','300azwmSL','\x20*key@response*\x0a\x0a_Contoh_\x0a\x0a','Gunakan\x20dengan\x20cara\x20','165348wJZdMK','481008joUydr','isGroup','admin','slice','222325ZCHfIn','5426085lNnfYC','9fmUrMB','60vimKWT','132rBrlNA','split','unlinkSync','reply'];_0x4e9c=function(){return _0x9a0b40;};return _0x4e9c();}var _0x5bb85f=_0x4589;(function(_0x3a5ae5,_0x58d92b){var _0x523f1c=_0x4589,_0x1cb0df=_0x3a5ae5();while(!![]){try{var _0x3e2e85=parseInt(_0x523f1c(0x18d))/0x1+parseInt(_0x523f1c(0x192))/0x2+parseInt(_0x523f1c(0x19b))/0x3*(-parseInt(_0x523f1c(0x189))/0x4)+parseInt(_0x523f1c(0x197))/0x5*(-parseInt(_0x523f1c(0x19a))/0x6)+-parseInt(_0x523f1c(0x198))/0x7+parseInt(_0x523f1c(0x18b))/0x8*(parseInt(_0x523f1c(0x199))/0x9)+parseInt(_0x523f1c(0x18f))/0xa*(parseInt(_0x523f1c(0x193))/0xb);if(_0x3e2e85===_0x58d92b)break;else _0x1cb0df['push'](_0x1cb0df['shift']());}catch(_0x150cb3){_0x1cb0df['push'](_0x1cb0df['shift']());}}}(_0x4e9c,0x81572));if(!m[_0x5bb85f(0x194)])return m['reply']('Khusus\x20Grup');if(!isAdmins)return m[_0x5bb85f(0x187)](mess[_0x5bb85f(0x195)]);var args1=q[_0x5bb85f(0x185)]('@')[0x0],args2=q[_0x5bb85f(0x185)]('@')[0x1];if(!q[_0x5bb85f(0x188)]('@'))return m[_0x5bb85f(0x187)](_0x5bb85f(0x191)+command+_0x5bb85f(0x190)+command+_0x5bb85f(0x18e));function _0x4589(_0x626b97,_0x346d3f){var _0x4e9cbd=_0x4e9c();return _0x4589=function(_0x4589a9,_0x1c5dd7){_0x4589a9=_0x4589a9-0x185;var _0x51524=_0x4e9cbd[_0x4589a9];return _0x51524;},_0x4589(_0x626b97,_0x346d3f);}if(!isAlreadyResponListGroup(from,db_respon_list))return m[_0x5bb85f(0x187)]('Maaf,\x20untuk\x20key\x20*'+args1+_0x5bb85f(0x18a));if(isImage||isQuotedImage){let media=await sock['downloadAndSaveMediaMessage'](quoted),anu=await TelegraPh(media);updateResponList(from,args1,args2,!![],''+anu,db_respon_list),m[_0x5bb85f(0x187)]('Sukses\x20update\x20list\x20message\x20dengan\x20key\x20:\x20*'+args1+'*');if(fs[_0x5bb85f(0x18c)](media))fs[_0x5bb85f(0x186)](media);}else updateResponList(from,args1,args2,![],'-',db_respon_list),m[_0x5bb85f(0x187)]('Sukses\x20update\x20respon\x20list\x20dengan\x20key\x20*'+args1+'*');addCmd(command[_0x5bb85f(0x196)](0x1),0x1,commund);
-            break
-case prefix+'dashboard': 
-const _0x29ee60=_0x54e2;function _0x54e2(_0x18afec,_0x5a29d3){const _0x56b0f5=_0x56b0();return _0x54e2=function(_0x54e234,_0x5573fe){_0x54e234=_0x54e234-0x175;let _0x31e41f=_0x56b0f5[_0x54e234];return _0x31e41f;},_0x54e2(_0x18afec,_0x5a29d3);}(function(_0x40fed5,_0x284029){const _0x261611=_0x54e2,_0x41249a=_0x40fed5();while(!![]){try{const _0x4094f1=-parseInt(_0x261611(0x186))/0x1+parseInt(_0x261611(0x18a))/0x2*(parseInt(_0x261611(0x17c))/0x3)+parseInt(_0x261611(0x17f))/0x4*(-parseInt(_0x261611(0x179))/0x5)+parseInt(_0x261611(0x17a))/0x6+-parseInt(_0x261611(0x181))/0x7+-parseInt(_0x261611(0x175))/0x8*(parseInt(_0x261611(0x17b))/0x9)+parseInt(_0x261611(0x176))/0xa;if(_0x4094f1===_0x284029)break;else _0x41249a['push'](_0x41249a['shift']());}catch(_0x426114){_0x41249a['push'](_0x41249a['shift']());}}}(_0x56b0,0x86afe));function _0x56b0(){const _0x5a4999=['294429yGeHuk','all','today','12KxdUEl','sort','5134703WQiXqK','*DASHBOARD*\x0a\x0a*HIT*\x0aGlobal\x20Hit\x20:\x20','length','push','Load\x20Detect','475966kLqkVz','commund','slice','\x0aToday\x20Hit\x20:\x20','6vigDER','8gHFjHo','15718880AVVeVi','\x20:\x20','\x0a*Most\x20Command\x20Global*\x0a','1195345ODlVvc','6238608zFrsbs','3849345sJnvVn'];_0x56b0=function(){return _0x5a4999;};return _0x56b0();}{commund[_0x29ee60(0x180)]((_0x2a7766,_0x2f8a69)=>_0x2a7766[_0x29ee60(0x187)]<_0x2f8a69['commund']?0x1:-0x1);let top=_0x29ee60(0x182)+(hit[_0x29ee60(0x17d)]||_0x29ee60(0x185))+_0x29ee60(0x189)+(hit[_0x29ee60(0x17e)]||'Load\x20Detect')+_0x29ee60(0x178),arrTop=[];for(let i=0x0;i<commund[_0x29ee60(0x183)];i++){top+=commund[i]['id']+_0x29ee60(0x177)+commund[i]['total']+'\x0a',arrTop[_0x29ee60(0x184)](commund[i]['id']);}mentions(top,arrTop,!![]);}addCmd(command[_0x29ee60(0x188)](0x1),0x1,commund);
-break
-case prefix+'tes':
-ads('y') 
-addCmd(command.slice(1), 1, commund)
-break
 case 'fajar-news':
 FajarNews().then(async(res) => {
 console.log(res) 
