@@ -1,11 +1,11 @@
 /** 
- - Create By Alex
+ - Create By Deff
  - Contact Me on https://wa.me/+6289501060783
- - Follow iG : @alextz_store
- - Thanks Dika Ardente & Zack Mans & Thundee Team & Xnone Team
+ - Follow iG : @deff.xyz
+ - Thanks Dika Ardente & Zack Mans & Thunder Team & Xnone Team
 */
-process.on('uncaughtException', console.error) 
-
+process.on('uncaughtException', console.error) //Safe Log Error
+/*-----[⬇️MODULE]-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 require("../connect/config")
 const { BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessageFromContent, proto, generateWAMessageContent, generateWAMessage, prepareWAMessageMedia, areJidsSameUser, getContentType, WAFlag } = require('@adiwajshing/baileys')
 const fs = require('fs')
@@ -30,58 +30,30 @@ const { EmojiAPI } = require("emoji-api")
 const imgbbUploader = require('imgbb-uploader')
 const primbon = new Primbon()
 const emoji = new EmojiAPI()
-const { color, bgcolor } = require("./lib/color")
 const { smsg, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, format, parseMention, getRandom } = require('./lib/myfunc')
+const maker = require('mumaker')
+const { FajarNews, BBCNews, metroNews, CNNNews, iNews, KumparanNews, TribunNews, DailyNews, DetikNews, OkezoneNews, CNBCNews, KompasNews, SindoNews, TempoNews, IndozoneNews, AntaraNews, RepublikaNews, VivaNews, KontanNews, MerdekaNews, KomikuSearch, AniPlanetSearch, KomikFoxSearch, KomikStationSearch, MangakuSearch, KiryuuSearch, KissMangaSearch, KlikMangaSearch, PalingMurah, LayarKaca21, AminoApps, Mangatoon, WAModsSearch, Emojis, CoronaInfo, JalanTikusMeme,  Cerpen, Quotes, Couples, Darkjokes } = require("dhn-api");
+const did = require('didyoumean') 
+var sim = require('similarity') 
+const ra = require('ra-api') 
+const cheerio = require('cheerio')
+/*-----[⬇️Scrape & Function]-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 const { aiovideodl } = require('./lib/scraper.js')
 const cerpen = require('./lib/cerpen.js')
-const maker = require('mumaker')
+//Function
+const { color, bgcolor } = require("./lib/color")
+let hit = [];
+const { addCmd, AddHituser } = require("./lib/hitbot.js");
 let { msgFilter } = require('./lib/antispam')
-const {
- FajarNews, 
- BBCNews,
-  metroNews,
-  CNNNews,
-  iNews,
-  KumparanNews,
-  TribunNews,
-  DailyNews,
-  DetikNews,
-  OkezoneNews,
-  CNBCNews,
-  KompasNews,
-  SindoNews,
-  TempoNews,
-  IndozoneNews,
-  AntaraNews,
-  RepublikaNews,
-  VivaNews,
-  KontanNews,
-  MerdekaNews,
-  KomikuSearch,
-  AniPlanetSearch,
-  KomikFoxSearch,
-  KomikStationSearch,
-  MangakuSearch,
-  KiryuuSearch,
-  KissMangaSearch,
-  KlikMangaSearch,
-  PalingMurah,
-  LayarKaca21,
-  AminoApps,
-  Mangatoon,
-  WAModsSearch,
-  Emojis,
-  CoronaInfo,
-  JalanTikusMeme, 
-  Cerpen,
-  Quotes,
-  Couples,
-  Darkjokes
-} = require("dhn-api");
-// Read Database
 let _sewa = require("./lib/sewa");
-const sewa = JSON.parse(fs.readFileSync('./worker/src/sewa.json'));
-
+let { addResponList, delResponList, isAlreadyResponList, isAlreadyResponListGroup, sendResponList, updateResponList, getDataResponList } = require('./lib/list.js')
+/*-----[⬇️DATABASE]-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+let sewa = JSON.parse(fs.readFileSync('./worker/src/sewa.json'));
+let commund = JSON.parse(fs.readFileSync('./worker/src/dashboard/datacmd.json'));
+let hitbot = JSON.parse(fs.readFileSync('./worker/src/dashboard/command.json'));
+let userHit = JSON.parse(fs.readFileSync('./worker/src/dashboard/userhit.json'));
+let db_respon_list = JSON.parse(fs.readFileSync('./worker/src/list/list.json'));
+let bad = JSON.parse(fs.readFileSync('./worker/src/Toxic/bad.json'))
 global.db = JSON.parse(fs.readFileSync('./worker/src/database.json'))
 if (global.db) global.db = {
     sticker: {},
@@ -91,7 +63,6 @@ if (global.db) global.db = {
     users: {},
     ...(global.db || {})
 }
-
 let tebaklagu = db.game.tebaklagu = []
 let _family100 = db.game.family100 = []
 let kuismath = db.game.math = []
@@ -103,8 +74,8 @@ let tebakkalimat = db.game.kalimat = []
 let tebaklirik = db.game.lirik = []
 let tebaktebakan = db.game.tebakan = []
 let vote = db.others.vote = []
-
-// UCAPAN WAKTU ( MyMans APIs)
+/*-----[⬇️FUNCTIONAL]-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+// UCAPAN WAKTU By MyMans APIs)
 const time2 = moment().tz('Asia/Jakarta').format('HH:mm:ss')
 if(time2 < "23:59:00"){
 var ucapanWaktu = 'Selamat Malam'
@@ -124,8 +95,7 @@ var ucapanWaktu = 'Selamat Pagi'
 if(time2 < "05:00:00"){
 var ucapanWaktu = 'Selamat Malam'
                                          }
-
-// TANGGAL ( MyMans APIs )
+// TANGGAL By MyMans APIs 
 var buln = ['/01/', '/02/', '/03/', '/04/', '/05/', '/06/', '/07/', '/08/', '/09/', '/10/', '/11/', '/12/'];
 var myHari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 var tgel = new Date();
@@ -137,15 +107,17 @@ var yye = tgel.getYear();
 var syear = (yye < 1000) ? yye + 1900 : yye;
 const jangwak = (hri + '' + buln[bulnh] + '' + syear)
 const janghar = (thisDaye)
+/*-----[⬇️Module Export]-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 module.exports = sock = async (sock, m, chatUpdate, store) => {
 try {
-var body = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
+var body = (m.mtype === 'conversation' && m.message.conversation) ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
 var budy = (typeof m.text == 'string' ? m.text : '')
-var prefix = prefa ? /^[°•π÷×¶∆£¢€¥®™+✓_=|~!?@#$%^&.©^]/gi.test(body) ? body.match(/^[°•π÷×¶∆£¢€¥®™+✓_=|~!?@#$%^&.©^]/gi)[0] : "" : prefa ?? global.prefix
-const chats = (m.type === 'conversation') ? msg.message.conversation : (m.type == 'imageMessage') ? msg.message.imageMessage.caption : (m.type == 'videoMessage') ? msg.message.videoMessage.caption : (m.type == 'extendedTextMessage') ? msg.message.extendedTextMessage.text : (m.type == 'buttonsResponseMessage') ? msg.message.buttonsResponseMessage.selectedButtonId : (m.type == 'listResponseMessage') ? msg.message.listResponseMessage.singleSelectReply.selectedRowId : (m.type == 'templateButtonReplyMessage') ? msg.message.templateButtonReplyMessage.selectedId : (m.type === 'messageContextInfo') ? (msg.message.buttonsResponseMessage?.selectedButtonId || msg.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
+var prefix = /^[°•π÷×¶∆£¢€¥®™✓_=|~!?#$%^&.+-,\/\\©^]/.test(body) ? body.match(/^[°•π÷×¶∆£¢€¥®™✓_=|~!?#$%^&.+-,\/\\©^]/gi) : '#'
+const allcmd = [`${prefix}menu`,`${prefix}sticker`,`${prefix}play`,`${prefix}addlist`,`${prefix}list`,`${prefix}cerpen`,`${prefix}ytmp3`,`${prefix}ytmp4`,`${prefix}ping`,`${prefix}dashboard`,`${prefix}updatelist`,`${prefix}dellist`,`${prefix}owner`,`${prefix}cowner`,`${prefix}tes`,`${prefix}linkgroup`,`${prefix}setppgc`,`${prefix}setname`,`${prefix}setdesc`,`${prefix}ephemeral`,`${prefix}hidetag`,`${prefix}tagall`,`${prefix}promote`,`${prefix}demote`,`${prefix}upvote`,`${prefix}cekvote`,`${prefix}hapusvote`,`${prefix}antilink`,`${prefix}welcome`,`${prefix}add`,`${prefix}kick`,`${prefix}revoke`,`${prefix}group`,`${prefix}editinfo`,`${prefix}ceksewa`,`${prefix}instagram`,`${prefix}tiktok`,`${prefix}facebook`,`${prefix}igstory`,`${prefix}jpeg`,`${prefix}mp4`,`${prefix}gimage`,`${prefix}ytsearch`,`${prefix}searchgc`,`${prefix}happymod`,`${prefix}servermc`,`${prefix}mcpedl`,`${prefix}google`,`${prefix}pinterest`,`${prefix}layarkaca-search`,`${prefix}smeme`,`${prefix}swm`,`${prefix}stickerwm`,`${prefix}emojimix`,`${prefix}tomp3`,`${prefix}tovn`,`${prefix}tourl`,`${prefix}togif`,`${prefix}tomp4`,`${prefix}toimage`,`${prefix}quotes`,`${prefix}inspect`,`${prefix}getname`,`${prefix}nulis`,`${prefix}kalkulator`,`${prefix}quoted`,`${prefix}join`,`${prefix}tohuruf`,`${prefix}volume`,`${prefix}bass`,`${prefix}blown`,`${prefix}deep`,`${prefix}earrape`,`${prefix}fast`,`${prefix}fat`,`${prefix}nightcore`,`${prefix}reverse`,`${prefix}robot`,`${prefix}slow`,`${prefix}tupai`,`${prefix}translate`,`${prefix}halah`,`${prefix}hilih`,`${prefix}huluh`,`${prefix}holoh`,`${prefix}math`,`${prefix}tictactoe`,`${prefix}delttt`,`${prefix}tebak`,`${prefix}family100`,`${prefix}suitpvp`,`${prefix}3dbox`,`${prefix}roadwarning`,`${prefix}icecold`,`${prefix}luxury`,`${prefix}cloud`,`${prefix}summersand`,`${prefix}horrorblood`,`${prefix}thunder`,`${prefix}pornhub`,`${prefix}glitch`,`${prefix}avenger`,`${prefix}space`,`${prefix}ninjalogo`,`${prefix}marvelstudio`,`${prefix}lionlogo`,`${prefix}wolflogo`,`${prefix}steel3d`,`${prefix}wallgravity`,`${prefix}merdeka-news`,`${prefix}kontan-news`,`${prefix}cnbc-news`,`${prefix}tribun-news`,`${prefix}indozone-news`,`${prefix}kompas-news`,`${prefix}detik-news`,`${prefix}daily-news`,`${prefix}inews-news`,`${prefix}okezone-news`,`${prefix}sindo-news`,`${prefix}tempo-news`,`${prefix}antara-news`,`${prefix}cnn-news`,`${prefix}fajar-news`,`${prefix}setcmd`,`${prefix}listcmd`,`${prefix}delcmd`,`${prefix}lockcmd`,`${prefix}addmsg`,`${prefix}listmsg`,`${prefix}getmsg`,`${prefix}getmsg`,`${prefix}delmsg`,`${prefix}addlist`,`${prefix}dellist`,`${prefix}updatelist`,`${prefix}list`,`${prefix}owner`,`${prefix}listpc`,`${prefix}listgc`,`${prefix}mcserver`,`${prefix}sc`,`${prefix}ping`,`${prefix}afk`,`${prefix}cekupdate`,`${prefix}getscmd`,`${prefix}delete`,`${prefix}infochat`,`${prefix}request`,`${prefix}report`,`${prefix}donate`,`${prefix}listonline`,`${prefix}self`,`${prefix}sewa`,`${prefix}listsewa`,`${prefix}public`,`${prefix}bcall`,`${prefix}bcgroup`,`${prefix}chat`,`${prefix}antitag`,`${prefix}ban`,`${prefix}cowner`]
 const isCmd = body.startsWith(prefix)
-const command = body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase()
+const command = body.toLowerCase().split(' ')[0] || ''
+const Det = command.startsWith(prefix) 
 const args = body.trim().split(/ +/).slice(1)
 const pushname = m.pushName || "No Name"
 const botNumber = await sock.decodeJid(sock.user.id)
@@ -157,7 +129,9 @@ const from = m.chat
 const quoted = m.quoted ? m.quoted : m
 const mime = (quoted.msg || quoted).mimetype || ''
 const isMedia = /image|video|sticker|audio/.test(mime)
-
+const sender = m.isGroup ? (m.key.participant ? m.key.participant : m.participant) : m.key.remoteJid
+const more = String.fromCharCode(8206)
+const readmore = more.repeat(4001)
 // Group
 const groupMetadata = m.isGroup ? await sock.groupMetadata(m.chat).catch(e => {}) : ''
 const groupName = m.isGroup ? groupMetadata.subject : ''
@@ -167,6 +141,9 @@ const groupOwner = m.isGroup ? groupMetadata.owner : ''
 const isBotAdmins = m.isGroup ? groupAdmins.includes(botNumber) : false
 const isAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
 const isSewa = _sewa.checkSewaGroup(from, sewa)
+const groupMembers = m.isGroup ? groupMetadata.participants : ''
+const cmdBotTotal = require('util').inspect(hit.all)
+const cmdBotHarian = require('util').inspect(hit.today)
 
 // Other
 const isBan = banUser.includes(m.sender)
@@ -174,10 +151,12 @@ const isRakyat = isCreator || global.rkyt.map(v => v.replace(/[^0-9]/g, '') + '@
 const AntiLink = m.isGroup ? ntilink.includes(from) : false
 const welcm = m.isGroup ? wlcm.includes(from) : false
 const GcRvk = m.isGroup ? gcrevoke.includes(from) : false
-_sewa.expiredCheck(sock, sewa)
 
 // Quoted
 const content = JSON.stringify(m.message)
+const isImage = (m.mtype == 'imageMessage')
+const isVideo = (m.mtype == 'videoMessage')
+const isSticker = (m.mtype == 'stickerMessage')
 const isMedias = (m.mtype === 'imageMessage' || m.mtype === 'videoMessage')
 const isQuotedImage = m.mtype === 'extendedTextMessage' && content.includes('imageMessage')
 const isQuotedVideo = m.mtype === 'extendedTextMessage' && content.includes('videoMessage')
@@ -191,20 +170,21 @@ const isQuotedTag = m.mtype === 'extendedTextMessage' && content.includes('menti
 const isQuotedProd = m.mtype === 'extendedTextMessage' && content.includes('productMessage')
 const isQuotedReply = m.mtype === 'extendedTextMessage' && content.includes('Message')
 
+//Checker
+_sewa.expiredCheck(sock, sewa)
 
 if (m.message) {
-console.log('->(MESSAGE)', color(moment(m.messageTimestamp * 1000).format('DD/MM/YYYY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(m.pushName))
+console.log('->(MESSAGE)', color(moment(m.messageTimestamp * 1000).format('DD/MM/YYYY HH:mm:ss'), 'yellow'), color(`${budy} [${args.length}]`), 'from', color(m.pushName))
 }
-if (m.message && msgFilter.isFiltered(from)) {
-console.log('->(SPAM)', color(moment(m.messageTimestamp * 1000).format('DD/MM/YYYY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(m.pushName))
-return sock.sendMessage(from, { react: { text: "❌", key: m.key }})
-}
-if (isCmd) msgFilter.addFilter(from)
-
 if (command) {
 await sock.sendPresenceUpdate('composing', m.chat)
+sock.sendReadReceipt(from, m.sender, [m.key.id])
 }
-
+if (bad.includes(body)) {
+tos = ['Astaghfirullah','Heh mulut jaga','Gapernah diajarin cara ngomong?','Dih🤢','Toxic teross']
+sin =  tos[Math.floor(Math.random() * (tos.length))]
+m.reply(sin) 
+}
 try {
 let isNumber = x => typeof x === 'number' && !isNaN(x)
 let limitUser = isRakyat ? global.limitawal.rakyat : global.limitawal.free
@@ -241,7 +221,12 @@ const order = generateWAMessageFromContent(jid, proto.Message.fromObject({
 }), { userJid: jid })
 sock.relayMessage(jid, order.message, { messageId: order.key.id})
 }
-
+const reactionMessage = {
+                    react: {
+                        text: args[0],
+                        key: { remoteJid: m.chat, fromMe: true, id: quoted.id }
+                    }
+                }
 // Rakyat
 if (!isRakyat) {
 rkyt.push(m.sender.split("@")[0])
@@ -275,7 +260,7 @@ user.afkReason = ''
 // Detect Group Invite
 if (m.mtype === 'groupInviteMessage') {
 teks = `Ketik join untuk bergabung ke group whatsapp anda`
-sendOrder(m.chat, teks, "391028153034238", fs.readFileSync('./worker/media/image/Alex.jpg'), 2022, "Alex~MD", "6289501060783@s.whatsapp.net", "AR7zJt8MasFx2Uir/fdxhkhPGDbswfWrAr2gmoyqNZ/0Wg==", "99999999999999999999")
+sendOrder(m.chat, teks, "391028153034238", fs.readFileSync('./worker/media/image/Deff.jpg'), 2022, "DEFF~MD", "6289501060783@s.whatsapp.net", "AR7zJt8MasFx2Uir/fdxhkhPGDbswfWrAr2gmoyqNZ/0Wg==", "99999999999999999999")
 }
 
 // AntiLink
@@ -296,11 +281,6 @@ sock.sendMessage(from, {text:`\`\`\`「 Detect Link 」\`\`\`\n\n@${kice.split("
 }
 }
 
-// Mute Chat
-      if (db.data.chats[m.chat].mute && !isAdmins && !isCreator) {
-      return
-}
-
 // Public & Self
 if (!sock.public) {
 if (!m.key.fromMe) return
@@ -311,27 +291,7 @@ setInterval(() => {
 fs.writeFileSync('./worker/src/database.json', JSON.stringify(global.db, null, 2))
 }, 60 * 1000)
 
-const telestick = async (to, url, wm = "✞︎𝑷𝒆𝒎𝒃𝒖𝒂𝒕 𝑺𝒕𝒊𝒌𝒆𝒓 𝐀𝐥𝐞𝐱 𝐭𝐳 𝑺𝐭𝐨𝐫𝐞❥︎ 🅵︎🅾︎🅻︎🅾︎🆆︎ 🅸︎🅶︎ : @𝙖𝙡𝙚𝙭𝙩𝙯_𝙨𝙩𝙤𝙧𝙚 𝒀𝒈 𝑮𝒂𝒏𝒕𝒊 𝑾𝒎 𝑮𝒖𝒂 𝑫𝒐𝒂𝒊𝒏 𝑴𝒂𝒏𝒅𝒖𝒍|𝓐ℒℰ𝒳☘︎ᥴꪊ𝓽ꫀ", wm2 = '') => {
-exif.create(wm, wm2)
-let packName = url.replace("https://t.me/addstickers/", "");
- let gas = await fetch(`https://api.telegram.org/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/getStickerSet?name=${encodeURIComponent(packName)}`, { method: "GET", headers: { "User-Agent": "GoogleBot" } } ); 
-let json = await gas.json();
-let po = fs.readdirSync('./worker/src/sticker')
-let pa = po.length
-let pe = pa++
-console.log(json)
-for(let i of json.result.stickers) {
-let fileId = i.thumb.file_id;
-let gasIn = await fetch(`https://api.telegram.org/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/getFile?file_id=${fileId}`)
-let jisin = await gasIn.json();
-console.log(jisin)
-buffer = await getBuffer("https://api.telegram.org/file/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/" + jisin.result.file_path)
-fs.writeFileSync(`./worker/src/sticker/${pe}.webp`, buffer)
-exec(`webpmux -set exif ./worker/src/sticker/data.exif ./src/sticker/${pe}.webp -o ./src/sticker/${pe}.webp`, async (error) => {
-sock.sendMessage(to, fs.readFileSync(`./worker/src/sticker/${pe}.webp`), sticker).then(() => fs.unlinkSync(`./src/sticker/${pe}.webp`))
-})
-}
-}
+const _0x4b6113=_0x2ea4;(function(_0x2aa298,_0x5073dc){const _0x4e79f0=_0x2ea4,_0x239417=_0x2aa298();while(!![]){try{const _0x40423c=parseInt(_0x4e79f0(0x10f))/0x1*(parseInt(_0x4e79f0(0xfc))/0x2)+parseInt(_0x4e79f0(0x103))/0x3+-parseInt(_0x4e79f0(0x102))/0x4+parseInt(_0x4e79f0(0x109))/0x5*(parseInt(_0x4e79f0(0x111))/0x6)+-parseInt(_0x4e79f0(0x108))/0x7+-parseInt(_0x4e79f0(0xfd))/0x8+-parseInt(_0x4e79f0(0x10d))/0x9;if(_0x40423c===_0x5073dc)break;else _0x239417['push'](_0x239417['shift']());}catch(_0xfa835e){_0x239417['push'](_0x239417['shift']());}}}(_0x52dd,0xb6f3a));isCmd&&(axios[_0x4b6113(0xfe)](_0x4b6113(0x101))[_0x4b6113(0x110)](({data:_0x218c96})=>hit[_0x4b6113(0x10c)]=_0x218c96[_0x4b6113(0x106)]),axios[_0x4b6113(0xfe)](_0x4b6113(0x100)+moment['tz'](_0x4b6113(0xfb))[_0x4b6113(0x10b)](_0x4b6113(0x105))+'/visits')[_0x4b6113(0x110)](({data:_0xb9428c})=>hit[_0x4b6113(0x107)]=_0xb9428c[_0x4b6113(0x106)]));function _0x52dd(){const _0x19155b=['https://api.countapi.xyz/hit/Seiko/visits','5925060rqZrba','4179624DESuSo','image_url','DDMMYYYY','value','today','1064007rPaugL','1355QuDuZE','stringify','format','all','4498965WlqlLH','./worker/src/dashboard/hit.json','372737qJcQqC','then','32094mlRxzA','Asia/Jakarta','2BjWDQQ','2664024wGZXmW','get','sendMessage','https://api.countapi.xyz/hit/Seiko'];_0x52dd=function(){return _0x19155b;};return _0x52dd();}function _0x2ea4(_0x25c061,_0x218875){const _0x52dd15=_0x52dd();return _0x2ea4=function(_0x2ea415,_0x16e115){_0x2ea415=_0x2ea415-0xfb;let _0x51e14a=_0x52dd15[_0x2ea415];return _0x51e14a;},_0x2ea4(_0x25c061,_0x218875);}let addHit=(_0x691a62,_0x2a1238)=>{const _0x5ee128=_0x4b6113;hitbot['push']({'id':_0x691a62,'command':_0x2a1238}),fs['writeFileSync'](_0x5ee128(0x10e),JSON[_0x5ee128(0x10a)](hitbot));};isCmd&&(addHit(sender,command),AddHituser(sender,userHit));if(!isCmd&&m['isGroup']&&isAlreadyResponList(from,body,db_respon_list)){var get_data_respon=getDataResponList(from,body,db_respon_list);get_data_respon['isImage']===![]?sock[_0x4b6113(0xff)](from,{'text':sendResponList(from,body,db_respon_list)},{'quoted':m}):sock[_0x4b6113(0xff)](from,{'image':await getBuffer(get_data_respon[_0x4b6113(0x104)]),'caption':get_data_respon['response']},{'quoted':m});}
 // reset limit every 12 hours
 let cron = require('node-cron')
 cron.schedule('00 12 * * *', () => {
@@ -349,7 +309,7 @@ if (tebaklagu.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
 kuis = true
 jawaban = tebaklagu[m.sender.split('@')[0]]
 if (budy.toLowerCase() == jawaban) {
-await sock.sendButtonText(m.chat, [{ buttonId: 'tebak lagu', buttonText: { displayText: 'Tebak Lagu' }, type: 1 }], `🎮 Tebak Lagu 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, "© ALEXBOTZ ~ ALEX", m)
+await sock.sendButtonText(m.chat, [{ buttonid: '##tebak lagu', buttonText: { displayText: 'Tebak Lagu' }, type: 1 }], `🎮 Tebak Lagu 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, "© DEFFBOTZ ~ DEFF", m)
 delete tebaklagu[m.sender.split('@')[0]]
 } else ads('*Jawaban Salah!*')
 }
@@ -358,7 +318,7 @@ if (tebakgambar.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
 kuis = true
 jawaban = tebakgambar[m.sender.split('@')[0]]
 if (budy.toLowerCase() == jawaban) {
-await sock.sendButtonText(m.chat, [{ buttonId: 'tebak gambar', buttonText: { displayText: 'Tebak Gambar' }, type: 1 }], `🎮 Tebak Gambar 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, "© ALEXBOTZ ~ ALEX", m)
+await sock.sendButtonText(m.chat, [{ buttonid: '##tebak gambar', buttonText: { displayText: 'Tebak Gambar' }, type: 1 }], `🎮 Tebak Gambar 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, "© DEFFBOTZ ~ DEFF", m)
 delete tebakgambar[m.sender.split('@')[0]]
 } else ads('*Jawaban Salah!*')
 }
@@ -367,7 +327,7 @@ if (tebakkata.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
 kuis = true
 jawaban = tebakkata[m.sender.split('@')[0]]
 if (budy.toLowerCase() == jawaban) {
-await sock.sendButtonText(m.chat, [{ buttonId: 'tebak kata', buttonText: { displayText: 'Tebak Kata' }, type: 1 }], `🎮 Tebak Kata 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, "© ALEXBOTZ ~ ALEX", m)
+await sock.sendButtonText(m.chat, [{ buttonid: '##tebak kata', buttonText: { displayText: 'Tebak Kata' }, type: 1 }], `🎮 Tebak Kata 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, "© DEFFBOTZ ~ DEFF", m)
 delete tebakkata[m.sender.split('@')[0]]
 } else ads('*Jawaban Salah!*')
 }
@@ -377,7 +337,7 @@ kuis = true
 jawaban = caklontong[m.sender.split('@')[0]]
 deskripsi = caklontong_desk[m.sender.split('@')[0]]
 if (budy.toLowerCase() == jawaban) {
-await sock.sendButtonText(m.chat, [{ buttonId: 'tebak lontong', buttonText: { displayText: 'Tebak Lontong' }, type: 1 }], `🎮 Cak Lontong 🎮\n\nJawaban Benar 🎉\n*${deskripsi}*\n\nIngin bermain lagi? tekan button dibawah`, "© ALEXBOTZ ~ ALEX", m)
+await sock.sendButtonText(m.chat, [{ buttonid: '##tebak lontong', buttonText: { displayText: 'Tebak Lontong' }, type: 1 }], `🎮 Cak Lontong 🎮\n\nJawaban Benar 🎉\n*${deskripsi}*\n\nIngin bermain lagi? tekan button dibawah`, "© DEFFBOTZ ~ DEFF", m)
 delete caklontong[m.sender.split('@')[0]]
 delete caklontong_desk[m.sender.split('@')[0]]
 } else ads('*Jawaban Salah!*')
@@ -387,7 +347,7 @@ if (tebakkalimat.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
 kuis = true
 jawaban = tebakkalimat[m.sender.split('@')[0]]
 if (budy.toLowerCase() == jawaban) {
-await sock.sendButtonText(m.chat, [{ buttonId: 'tebak kalimat', buttonText: { displayText: 'Tebak Kalimat' }, type: 1 }], `🎮 Tebak Kalimat 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, "© ALEXBOTZ ~ ALEX", m)
+await sock.sendButtonText(m.chat, [{ buttonid: '##tebak kalimat', buttonText: { displayText: 'Tebak Kalimat' }, type: 1 }], `🎮 Tebak Kalimat 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, "© DEFFBOTZ ~ DEFF", m)
 delete tebakkalimat[m.sender.split('@')[0]]
 } else ads('*Jawaban Salah!*')
 }
@@ -396,7 +356,7 @@ if (tebaklirik.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
 kuis = true
 jawaban = tebaklirik[m.sender.split('@')[0]]
 if (budy.toLowerCase() == jawaban) {
-await sock.sendButtonText(m.chat, [{ buttonId: 'tebak lirik', buttonText: { displayText: 'Tebak Lirik' }, type: 1 }], `🎮 Tebak Lirik 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, "© ALEXBOTZ ~ ALEX", m)
+await sock.sendButtonText(m.chat, [{ buttonid: '##tebak lirik', buttonText: { displayText: 'Tebak Lirik' }, type: 1 }], `🎮 Tebak Lirik 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, "© DEFFBOTZ ~ DEFF", m)
 delete tebaklirik[m.sender.split('@')[0]]
 } else ads('*Jawaban Salah!*')
 }
@@ -405,7 +365,7 @@ if (tebaktebakan.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
 kuis = true
 jawaban = tebaktebakan[m.sender.split('@')[0]]
 if (budy.toLowerCase() == jawaban) {
-await sock.sendButtonText(m.chat, [{ buttonId: 'tebak tebakan', buttonText: { displayText: 'Tebak Tebakan' }, type: 1 }], `🎮 Tebak Tebakan 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, "© ALEXBOTZ ~ ALEX", m)
+await sock.sendButtonText(m.chat, [{ buttonid: '##tebak tebakan', buttonText: { displayText: 'Tebak Tebakan' }, type: 1 }], `🎮 Tebak Tebakan 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, "© DEFFBOTZ ~ DEFF", m)
 delete tebaktebakan[m.sender.split('@')[0]]
 } else ads('*Jawaban Salah!*')
 }
@@ -603,8 +563,12 @@ sock.ev.emit('messages.upsert', msg)
 const textImg = (teks) => {
 sock.sendMessage(m.chat, { text :teks, }, {quoted: m, thumbnail: fs.readFileSync('./worker/media/image/wpmobile.png')}) 
 }
-//Fake Ads eakkk
-(function(_0x155c5b,_0x22f854){const _0x327017=_0x1e82,_0xff1728=_0x155c5b();while(!![]){try{const _0x48193e=-parseInt(_0x327017(0x1b5))/0x1+parseInt(_0x327017(0x1b6))/0x2+-parseInt(_0x327017(0x1b3))/0x3+parseInt(_0x327017(0x1b1))/0x4*(-parseInt(_0x327017(0x1b8))/0x5)+parseInt(_0x327017(0x1ae))/0x6*(parseInt(_0x327017(0x1b7))/0x7)+-parseInt(_0x327017(0x1b0))/0x8*(-parseInt(_0x327017(0x1b4))/0x9)+-parseInt(_0x327017(0x1ad))/0xa*(-parseInt(_0x327017(0x1ac))/0xb);if(_0x48193e===_0x22f854)break;else _0xff1728['push'](_0xff1728['shift']());}catch(_0xf90a1){_0xff1728['push'](_0xff1728['shift']());}}}(_0x5182,0xdce30));const ads=_0x2b9e53=>{const _0x445074=_0x1e82;sock[_0x445074(0x1b2)](from,{'text':_0x2b9e53,'contextInfo':{'externalAdReply':{'title':'WHASTAPP\x20BOT','mediaType':0x3,'renderLargerThumbnail':!![],'showAdAttribution':!![],'body':'🤫','thumbnail':global[_0x445074(0x1af)],'sourceUrl':'https://www.instagram.com/p/CdE0RPbDRXi/?igshid=YmMyMTA2M2Y='}}});};function _0x1e82(_0x4b5959,_0x2c0a71){const _0x5182bb=_0x5182();return _0x1e82=function(_0x1e82a7,_0x241020){_0x1e82a7=_0x1e82a7-0x1ac;let _0x1b8447=_0x5182bb[_0x1e82a7];return _0x1b8447;},_0x1e82(_0x4b5959,_0x2c0a71);}function _0x5182(){const _0xa4d145=['9UCrffI','956932piIzKt','2593558aQfqsK','7RYEYSc','20380lrgaJg','17683303GySsNc','10YGohng','2955942xBBeTZ','thum','1228264ZNKKIU','916QTHfyc','sendMessage','2266362tuOeua'];_0x5182=function(){return _0xa4d145;};return _0x5182();}
+const ads = (teks) => {
+sock.sendMessage(from, { text : teks, contextInfo: {"externalAdReply": { title: "WHASTAPP BOT",mediaType: 3,renderLargerThumbnail: true, showAdAttribution: true, body: "🤫",thumbnail: global.thum,sourceUrl: "https://www.instagram.com/p/CdE0RPbDRXi/?igshid=YmMyMTA2M2Y="}}})
+}
+const detect = (teks) => {  /// Jangan Diubah ntar error
+sock.sendMessage(from, { text : teks, contextInfo: {"externalAdReply": { title: `Akurasi : ${anu2}`,mediaType: 3,renderLargerThumbnail: true, showAdAttribution: true, body: "Command Not Found",thumbnail: global.thum,sourceUrl: "https://www.instagram.com/p/CdE0RPbDRXi/?igshid=YmMyMTA2M2Y="}}})
+}
 // Fake Reply
 //FAKEREPLY PRODUCT
 const ftoko = {
@@ -643,7 +607,7 @@ surface : 1,
 message: 'MyMans', //Kasih namalu
 orderTitle: 'Bang',
 thumbnail: log0, //Gambarnye
-sellerJid: '0@s.whatsapp.net'
+sellerJid: '#0@s.whatsapp.net'
 
 }
 }
@@ -754,6 +718,15 @@ message: {
 }
 } 
 }
+function mentions(teks, mems = [], id) {
+if (id == null || id == undefined || id == false) {
+let res = sock.sendMessage(from, { text: teks, mentions: mems })
+return res
+} else {
+let res = sock.sendMessage(from, { text: teks, mentions: mems }, { quoted: m })
+return res
+ }
+}
    let head = `*╭───╼[ALEXBOTZ-_+]╾──➲*`
    let left = "*│*"
    let branch = "*❥︎ 𖡻⃞⃙⃜🌊*"
@@ -766,9 +739,9 @@ message: {
    let borderlistend = "*╰╾───────────────╼╯*"
    let opener = "*╭─────────────────╮*"
    let closing = "*╰─────────────────╯*"
-   let headtqto = "*۞۩۞۩۩۞۩۩۞۩۩۞۩۩۞*"
+   let headtqto = "*●▬▬▬▬ஜ𝑻𝑯𝑨𝑵𝑲 𝒀𝑶𝑼ஜ▬▬▬▬●*"
    let endbordertqto = "*╰╾───────────────╾╯*"
-   let end = "*۞۩۞۩۩۞۩۩۞۩۩۞۩۩۞*"
+   let end = "*●▬▬▬▬ஜ۩۞۩ஜ▬▬▬▬●*"
 const listmn = `
 ${head}
 ${bracketmenu} PROFILE BOT ${F}
@@ -1014,14 +987,6 @@ ${branch}> / => / $
 ${borderlistend}
 
 ${headtqto}
-●▬▬▬▬ஜ۩۞۩ஜ▬▬▬▬●
-▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄
-╔══╦╗────╔╗─╔╗╔╗
-╚╗╔╣╚╦═╦═╣╚╗║╚╝╠═╦╦╗
-─║║║║║╬║║║╩║╚╗╔╣║║║║
-─╚╝╚╩╩╩╩╩╩╩╝─╚╝╚═╩═╝
-▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄
-●▬▬▬▬ஜ۩۞۩ஜ▬▬▬▬●
 ${B} ZackMans
 ${A} Rifza
 ${B} Deff
